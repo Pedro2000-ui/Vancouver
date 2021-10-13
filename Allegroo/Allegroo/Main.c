@@ -37,6 +37,7 @@ int main(){
 	int pos_xEnemy1 = 50, pos_xEnemy2 = 250, pos_xEnemy3 = 450, pos_yEnemys = 101;
 	//Variável para uso dos tiros que sairão dos Inimigos
 	int pos_yAtaque = pos_yEnemys;
+	int pos_xAtaque1 = pos_xEnemy1, pos_xAtaque2 = pos_xEnemy2, pos_xAtaque3 = pos_xEnemy3;
 	bool primeiroTiro = true;
 	//Variável para velocidade de rodagem do jogo
 	int FPS = 60;
@@ -138,11 +139,15 @@ int main(){
 								}
 
 								pos_yEnemys -= 3; //entra em conflito com pos_yEnemys += 3 e trava os inimigos na posição
-								al_draw_filled_rectangle(pos_xEnemy1 + 15, pos_yAtaque + 32, (pos_xEnemy1 + 15) + 5, (pos_yAtaque + 32) + 5, al_map_rgb(255, 0, 0));
-								al_draw_filled_rectangle(pos_xEnemy2 + 15, pos_yAtaque + 32, (pos_xEnemy2 + 15) + 5, (pos_yAtaque + 32) + 5, al_map_rgb(255, 0, 0));
-								al_draw_filled_rectangle(pos_xEnemy3 + 15, pos_yAtaque + 32, (pos_xEnemy3 + 15) + 5, (pos_yAtaque + 32) + 5, al_map_rgb(255, 0, 0));
+								al_draw_filled_rectangle(pos_xAtaque1 + 15, pos_yAtaque + 32, (pos_xAtaque1 + 15) + 5, (pos_yAtaque + 32) + 5, al_map_rgb(255, 0, 0));
+								al_draw_filled_rectangle(pos_xAtaque2 + 15, pos_yAtaque + 32, (pos_xAtaque2 + 15) + 5, (pos_yAtaque + 32) + 5, al_map_rgb(255, 0, 0));
+								al_draw_filled_rectangle(pos_xAtaque3 + 15, pos_yAtaque + 32, (pos_xAtaque3 + 15) + 5, (pos_yAtaque + 32) + 5, al_map_rgb(255, 0, 0));
 								pos_yAtaque += 15;
 								
+								if (pos_xAtaque1 >= pos_x && pos_xAtaque1 <= (pos_x + 30)) { //logica errada, melhorar
+									vidasInimigo3--;
+								}
+
 								if (pos_yAtaque > 501) {
 									pos_yAtaque = pos_yEnemys;
 								}
