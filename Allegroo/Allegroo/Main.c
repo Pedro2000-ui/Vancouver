@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_image.h>
 enum TECLAS { CIMA, BAIXO, DIREITA, ESQUERDA, SPACE };
 
 void  jogador(pos_x, pos_y) {
@@ -9,10 +10,10 @@ void  jogador(pos_x, pos_y) {
 
 void inimigos(pos_xEnemy1, pos_xEnemy2, pos_xEnemy3, pos_yEnemys, vidasInimigo1, vidasInimigo2, vidasInimigo3) {
 	//tentar melhorar, muito repetitiva
-	if(vidasInimigo1 > 0){
+	if (vidasInimigo1 > 0) {
 		al_draw_filled_rectangle(pos_xEnemy1, pos_yEnemys, pos_xEnemy1 + 30, pos_yEnemys + 30, al_map_rgb(0, 255, 0));
 	}
-	
+
 	if (vidasInimigo2 > 0) {
 		al_draw_filled_rectangle(pos_xEnemy2, pos_yEnemys, pos_xEnemy2 + 30, pos_yEnemys + 30, al_map_rgb(0, 255, 0));
 	}
@@ -23,9 +24,9 @@ void inimigos(pos_xEnemy1, pos_xEnemy2, pos_xEnemy3, pos_yEnemys, vidasInimigo1,
 }
 
 //MAIN
-int main(){
-	
-	const int largura_tela = 500, altura_tela = 500; //Define altura e largura do protótipo da tela;
+int main() {
+
+	const int largura_tela = 800, altura_tela = 600; //Define altura e largura do protótipo da tela;
 	bool x = true; //Variável que será usada para movimentação dos inimigos com o intuito de evitar conflitos
 	bool fim = false; //variável apenas pra idenficar o fim do jogo futuramente;
 	bool teclas[] = { false, false, false, false, false };
@@ -37,7 +38,6 @@ int main(){
 	int pos_xEnemy1 = 50, pos_xEnemy2 = 250, pos_xEnemy3 = 450, pos_yEnemys = 101;
 	//Variável para uso dos tiros que sairão dos Inimigos
 	int pos_yAtaque = pos_yEnemys;
-	int pos_xAtaque1 = pos_xEnemy1, pos_xAtaque2 = pos_xEnemy2, pos_xAtaque3 = pos_xEnemy3;
 	bool primeiroTiro = true;
 	//Variável para velocidade de rodagem do jogo
 	int FPS = 60;
@@ -49,13 +49,17 @@ int main(){
 	al_init();
 	ALLEGRO_DISPLAY* display = 0; //criando tela do jogo com ponteiro fazendo referência em ALLEGRO_DISPLAY;
 	display = al_create_display(largura_tela, altura_tela); //função que cria um display (eixo x, eixo y);
-	
+
 	//INICIALIZAÇÂO DE TEMPORIZADOR
 	ALLEGRO_TIMER* timer = 0;
+
+	//VARIAVEL DA IMAGEM
+	ALLEGRO_BITMAP* imagem = NULL;
 
 	//INICIALIZAÇÃO DE ADDONS
 	al_init_primitives_addon();
 	al_install_keyboard();
+	al_init_image_addon();
 
 	timer = al_create_timer(1.5 / FPS);
 
@@ -66,20 +70,24 @@ int main(){
 	al_register_event_source(fila_eventos, al_get_display_event_source(display)); //eventos de display 
 	al_register_event_source(fila_eventos, al_get_display_event_source(timer)); //eventos de timer
 
-
 	al_start_timer(timer);
-	
+
+	//CARREGAR IMAGEM
+	imagem = al_load_bitmap("mapa1.png");
+
 	while (fim == false && vidasJogador > 0) {
 		//JOGADOR
 		jogador(pos_x, pos_y);
-		
+
 		//INIMIGOS
 		inimigos(pos_xEnemy1, pos_xEnemy2, pos_xEnemy3, pos_yEnemys, vidasInimigo1, vidasInimigo2, vidasInimigo3);
-			
+
+
+
 		ALLEGRO_EVENT ev; //variavel para usarmos para verificar a situação dos eventos
 		al_wait_for_event(fila_eventos, &ev); //verifica se algum evento foi detectado, se sim avança pra próxima linha, senão não continua o loop - útil para evitar uso de memória indevido
 		if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
-			 fim = true;
+			fim = true;
 		}
 		//MOVIMENTOS DO JOGADOR E DOS INIMIGOS
 		else {
@@ -103,7 +111,7 @@ int main(){
 					teclas[ESQUERDA] = true;
 					break;
 				case ALLEGRO_KEY_SPACE:
-					teclas[SPACE] = true; 
+					teclas[SPACE] = true;
 					break;
 				}
 
@@ -132,21 +140,17 @@ int main(){
 				else {
 					if (ev.type == ALLEGRO_EVENT_TIMER) { //Qualquer movimento dentro desse if roda nas especificações do timer (segundos/fps)
 						if (pos_yEnemys < 300 && x == true) {
-							if(pos_y <= regiaoDeAtaque) {
-								if (primeiroTiro == true) { 
+							if (pos_y <= regiaoDeAtaque) {
+								if (primeiroTiro == true) {
 									pos_yAtaque = pos_yEnemys;
 									primeiroTiro = false;
 								}
 
 								pos_yEnemys -= 3; //entra em conflito com pos_yEnemys += 3 e trava os inimigos na posição
-								al_draw_filled_rectangle(pos_xAtaque1 + 15, pos_yAtaque + 32, (pos_xAtaque1 + 15) + 5, (pos_yAtaque + 32) + 5, al_map_rgb(255, 0, 0));
-								al_draw_filled_rectangle(pos_xAtaque2 + 15, pos_yAtaque + 32, (pos_xAtaque2 + 15) + 5, (pos_yAtaque + 32) + 5, al_map_rgb(255, 0, 0));
-								al_draw_filled_rectangle(pos_xAtaque3 + 15, pos_yAtaque + 32, (pos_xAtaque3 + 15) + 5, (pos_yAtaque + 32) + 5, al_map_rgb(255, 0, 0));
+								al_draw_filled_rectangle(pos_xEnemy1 + 15, pos_yAtaque + 32, (pos_xEnemy1 + 15) + 5, (pos_yAtaque + 32) + 5, al_map_rgb(255, 0, 0));
+								al_draw_filled_rectangle(pos_xEnemy2 + 15, pos_yAtaque + 32, (pos_xEnemy2 + 15) + 5, (pos_yAtaque + 32) + 5, al_map_rgb(255, 0, 0));
+								al_draw_filled_rectangle(pos_xEnemy3 + 15, pos_yAtaque + 32, (pos_xEnemy3 + 15) + 5, (pos_yAtaque + 32) + 5, al_map_rgb(255, 0, 0));
 								pos_yAtaque += 15;
-								
-								if (pos_xAtaque1 >= pos_x && pos_xAtaque1 <= (pos_x + 30)) { //logica errada, melhorar
-									vidasInimigo3--;
-								}
 
 								if (pos_yAtaque > 501) {
 									pos_yAtaque = pos_yEnemys;
@@ -155,7 +159,7 @@ int main(){
 							pos_yEnemys += 3;
 						}
 						else {
-							if (pos_yEnemys ==101) {
+							if (pos_yEnemys == 101) {
 								x = true;
 							}
 							else {
@@ -164,15 +168,15 @@ int main(){
 							}
 						}
 
-						if (teclas[CIMA] && !teclas[DIREITA] && !teclas[ESQUERDA] &&pos_y >=0) {
+						if (teclas[CIMA] && !teclas[DIREITA] && !teclas[ESQUERDA] && pos_y >= 0) {
 							pos_y -= teclas[CIMA] * 3;
 						}
 						else {
-							if (teclas[BAIXO] && !teclas[DIREITA] && !teclas[ESQUERDA] &&pos_y <470){
+							if (teclas[BAIXO] && !teclas[DIREITA] && !teclas[ESQUERDA] && pos_y < 568) {
 								pos_y += teclas[BAIXO] * 3;
 							}
 							else {
-								if (teclas[DIREITA] && pos_x <469) {
+								if (teclas[DIREITA] && pos_x < 769) {
 									pos_x += teclas[DIREITA] * 3;
 								}
 								else {
@@ -188,14 +192,16 @@ int main(){
 			}
 			al_flip_display();
 			al_clear_to_color(al_map_rgb(0, 0, 0)); //Pra limpar a tela quando movermos os objetos, não deixando rastros
+			al_draw_bitmap(imagem, 0, 0, 0);
 		}
-		
+
 	}
 
 	//FINALIZAÇÃO DO PROGRAMA
 	al_destroy_display(display);
 	al_destroy_event_queue(fila_eventos);
 	al_destroy_timer(timer);
+	al_destroy_bitmap(imagem);
 	return 0;
 }
 
