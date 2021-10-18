@@ -8,19 +8,14 @@ void  jogador(pos_x, pos_y) {
 	al_draw_filled_rectangle(pos_x, pos_y, pos_x + 30, pos_y + 30, al_map_rgb(255, 255, 0));
 }
 
-void inimigos(pos_xEnemy1, pos_xEnemy2, pos_xEnemy3, pos_yEnemys, vidasInimigo1, vidasInimigo2, vidasInimigo3) {
-	//tentar melhorar, muito repetitiva
-	if (vidasInimigo1 > 0) {
-		al_draw_filled_rectangle(pos_xEnemy1, pos_yEnemys, pos_xEnemy1 + 30, pos_yEnemys + 30, al_map_rgb(0, 255, 0));
+void inimigos(int pos_xEnemys[], int pos_yEnemys[], int vidasInimigos[]) {
+	for (int i = 0; i < 3; i++)
+	{
+		al_draw_filled_rectangle(pos_xEnemys[i], pos_yEnemys[0], pos_xEnemys[i] + 30, pos_yEnemys[0] + 30, al_map_rgb(0, 255, 0));
 	}
 
-	if (vidasInimigo2 > 0) {
-		al_draw_filled_rectangle(pos_xEnemy2, pos_yEnemys, pos_xEnemy2 + 30, pos_yEnemys + 30, al_map_rgb(0, 255, 0));
-	}
-
-	if (vidasInimigo3 > 0) {
-		al_draw_filled_rectangle(pos_xEnemy3, pos_yEnemys, pos_xEnemy3 + 30, pos_yEnemys + 30, al_map_rgb(0, 255, 0));
-	}
+	
+	//ideia de colocar condições onde caso o inimigo morra a imagem daquele inimigo que morreu é destruida e desaparece do mapa
 }
 
 //MAIN
@@ -29,22 +24,32 @@ int main() {
 	const int largura_tela = 800, altura_tela = 600; //Define altura e largura do protótipo da tela;
 	bool x = true; //Variável que será usada para movimentação dos inimigos com o intuito de evitar conflitos
 	bool fim = false; //variável apenas pra idenficar o fim do jogo futuramente;
-	bool teclas[] = { false, false, false, false, false };
+	bool teclas[] = { false, false, false, false, false }; 
 	//Posição que iniciará o jogador;
-	int pos_x = 250, pos_y = 401;
-	//Região de ataque dos inimigos
-	int regiaoDeAtaque = 335;
+	int pos_xJogador = 400, pos_yJogador = 500;
+	//Variaveis para uso dos tiros que sairão do Jogador
+	int pos_yTiroJogador = pos_yJogador;
+	int pos_xTiroJogador = pos_xJogador;
+	bool tiroAcertouInimigo = false;
+	//Região que os inimigos atacarão ao visualizarem o jogador
+	int regiaoDeAtaque = 400;
 	//Posições que os inimigos iniciarão;
-	int pos_xEnemy1 = 50, pos_xEnemy2 = 250, pos_xEnemy3 = 450, pos_yEnemys = 101;
-	//Variável para uso dos tiros que sairão dos Inimigos
-	int pos_yAtaque = pos_yEnemys;
-	bool primeiroTiro = true;
+	int pos_xEnemys[] = { 50, 250, 450 }, pos_yEnemys[] = { 90 }; //terá mais posições em Y para inimigos vindo das laterais
+	//Variaveis para uso dos tiros que sairão dos Inimigos
+	int pos_yTiro[3];
+	int pos_xTiro[3];
+	for (int i = 0; i < 3; i++) {
+		pos_xTiro[i] = pos_xEnemys[i]; //recebe as posições iniciais de XEnemys e YEnemys, pois os tiros saem dos inimigos né!!!
+		pos_yTiro[i] = pos_yEnemys[0];
+	}
+	bool primeiroTiro = true, tiroAcertou = false;
 	//Variável para velocidade de rodagem do jogo
 	int FPS = 60;
 	//Variável para vidas do jogador;
-	int vidasJogador = 5;
+	int vidasJogador = 8;
 	//Variável para vidas dos inimigos;
-	int vidasInimigo1 = 5, vidasInimigo2 = 5, vidasInimigo3 = 5;
+	int vidasInimigos[3] = { 5, 5, 5 };
+	
 	//TELA DO JOGO
 	al_init();
 	ALLEGRO_DISPLAY* display = 0; //criando tela do jogo com ponteiro fazendo referência em ALLEGRO_DISPLAY;
@@ -74,16 +79,16 @@ int main() {
 
 	//CARREGAR IMAGEM
 	imagem = al_load_bitmap("mapa1.png");
-
+	
 	while (fim == false && vidasJogador > 0) {
 		//JOGADOR
-		jogador(pos_x, pos_y);
+		jogador(pos_xJogador, pos_yJogador);
 
 		//INIMIGOS
-		inimigos(pos_xEnemy1, pos_xEnemy2, pos_xEnemy3, pos_yEnemys, vidasInimigo1, vidasInimigo2, vidasInimigo3);
+		inimigos(pos_xEnemys, pos_yEnemys, vidasInimigos);
 
 
-
+		
 		ALLEGRO_EVENT ev; //variavel para usarmos para verificar a situação dos eventos
 		al_wait_for_event(fila_eventos, &ev); //verifica se algum evento foi detectado, se sim avança pra próxima linha, senão não continua o loop - útil para evitar uso de memória indevido
 		if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
@@ -139,49 +144,80 @@ int main() {
 
 				else {
 					if (ev.type == ALLEGRO_EVENT_TIMER) { //Qualquer movimento dentro desse if roda nas especificações do timer (segundos/fps)
-						if (pos_yEnemys < 300 && x == true) {
-							if (pos_y <= regiaoDeAtaque) {
-								if (primeiroTiro == true) {
-									pos_yAtaque = pos_yEnemys;
-									primeiroTiro = false;
+						if (pos_yEnemys[0] <= 250 && x == true) { //Bloco de controle da movimentação dos inimigos
+							if (pos_yJogador <= regiaoDeAtaque) {
+								if (pos_yEnemys[0] <= 215) {
+									pos_yEnemys[0] -= 1;  //entra em conflito com pos_yEnemys += 2 e os inimigos andam de uma em uma casa
 								}
-
-								pos_yEnemys -= 3; //entra em conflito com pos_yEnemys += 3 e trava os inimigos na posição
-								al_draw_filled_rectangle(pos_xEnemy1 + 15, pos_yAtaque + 32, (pos_xEnemy1 + 15) + 5, (pos_yAtaque + 32) + 5, al_map_rgb(255, 0, 0));
-								al_draw_filled_rectangle(pos_xEnemy2 + 15, pos_yAtaque + 32, (pos_xEnemy2 + 15) + 5, (pos_yAtaque + 32) + 5, al_map_rgb(255, 0, 0));
-								al_draw_filled_rectangle(pos_xEnemy3 + 15, pos_yAtaque + 32, (pos_xEnemy3 + 15) + 5, (pos_yAtaque + 32) + 5, al_map_rgb(255, 0, 0));
-								pos_yAtaque += 15;
-
-								if (pos_yAtaque > 501) {
-									pos_yAtaque = pos_yEnemys;
+								else {
+									pos_yEnemys[0] -= 2; //entra em conflito com pos_yEnemys += 2 e os inimigos travam na posição
 								}
+								for (int i = 0; i < 3; i++) {
+									if (primeiroTiro == true) {
+										pos_yTiro[i] = pos_yEnemys[0];
+										primeiroTiro = false;
+									}
+									al_draw_filled_rectangle(pos_xTiro[i] + 15, pos_yTiro[i] + 32, (pos_xTiro[i] + 15) + 5, (pos_yTiro[i] + 32) + 5, al_map_rgb(255, 0, 0));
+									pos_yTiro[i] += 15; //velocidade dos tiros
+									if (pos_yTiro[i] >= pos_yJogador && (pos_xTiro[i] + 15 >= pos_xJogador && pos_xTiro[i] + 15 <= pos_xJogador + 30)) {
+										tiroAcertou = true;
+										vidasJogador--;
+									}
+									else {
+										tiroAcertou = false;
+									}
+									
+									if (pos_yTiro[i] > 600 || tiroAcertou == true) {
+										pos_yTiro[i] = pos_yEnemys[0];
+									}
+								}
+								
 							}
-							pos_yEnemys += 3;
+							pos_yEnemys[0] += 2;
 						}
 						else {
-							if (pos_yEnemys == 101) {
+							if (pos_yEnemys[0] <= 90) {
 								x = true;
 							}
 							else {
-								pos_yEnemys -= 3;
+								pos_yEnemys[0] -= 2;
 								x = false;
 							}
 						}
-
-						if (teclas[CIMA] && !teclas[DIREITA] && !teclas[ESQUERDA] && pos_y >= 0) {
-							pos_y -= teclas[CIMA] * 3;
-						}
-						else {
-							if (teclas[BAIXO] && !teclas[DIREITA] && !teclas[ESQUERDA] && pos_y < 568) {
-								pos_y += teclas[BAIXO] * 3;
-							}
-							else {
-								if (teclas[DIREITA] && pos_x < 769) {
-									pos_x += teclas[DIREITA] * 3;
+						if (teclas[SPACE] && pos_yJogador <= regiaoDeAtaque) { //Consertar Bugs dos Tiros do Jogador
+							al_draw_filled_rectangle(pos_xTiroJogador + 15, pos_yTiroJogador - 32, (pos_xTiroJogador + 15) + 5, (pos_yTiroJogador - 32) + 5, al_map_rgb(255, 0, 0));
+							pos_yTiroJogador -= 20;
+							for (int i = 0; i < 3; i++) {
+								if (pos_yTiroJogador <= pos_yEnemys[i] + 30 && (pos_xTiroJogador + 15 >= pos_xEnemys[i] && pos_xTiroJogador + 15 <= pos_xEnemys[i] + 30)) { //Focar na lógica
+									tiroAcertouInimigo = true;
+									vidasInimigos[i]--;
 								}
 								else {
-									if (teclas[ESQUERDA] && pos_x >= 4) {
-										pos_x -= teclas[ESQUERDA] * 3;
+									tiroAcertouInimigo = false;
+								}
+								if (pos_yTiroJogador < 0 || tiroAcertouInimigo == true) {
+									pos_yTiroJogador = pos_yJogador;
+									pos_xTiroJogador = pos_xJogador;
+									teclas[SPACE] = false;
+								}
+							}
+						}
+						if (teclas[CIMA] && !teclas[DIREITA] && !teclas[ESQUERDA] && pos_yJogador >= 0) {
+							pos_yJogador -= teclas[CIMA] * 3;
+							
+						}
+						else {
+							if (teclas[BAIXO] && !teclas[DIREITA] && !teclas[ESQUERDA] && pos_yJogador < 568) {
+								pos_yJogador += teclas[BAIXO] * 3;
+							}
+							else {
+								if (teclas[DIREITA] && pos_xJogador < 769) {
+									pos_xJogador += teclas[DIREITA] * 3;
+									
+								}
+								else {
+									if (teclas[ESQUERDA] && pos_xJogador >= 4) {
+										pos_xJogador -= teclas[ESQUERDA] * 3;
 									}
 								}
 							} //tem que criar uma condição pra tecla espaço com o intuito de atirar
@@ -190,9 +226,10 @@ int main() {
 				}
 
 			}
+			
 			al_flip_display();
 			al_clear_to_color(al_map_rgb(0, 0, 0)); //Pra limpar a tela quando movermos os objetos, não deixando rastros
-			al_draw_bitmap(imagem, 0, 0, 0);
+			//al_draw_bitmap(imagem, 0, 0, 0);
 		}
 
 	}
