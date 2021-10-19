@@ -21,6 +21,52 @@ void inimigos(int pos_xEnemys[], int pos_yEnemys[], int vidasInimigos[]) {
 	//ideia de colocar condições onde caso o inimigo morra a imagem daquele inimigo que morreu é destruida e desaparece do mapa
 }
 
+void menu() {
+	bool teclas[] = { false, false, false, false };
+
+	bool fim = false;
+
+	ALLEGRO_EVENT_QUEUE* fila_eventos = NULL;
+
+	al_install_keyboard();
+	al_init_image_addon();
+
+	fila_eventos = al_create_evente_queue();
+
+	al_register_event_source(fila_eventos, al_get_keyboard_event_source());
+
+	while (!fim) {
+
+		ALLEGRO_DISPLAY* janela = NULL;
+
+		ALLEGRO_BITMAP* imagem = NULL;
+
+		al_init();
+		al_init_image_addon();
+
+		janela = al_create_display(800, 600);
+
+		imagem = al_load_bitmap("background.png");
+
+		al_draw_bitmap(imagem, 0, 0, 0);
+
+		al_flip_display();
+
+
+		ALLEGRO_EVENT ev;
+
+		al_wait_for_event(fila_eventos, &ev);
+
+		if (ev.type == ALLEGRO_EVENT_KEY_UP) {
+			if (ev.keyboard.keycode == ALLEGRO_KEY_ENTER) {
+				fim = true;
+			}
+		}
+
+	}
+
+	al_destroy_event_queue(fila_eventos);
+}
 //MAIN
 int main() {
 
