@@ -164,9 +164,9 @@ int main() {
 										pos_yTiro[i] = pos_yEnemys[0];
 										primeiroTiro = false;
 									}
-									al_draw_filled_rectangle(pos_xTiro[i] + 15, pos_yTiro[i] + 32, (pos_xTiro[i] + 15) + 5, (pos_yTiro[i] + 32) + 5, al_map_rgb(255, 0, 0));
+									al_draw_filled_rectangle(pos_xTiro[i] + 8, pos_yTiro[i] + 50, (pos_xTiro[i] + 8) + 5, (pos_yTiro[i] + 50) + 5, al_map_rgb(0, 0, 0));
 									pos_yTiro[i] += 15; //velocidade dos tiros
-									if (pos_yTiro[i] >= pos_yJogador && (pos_xTiro[i] + 15 >= pos_xJogador && pos_xTiro[i] + 15 <= pos_xJogador + 30)) {
+									if (pos_yTiro[i] >= pos_yJogador && (pos_xTiro[i] + 8 >= pos_xJogador && pos_xTiro[i] + 8 <= pos_xJogador + 35)) {
 										tiroAcertou = true;
 										vidasJogador--;
 									}
@@ -192,7 +192,7 @@ int main() {
 							}
 						}
 						if (teclas[SPACE] && pos_yJogador <= regiaoDeAtaque) { //Consertar Bugs dos Tiros do Jogador
-							al_draw_filled_rectangle(pos_xTiroJogador + 15, pos_yTiroJogador - 32, (pos_xTiroJogador + 15) + 5, (pos_yTiroJogador - 32) + 5, al_map_rgb(255, 0, 0));
+							al_draw_filled_rectangle(pos_xTiroJogador + 30, pos_yTiroJogador - 13, (pos_xTiroJogador + 30) + 5, (pos_yTiroJogador - 13) + 5, al_map_rgb(0, 0, 0));
 							pos_yTiroJogador -= 20;
 							for (int i = 0; i < 3; i++) {
 								if (pos_yTiroJogador <= pos_yEnemys[i] + 30 && (pos_xTiroJogador + 15 >= pos_xEnemys[i] && pos_xTiroJogador + 15 <= pos_xEnemys[i] + 30)) { //Focar na lógica
