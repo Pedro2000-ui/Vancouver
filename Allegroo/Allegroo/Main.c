@@ -140,8 +140,7 @@ int main() {
 		//INIMIGOS
 		inimigos(pos_xEnemys, pos_yEnemys, vidasInimigos);
 
-		printf("    | %d __ %d |    ", pos_xJogador, pos_yJogador);
-
+		printf("Posição no eixo X: %d\nPosição no eixo Y %d: ", pos_xJogador, pos_yJogador);
 		ALLEGRO_EVENT ev; //variavel para usarmos para verificar a situação dos eventos
 		al_wait_for_event(fila_eventos, &ev); //verifica se algum evento foi detectado, se sim avança pra próxima linha, senão não continua o loop - útil para evitar uso de memória indevido
 		if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
@@ -212,8 +211,8 @@ int main() {
 									}
 									al_draw_filled_rectangle(pos_xTiro[i] + 8, pos_yTiro[i] + 50, (pos_xTiro[i] + 8) + 5, (pos_yTiro[i] + 50) + 5, al_map_rgb(0, 0, 0));
 									pos_yTiro[i] += 15; //velocidade dos tiros
-									if (pos_yTiro[i] >= pos_yJogador && (pos_xTiro[i] + 8 >= pos_xJogador && pos_xTiro[i] + 8 <= pos_xJogador + 35)) {
-										tiroAcertou = true;
+									if ((pos_yTiro[i] >= pos_yJogador && pos_yJogador > pos_yEnemys[0]) && (pos_xTiro[i] + 8 >= pos_xJogador && pos_xTiro[i] + 8 <= pos_xJogador + 35)) {
+										tiroAcertou = true; //bug de ser atingido ao passar por trás dos inimigos consertado
 										vidasJogador--;
 									}
 									else {
@@ -273,13 +272,13 @@ int main() {
 										pos_xJogador -= teclas[ESQUERDA] * 3;
 									}
 								}
-							} //tem que criar uma condição pra tecla espaço com o intuito de atirar
+							} 
 						}
 					}
 				}
 
 			}
-
+			
 			for (int i = 360; i < 430; i++) {
 				if (pos_xJogador == i && pos_yJogador == -2) {
 					imagem = al_load_bitmap("sprites/mapa2.jpg");
@@ -295,7 +294,7 @@ int main() {
 					pos_yJogador = 500;
 				}
 			}
-
+			
 			al_flip_display();
 			al_clear_to_color(al_map_rgb(0, 0, 0)); //Pra limpar a tela quando movermos os objetos, não deixando rastros
 			al_draw_bitmap(imagem, 0, 0, 0);
