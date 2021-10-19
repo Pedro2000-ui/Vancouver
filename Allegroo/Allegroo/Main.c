@@ -17,7 +17,7 @@ void inimigos(int pos_xEnemys[], int pos_yEnemys[], int vidasInimigos[]) {
 		//al_draw_filled_rectangle(pos_xEnemys[i], pos_yEnemys[0], pos_xEnemys[i] + 30, pos_yEnemys[0] + 30, al_map_rgb(0, 255, 0));
 	//}
 	//mesma coisa para os inimigos, o draw_bitmap, está lá na parte de baixo.
-	
+
 	//ideia de colocar condições onde caso o inimigo morra a imagem daquele inimigo que morreu é destruida e desaparece do mapa
 }
 
@@ -27,7 +27,7 @@ int main() {
 	const int largura_tela = 800, altura_tela = 600; //Define altura e largura do protótipo da tela;
 	bool x = true; //Variável que será usada para movimentação dos inimigos com o intuito de evitar conflitos
 	bool fim = false; //variável apenas pra idenficar o fim do jogo futuramente;
-	bool teclas[] = { false, false, false, false, false }; 
+	bool teclas[] = { false, false, false, false, false };
 	//Posição que iniciará o jogador;
 	int pos_xJogador = 150, pos_yJogador = 550;
 	//Variaveis para uso dos tiros que sairão do Jogador
@@ -52,7 +52,7 @@ int main() {
 	int vidasJogador = 8;
 	//Variável para vidas dos inimigos;
 	int vidasInimigos[3] = { 5, 5, 5 };
-	
+
 	//TELA DO JOGO
 	al_init();
 	ALLEGRO_DISPLAY* display = 0; //criando tela do jogo com ponteiro fazendo referência em ALLEGRO_DISPLAY;
@@ -83,19 +83,19 @@ int main() {
 	al_start_timer(timer);
 
 	//CARREGAR IMAGENS
-	imagem = al_load_bitmap("mapa1.png");
-	player = al_load_bitmap("playerup.png");
-	enemy = al_load_bitmap("enemydown.png");
-	
+	imagem = al_load_bitmap("sprites/mapa1.png");
+	player = al_load_bitmap("sprites/playerup.png");
+	enemy = al_load_bitmap("sprites/enemydown.png");
+
 	while (fim == false && vidasJogador > 0) {
 		//JOGADOR
 		jogador(pos_xJogador, pos_yJogador);
-	
+
 		//INIMIGOS
 		inimigos(pos_xEnemys, pos_yEnemys, vidasInimigos);
 
+		printf("    | %d __ %d |    ", pos_xJogador, pos_yJogador);
 
-		
 		ALLEGRO_EVENT ev; //variavel para usarmos para verificar a situação dos eventos
 		al_wait_for_event(fila_eventos, &ev); //verifica se algum evento foi detectado, se sim avança pra próxima linha, senão não continua o loop - útil para evitar uso de memória indevido
 		if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
@@ -173,12 +173,12 @@ int main() {
 									else {
 										tiroAcertou = false;
 									}
-									
+
 									if (pos_yTiro[i] > 600 || tiroAcertou == true) {
 										pos_yTiro[i] = pos_yEnemys[0];
 									}
 								}
-								
+
 							}
 							pos_yEnemys[0] += 2;
 						}
@@ -211,7 +211,7 @@ int main() {
 						}
 						if (teclas[CIMA] && !teclas[DIREITA] && !teclas[ESQUERDA] && pos_yJogador >= 0) {
 							pos_yJogador -= teclas[CIMA] * 3;
-							
+
 						}
 						else {
 							if (teclas[BAIXO] && !teclas[DIREITA] && !teclas[ESQUERDA] && pos_yJogador < 568) {
@@ -220,7 +220,7 @@ int main() {
 							else {
 								if (teclas[DIREITA] && pos_xJogador < 769) {
 									pos_xJogador += teclas[DIREITA] * 3;
-									
+
 								}
 								else {
 									if (teclas[ESQUERDA] && pos_xJogador >= 4) {
@@ -233,7 +233,23 @@ int main() {
 				}
 
 			}
-			
+
+			for (int i = 360; i < 430; i++) {
+				if (pos_xJogador == i && pos_yJogador == -2) {
+					imagem = al_load_bitmap("sprites/mapa2.jpg");
+					pos_xJogador = 300;
+					pos_yJogador = 500;
+				}
+			}
+
+			for (int i = 230; i < 390; i++) {
+				if ((pos_xJogador == 771 && pos_yJogador == i)) {
+					imagem = al_load_bitmap("sprites/mapa2.jpg");
+					pos_xJogador = 300;
+					pos_yJogador = 500;
+				}
+			}
+
 			al_flip_display();
 			al_clear_to_color(al_map_rgb(0, 0, 0)); //Pra limpar a tela quando movermos os objetos, não deixando rastros
 			al_draw_bitmap(imagem, 0, 0, 0);
@@ -242,7 +258,7 @@ int main() {
 			for (int i = 0; i < 3; i++) {
 				al_draw_bitmap(enemy, pos_xEnemys[i], pos_yEnemys[0], 0);
 			}
-			
+
 		}
 
 	}
@@ -255,4 +271,6 @@ int main() {
 	al_destroy_bitmap(player);
 	return 0;
 }
+
+
 
