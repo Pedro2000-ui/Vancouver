@@ -1,3 +1,1 @@
-﻿  Main.c
-C:\Users\pholi\Vancouver\Vancouver\Allegroo\Allegroo\Main.c(81,74): warning C4133: 'função': tipos incompatíveis - de 'ALLEGRO_TIMER *' para 'ALLEGRO_DISPLAY *'
-  Allegroo.vcxproj -> C:\Users\pholi\Vancouver\Vancouver\Allegroo\x64\Debug\Allegroo.exe
+﻿  Allegroo.vcxproj -> C:\Users\Frankenstein\Desktop\Vancouver\Allegroo\x64\Debug\Allegroo.exe
