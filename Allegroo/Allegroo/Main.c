@@ -2,18 +2,21 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_image.h>
+
 enum TECLAS { CIMA, BAIXO, DIREITA, ESQUERDA, SPACE };
 
 void  jogador(pos_x, pos_y) {
-	al_draw_filled_rectangle(pos_x, pos_y, pos_x + 30, pos_y + 30, al_map_rgb(255, 255, 0));
+
+	//al_draw_filled_rectangle(pos_x, pos_y, pos_x + 30, pos_y + 30, al_map_rgb(255, 255, 0));
+	//não consegui colocar o draw_bitmap dentro da função, ai está lá no final, se alguém conseguir substituir pode fazer.
 }
 
 void inimigos(int pos_xEnemys[], int pos_yEnemys[], int vidasInimigos[]) {
-	for (int i = 0; i < 3; i++)
-	{
-		al_draw_filled_rectangle(pos_xEnemys[i], pos_yEnemys[0], pos_xEnemys[i] + 30, pos_yEnemys[0] + 30, al_map_rgb(0, 255, 0));
-	}
-
+	//for (int i = 0; i < 3; i++)
+	//{
+		//al_draw_filled_rectangle(pos_xEnemys[i], pos_yEnemys[0], pos_xEnemys[i] + 30, pos_yEnemys[0] + 30, al_map_rgb(0, 255, 0));
+	//}
+	//mesma coisa para os inimigos, o draw_bitmap, está lá na parte de baixo.
 	
 	//ideia de colocar condições onde caso o inimigo morra a imagem daquele inimigo que morreu é destruida e desaparece do mapa
 }
@@ -26,7 +29,7 @@ int main() {
 	bool fim = false; //variável apenas pra idenficar o fim do jogo futuramente;
 	bool teclas[] = { false, false, false, false, false }; 
 	//Posição que iniciará o jogador;
-	int pos_xJogador = 400, pos_yJogador = 500;
+	int pos_xJogador = 150, pos_yJogador = 550;
 	//Variaveis para uso dos tiros que sairão do Jogador
 	int pos_yTiroJogador = pos_yJogador;
 	int pos_xTiroJogador = pos_xJogador;
@@ -60,6 +63,8 @@ int main() {
 
 	//VARIAVEL DA IMAGEM
 	ALLEGRO_BITMAP* imagem = NULL;
+	ALLEGRO_BITMAP* player = NULL;
+	ALLEGRO_BITMAP* enemy = NULL;
 
 	//INICIALIZAÇÃO DE ADDONS
 	al_init_primitives_addon();
@@ -77,13 +82,15 @@ int main() {
 
 	al_start_timer(timer);
 
-	//CARREGAR IMAGEM
+	//CARREGAR IMAGENS
 	imagem = al_load_bitmap("mapa1.png");
+	player = al_load_bitmap("playerup.png");
+	enemy = al_load_bitmap("enemydown.png");
 	
 	while (fim == false && vidasJogador > 0) {
 		//JOGADOR
 		jogador(pos_xJogador, pos_yJogador);
-
+	
 		//INIMIGOS
 		inimigos(pos_xEnemys, pos_yEnemys, vidasInimigos);
 
@@ -229,7 +236,13 @@ int main() {
 			
 			al_flip_display();
 			al_clear_to_color(al_map_rgb(0, 0, 0)); //Pra limpar a tela quando movermos os objetos, não deixando rastros
-			//al_draw_bitmap(imagem, 0, 0, 0);
+			al_draw_bitmap(imagem, 0, 0, 0);
+			//adição de personagem direto com bitmap
+			al_draw_bitmap(player, pos_xJogador, pos_yJogador, 0);
+			for (int i = 0; i < 3; i++) {
+				al_draw_bitmap(enemy, pos_xEnemys[i], pos_yEnemys[0], 0);
+			}
+			
 		}
 
 	}
@@ -239,6 +252,7 @@ int main() {
 	al_destroy_event_queue(fila_eventos);
 	al_destroy_timer(timer);
 	al_destroy_bitmap(imagem);
+	al_destroy_bitmap(player);
 	return 0;
 }
 
