@@ -5,22 +5,17 @@
 
 enum TECLAS { CIMA, BAIXO, DIREITA, ESQUERDA, SPACE };
 
-void  jogador(pos_x, pos_y) {
-
-	//al_draw_filled_rectangle(pos_x, pos_y, pos_x + 30, pos_y + 30, al_map_rgb(255, 255, 0));
-	//não consegui colocar o draw_bitmap dentro da função, ai está lá no final, se alguém conseguir substituir pode fazer.
+void  jogador(ALLEGRO_BITMAP* player, int pos_x, int pos_y, int constante) {
+	al_draw_bitmap(player, pos_x, pos_y, constante);
 }
 
-void inimigos(int pos_xEnemys[], int pos_yEnemys[], int vidasInimigos[]) {
-	//for (int i = 0; i < 3; i++)
-	//{
-		//al_draw_filled_rectangle(pos_xEnemys[i], pos_yEnemys[0], pos_xEnemys[i] + 30, pos_yEnemys[0] + 30, al_map_rgb(0, 255, 0));
-	//}
-	//mesma coisa para os inimigos, o draw_bitmap, está lá na parte de baixo.
-
+void inimigos(ALLEGRO_BITMAP* enemy, int pos_xEnemys[], int pos_yEnemys[], int constante, int vidaInimigos[]) {
+	for (int i = 0; i < 3; i++) {
+		al_draw_bitmap(enemy, pos_xEnemys[i], pos_yEnemys[0], constante);
+	}
 	//ideia de colocar condições onde caso o inimigo morra a imagem daquele inimigo que morreu é destruida e desaparece do mapa
 }
-
+/*
 void menu() {
 	bool teclas[] = { false, false, false, false };
 
@@ -66,7 +61,7 @@ void menu() {
 	}
 
 	al_destroy_event_queue(fila_eventos);
-}
+}*/
 //MAIN
 int main() {
 
@@ -135,11 +130,10 @@ int main() {
 
 	while (fim == false && vidasJogador > 0) {
 		//JOGADOR
-		jogador(pos_xJogador, pos_yJogador);
-
+		jogador(player, pos_xJogador, pos_yJogador, 0);
 		//INIMIGOS
-		inimigos(pos_xEnemys, pos_yEnemys, vidasInimigos);
-
+		inimigos(enemy, pos_xEnemys, pos_yEnemys, 0, vidasInimigos);
+		
 		printf("Posição no eixo X: %d\nPosição no eixo Y %d: ", pos_xJogador, pos_yJogador);
 		ALLEGRO_EVENT ev; //variavel para usarmos para verificar a situação dos eventos
 		al_wait_for_event(fila_eventos, &ev); //verifica se algum evento foi detectado, se sim avança pra próxima linha, senão não continua o loop - útil para evitar uso de memória indevido
@@ -197,6 +191,7 @@ int main() {
 				else {
 					if (ev.type == ALLEGRO_EVENT_TIMER) { //Qualquer movimento dentro desse if roda nas especificações do timer (segundos/fps)
 						if (pos_yEnemys[0] <= 250 && x == true) { //Bloco de controle da movimentação dos inimigos
+							enemy = al_load_bitmap("sprites/enemydown.png");
 							if (pos_yJogador <= regiaoDeAtaque) {
 								if (pos_yEnemys[0] <= 215) {
 									pos_yEnemys[0] -= 1;  //entra em conflito com pos_yEnemys += 2 e os inimigos andam de uma em uma casa
@@ -204,7 +199,7 @@ int main() {
 								else {
 									pos_yEnemys[0] -= 2; //entra em conflito com pos_yEnemys += 2 e os inimigos travam na posição
 								}
-								for (int i = 0; i < 3; i++) {
+								for (int i = 0; i < 3; i++) { //Bloco de controle dos tiros dos inimigos
 									if (primeiroTiro == true) {
 										pos_yTiro[i] = pos_yEnemys[0];
 										primeiroTiro = false;
@@ -212,18 +207,16 @@ int main() {
 									al_draw_filled_rectangle(pos_xTiro[i] + 8, pos_yTiro[i] + 50, (pos_xTiro[i] + 8) + 5, (pos_yTiro[i] + 50) + 5, al_map_rgb(0, 0, 0));
 									pos_yTiro[i] += 15; //velocidade dos tiros
 									if ((pos_yTiro[i] >= pos_yJogador && pos_yJogador > pos_yEnemys[0]) && (pos_xTiro[i] + 8 >= pos_xJogador && pos_xTiro[i] + 8 <= pos_xJogador + 35)) {
-										tiroAcertou = true; //bug de ser atingido ao passar por trás dos inimigos consertado
+										tiroAcertou = true; 
 										vidasJogador--;
 									}
 									else {
 										tiroAcertou = false;
 									}
-
 									if (pos_yTiro[i] > 600 || tiroAcertou == true) {
 										pos_yTiro[i] = pos_yEnemys[0];
 									}
 								}
-
 							}
 							pos_yEnemys[0] += 2;
 						}
@@ -234,6 +227,7 @@ int main() {
 							else {
 								pos_yEnemys[0] -= 2;
 								x = false;
+								enemy = al_load_bitmap("sprites/enemyup.png");
 							}
 						}
 						if (teclas[SPACE] && pos_yJogador <= regiaoDeAtaque) { //Consertar Bugs dos Tiros do Jogador
@@ -256,27 +250,28 @@ int main() {
 						}
 						if (teclas[CIMA] && !teclas[DIREITA] && !teclas[ESQUERDA] && pos_yJogador >= 0) {
 							pos_yJogador -= teclas[CIMA] * 3;
-
+							player = al_load_bitmap("sprites/playerup.png");
 						}
 						else {
 							if (teclas[BAIXO] && !teclas[DIREITA] && !teclas[ESQUERDA] && pos_yJogador < 568) {
 								pos_yJogador += teclas[BAIXO] * 3;
+								player = al_load_bitmap("sprites/playerdown.png");
 							}
 							else {
 								if (teclas[DIREITA] && pos_xJogador < 769) {
 									pos_xJogador += teclas[DIREITA] * 3;
-
+									player = al_load_bitmap("sprites/playerright.png");
 								}
 								else {
 									if (teclas[ESQUERDA] && pos_xJogador >= 4) {
 										pos_xJogador -= teclas[ESQUERDA] * 3;
+										player = al_load_bitmap("sprites/playerleft.png");
 									}
 								}
 							} 
 						}
 					}
 				}
-
 			}
 			
 			for (int i = 360; i < 430; i++) {
@@ -294,18 +289,11 @@ int main() {
 					pos_yJogador = 500;
 				}
 			}
-			
 			al_flip_display();
 			al_clear_to_color(al_map_rgb(0, 0, 0)); //Pra limpar a tela quando movermos os objetos, não deixando rastros
 			al_draw_bitmap(imagem, 0, 0, 0);
 			//adição de personagem direto com bitmap
-			al_draw_bitmap(player, pos_xJogador, pos_yJogador, 0);
-			for (int i = 0; i < 3; i++) {
-				al_draw_bitmap(enemy, pos_xEnemys[i], pos_yEnemys[0], 0);
-			}
-
 		}
-
 	}
 
 	//FINALIZAÇÃO DO PROGRAMA
@@ -314,6 +302,7 @@ int main() {
 	al_destroy_timer(timer);
 	al_destroy_bitmap(imagem);
 	al_destroy_bitmap(player);
+	al_destroy_bitmap(enemy);
 	return 0;
 }
 
