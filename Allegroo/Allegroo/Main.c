@@ -248,7 +248,7 @@ int main() {
 								}
 							}
 						}
-						if (teclas[CIMA] && !teclas[DIREITA] && !teclas[ESQUERDA] && pos_yJogador >= 0) {
+						if (teclas[CIMA]  && !teclas[BAIXO] && !teclas[DIREITA] && !teclas[ESQUERDA] && pos_yJogador >= 0) {
 							pos_yJogador -= teclas[CIMA] * 3;
 							player = al_load_bitmap("sprites/playerup.png");
 						}
@@ -258,7 +258,7 @@ int main() {
 								player = al_load_bitmap("sprites/playerdown.png");
 							}
 							else {
-								if (teclas[DIREITA] && pos_xJogador < 769) {
+								if (teclas[DIREITA] && !teclas[ESQUERDA] && pos_xJogador < 769) {
 									pos_xJogador += teclas[DIREITA] * 3;
 									player = al_load_bitmap("sprites/playerright.png");
 								}
@@ -273,7 +273,7 @@ int main() {
 					}
 				}
 			}
-			
+			/*
 			for (int i = 360; i < 430; i++) {
 				if (pos_xJogador == i && pos_yJogador == -2) {
 					imagem = al_load_bitmap("sprites/mapa2.jpg");
@@ -288,7 +288,7 @@ int main() {
 					pos_xJogador = 300;
 					pos_yJogador = 500;
 				}
-			}
+			}*/
 			al_flip_display();
 			al_clear_to_color(al_map_rgb(0, 0, 0)); //Pra limpar a tela quando movermos os objetos, não deixando rastros
 			al_draw_bitmap(imagem, 0, 0, 0);
