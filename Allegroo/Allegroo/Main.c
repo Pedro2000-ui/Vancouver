@@ -147,24 +147,18 @@ int main() {
 				if (ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE) { //verifica se o evento do tipo teclado e o seu código(qual tecla é) no casso desse if, está verificando se é igual a tecla ESCAPE (o famoso ESC)
 					fim = true;
 				}
-
 				switch (ev.keyboard.keycode) {
 				case ALLEGRO_KEY_UP:
 					teclas[CIMA] = true;
-					
-					
 					break;
 				case ALLEGRO_KEY_DOWN:
 					teclas[BAIXO] = true;
-					
 					break;
 				case ALLEGRO_KEY_RIGHT:
 					teclas[DIREITA] = true;
-					
 					break;
 				case ALLEGRO_KEY_LEFT:
 					teclas[ESQUERDA] = true;
-					
 					break;
 				case ALLEGRO_KEY_SPACE:
 					teclas[SPACE] = true;
@@ -196,6 +190,7 @@ int main() {
 				else {
 					if (ev.type == ALLEGRO_EVENT_TIMER) { //Qualquer movimento dentro desse if roda nas especificações do timer (segundos/fps)
 						if (pos_yEnemys[0] <= 250 && x == true) { //Bloco de controle da movimentação dos inimigos
+							al_destroy_bitmap(enemy);
 							enemy = al_load_bitmap("sprites/enemydown.png");
 							if (pos_yJogador <= regiaoDeAtaque) {
 								if (pos_yEnemys[0] <= 215) {
@@ -232,6 +227,7 @@ int main() {
 							else {
 								pos_yEnemys[0] -= 2;
 								x = false;
+								al_destroy_bitmap(enemy);
 								enemy = al_load_bitmap("sprites/enemyup.png");
 							}
 						}
@@ -255,21 +251,26 @@ int main() {
 						}
 						if (teclas[CIMA]  && !teclas[BAIXO] && !teclas[DIREITA] && !teclas[ESQUERDA] && pos_yJogador >= 0) {
 							pos_yJogador -= teclas[CIMA] * 3;
+							al_destroy_bitmap(player);
 							player = al_load_bitmap("sprites/playerup.png");
 						}
 						else {
+							
 							if (teclas[BAIXO] && !teclas[DIREITA] && !teclas[ESQUERDA] && pos_yJogador < 568) {
 								pos_yJogador += teclas[BAIXO] * 3;
+								al_destroy_bitmap(player);
 								player = al_load_bitmap("sprites/playerdown.png");
 							}
 							else {
 								if (teclas[DIREITA] && !teclas[ESQUERDA] && pos_xJogador < 769) {
 									pos_xJogador += teclas[DIREITA] * 3;
+									al_destroy_bitmap(player);
 									player = al_load_bitmap("sprites/playerright.png");
 								}
 								else {
 									if (teclas[ESQUERDA] && pos_xJogador >= 4) {
 										pos_xJogador -= teclas[ESQUERDA] * 3;
+										al_destroy_bitmap(player);
 										player = al_load_bitmap("sprites/playerleft.png");
 									}
 								}
@@ -395,8 +396,6 @@ int main() {
 					pos_yJogador = 500;
 				}
 			}*/
-
-			
 
 			al_flip_display();
 			al_clear_to_color(al_map_rgb(0, 0, 0)); //Pra limpar a tela quando movermos os objetos, não deixando rastros
