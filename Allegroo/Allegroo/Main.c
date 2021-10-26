@@ -380,6 +380,40 @@ int main() {
 
 			}
 			//ESQUERDA
+			//RIO - AGUA
+
+			for (int i = 445; i < 600; i++) {
+				for (int j = 300; j < 320; j++) {
+					if ((pos_xJogador == j) && (pos_yJogador == i)) {
+						teclas[DIREITA] = false;
+					}
+				}
+			}
+
+			for (int i = 445; i < 460; i++) {
+				for (int j = 300; j < 483; j++) {
+					if ((pos_xJogador == j) && (pos_yJogador == i)) {
+						teclas[BAIXO] = false;
+					}
+				}
+			}
+
+			for (int i = 375; i < 446; i++) {
+				for (int j = 483; j < 500; j++) {
+					if ((pos_xJogador == j) && (pos_yJogador == i)) {
+						teclas[DIREITA] = false;
+					}
+				}
+			}
+			for (int i = 375; i < 390; i++) {
+				for (int j = 483; j <= 771; j++) {
+					if ((pos_xJogador == j) && (pos_yJogador == i)) {
+						teclas[BAIXO] = false;
+					}
+				}
+			}
+
+			//RIO - AGUA
 			/*
 			for (int i = 360; i < 430; i++) {
 				if (pos_xJogador == i && pos_yJogador == -2) {
