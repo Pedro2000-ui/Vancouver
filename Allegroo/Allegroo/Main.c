@@ -151,108 +151,20 @@ int main() {
 				switch (ev.keyboard.keycode) {
 				case ALLEGRO_KEY_UP:
 					teclas[CIMA] = true;
-					for (int i = 420; i < 480; i++) { //espaco de posições que representam 
-						for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
-							if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] + j)) {
-								teclas[CIMA] = false;
-							}
-						}
-					}
-					for (int i = 220; i < 280; i++) { //espaco de posições que representam 
-						for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
-							if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] + j)) {
-								teclas[CIMA] = false;
-							}
-						}
-
-					}
-					for (int i = 20; i < 80; i++) { //espaco de posições que representam 
-						for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
-							if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] + j)) {
-								teclas[CIMA] = false;
-							}
-						}
-
-					}
+					
 					
 					break;
 				case ALLEGRO_KEY_DOWN:
 					teclas[BAIXO] = true;
-					for (int i = 420; i < 480; i++) { //espaco de posições que representam 
-						for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
-							if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - j)) {
-								teclas[BAIXO] = false;
-							}
-						}
-					}
-					for (int i = 220; i < 280; i++) { //espaco de posições que representam 
-						for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
-							if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - j)) {
-								teclas[BAIXO] = false;
-							}
-						}
-						
-					}
-					for (int i = 20; i < 80; i++) { //espaco de posições que representam 
-						for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
-							if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - j)) {
-								teclas[BAIXO] = false;
-							}
-						}
-
-					}
+					
 					break;
 				case ALLEGRO_KEY_RIGHT:
 					teclas[DIREITA] = true;
-					for (int i = 400; i < 450; i++) { //espaco de posições para a parada do jogador
-						for (int j = 35; j > -35; j--) { //espaco de posições que representam 
-							if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j))) {
-								teclas[DIREITA] = false;
-							}
-						}
-					}
-					for (int i = 200; i < 250; i++) { //espaco de posições para a parada do jogador
-						for (int j = 35; j > -35; j--) { //espaco de posições que representam 
-							if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j))) {
-								teclas[DIREITA] = false;
-							}
-						}
-
-					}
-					for (int i = 0; i < 50; i++) { //espaco de posições para a parada do jogador
-						for (int j = 35; j > -35; j--) { //espaco de posições que representam 
-							if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j))) {
-								teclas[DIREITA] = false;
-							}
-						}
-
-					}
+					
 					break;
 				case ALLEGRO_KEY_LEFT:
 					teclas[ESQUERDA] = true;
-					for (int i = 500; i > 450; i--) { //espaco de posições para a parada do jogador
-						for (int j = 35; j > -35; j--) { //espaco de posições que representam 
-							if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j))) {
-								teclas[ESQUERDA] = false;
-							}
-						}
-					}
-					for (int i = 300; i > 250; i--) { //espaco de posições para a parada do jogador
-						for (int j = 35; j > -35; j--) { //espaco de posições que representam 
-							if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j))) {
-								teclas[ESQUERDA] = false;
-							}
-						}
-
-					}
-					for (int i = 100; i > 50; i--) { //espaco de posições para a parada do jogador
-						for (int j = 35; j > -35; j--) { //espaco de posições que representam 
-							if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j))) {
-								teclas[ESQUERDA] = false;
-							}
-						}
-
-					}
+					
 					break;
 				case ALLEGRO_KEY_SPACE:
 					teclas[SPACE] = true;
@@ -366,6 +278,107 @@ int main() {
 					}
 				}
 			}
+
+			//CIMA
+			for (int i = 420; i < 480; i++) { //espaco de posições que representam 
+				for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
+					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] + j)) {
+						teclas[CIMA] = false;
+					}
+				}
+			}
+			for (int i = 220; i < 280; i++) { //espaco de posições que representam 
+				for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
+					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] + j)) {
+						teclas[CIMA] = false;
+					}
+				}
+
+			}
+			for (int i = 20; i < 80; i++) { //espaco de posições que representam 
+				for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
+					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] + j)) {
+						teclas[CIMA] = false;
+					}
+				}
+
+			}
+			//CIMA
+			//BAIXO
+			for (int i = 420; i < 480; i++) { //espaco de posições que representam 
+				for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
+					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - j)) {
+						teclas[BAIXO] = false;
+					}
+				}
+			}
+			for (int i = 220; i < 280; i++) { //espaco de posições que representam 
+				for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
+					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - j)) {
+						teclas[BAIXO] = false;
+					}
+				}
+
+			}
+			for (int i = 20; i < 80; i++) { //espaco de posições que representam 
+				for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
+					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - j)) {
+						teclas[BAIXO] = false;
+					}
+				}
+
+			}
+			//BAIXO
+			//DIREITA
+			for (int i = 400; i < 450; i++) { //espaco de posições para a parada do jogador
+				for (int j = 35; j > -35; j--) { //espaco de posições que representam 
+					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j))) {
+						teclas[DIREITA] = false;
+					}
+				}
+			}
+			for (int i = 200; i < 250; i++) { //espaco de posições para a parada do jogador
+				for (int j = 35; j > -35; j--) { //espaco de posições que representam 
+					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j))) {
+						teclas[DIREITA] = false;
+					}
+				}
+
+			}
+			for (int i = 0; i < 50; i++) { //espaco de posições para a parada do jogador
+				for (int j = 35; j > -35; j--) { //espaco de posições que representam 
+					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j))) {
+						teclas[DIREITA] = false;
+					}
+				}
+
+			}
+			//DIREITA
+			//ESQUERDA
+			for (int i = 500; i > 450; i--) { //espaco de posições para a parada do jogador
+				for (int j = 35; j > -35; j--) { //espaco de posições que representam 
+					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j))) {
+						teclas[ESQUERDA] = false;
+					}
+				}
+			}
+			for (int i = 300; i > 250; i--) { //espaco de posições para a parada do jogador
+				for (int j = 35; j > -35; j--) { //espaco de posições que representam 
+					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j))) {
+						teclas[ESQUERDA] = false;
+					}
+				}
+
+			}
+			for (int i = 100; i > 50; i--) { //espaco de posições para a parada do jogador
+				for (int j = 35; j > -35; j--) { //espaco de posições que representam 
+					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j))) {
+						teclas[ESQUERDA] = false;
+					}
+				}
+
+			}
+			//ESQUERDA
 			/*
 			for (int i = 360; i < 430; i++) {
 				if (pos_xJogador == i && pos_yJogador == -2) {
