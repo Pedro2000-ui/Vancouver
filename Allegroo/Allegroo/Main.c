@@ -2,6 +2,8 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_image.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 
 enum TECLAS { CIMA, BAIXO, DIREITA, ESQUERDA, SPACE };
 
@@ -93,6 +95,16 @@ int main() {
 	int vidasJogador = 8;
 	//Variável para vidas dos inimigos;
 	int vidasInimigos[3] = { 5, 5, 5 };
+	//Variavel de Som
+	ALLEGRO_SAMPLE* trilha_sonora = NULL;
+	ALLEGRO_SAMPLE* tiro = NULL;
+	ALLEGRO_SAMPLE* passos = NULL;
+	ALLEGRO_SAMPLE* dano = NULL;
+
+	ALLEGRO_SAMPLE_INSTANCE* inst_trilha_sonora = NULL;
+	ALLEGRO_SAMPLE_INSTANCE* inst_tiro = NULL;
+	ALLEGRO_SAMPLE_INSTANCE* inst_passos = NULL;
+	ALLEGRO_SAMPLE_INSTANCE* inst_dano = NULL;
 
 	//TELA DO JOGO
 	al_init();
@@ -111,6 +123,9 @@ int main() {
 	al_init_primitives_addon();
 	al_install_keyboard();
 	al_init_image_addon();
+	al_install_audio();
+	al_init_acodec_addon();
+	al_reserve_samples('10');
 
 	timer = al_create_timer(1.5 / FPS);
 
@@ -123,11 +138,23 @@ int main() {
 
 	al_start_timer(timer);
 
+	trilha_sonora = al_load_sample("sounds/trilhasonorateste.ogg");
+	inst_trilha_sonora = al_create_sample_instance(trilha_sonora);
+	tiro = al_load_sample("sounds/tiro.ogg");
+	inst_tiro = al_create_sample_instance(tiro);
+	al_attach_sample_instance_to_mixer(inst_trilha_sonora, al_get_default_mixer());
+	al_attach_sample_instance_to_mixer(inst_tiro, al_get_default_mixer());
+	al_set_sample_instance_playmode(inst_trilha_sonora, ALLEGRO_PLAYMODE_LOOP);
+	al_set_sample_instance_gain(inst_trilha_sonora, 0.8);
+	al_set_sample_instance_gain(inst_tiro, 0.8);
+
+
 	//CARREGAR IMAGENS
 	imagem = al_load_bitmap("sprites/mapa1.png");
 	player = al_load_bitmap("sprites/playerup.png");
 	enemy = al_load_bitmap("sprites/enemydown.png");
 
+	al_play_sample_instance(inst_trilha_sonora);
 	while (fim == false && vidasJogador > 0) {
 		//JOGADOR
 		jogador(player, pos_xJogador, pos_yJogador, 0);
@@ -162,6 +189,7 @@ int main() {
 					break;
 				case ALLEGRO_KEY_SPACE:
 					teclas[SPACE] = true;
+					al_play_sample_instance(inst_tiro);
 					break;
 				}
 
