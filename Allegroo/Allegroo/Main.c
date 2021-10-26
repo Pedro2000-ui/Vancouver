@@ -307,8 +307,12 @@ int main() {
 					}
 				}
 			}
-
-			//CIMA
+			// =========================================================================== //
+			// ==     COLISÕES                    DO                       M A P A 1    ==
+			// =========================================================================== //
+			
+			//COLISÕES PRA CIMA
+			//soldado esquerda
 			for (int i = 420; i < 480; i++) { //espaco de posições que representam 
 				for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
 					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] + j)) {
@@ -316,6 +320,7 @@ int main() {
 					}
 				}
 			}
+			//soldado meio
 			for (int i = 220; i < 280; i++) { //espaco de posições que representam 
 				for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
 					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] + j)) {
@@ -324,6 +329,7 @@ int main() {
 				}
 
 			}
+			//soldado direita
 			for (int i = 20; i < 80; i++) { //espaco de posições que representam 
 				for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
 					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] + j)) {
@@ -332,8 +338,8 @@ int main() {
 				}
 
 			}
-			//CIMA
-			//BAIXO
+			//COLISÕES PRA BAIXO
+			//soldado esquerda
 			for (int i = 420; i < 480; i++) { //espaco de posições que representam 
 				for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
 					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - j)) {
@@ -341,6 +347,7 @@ int main() {
 					}
 				}
 			}
+			//soldado meio
 			for (int i = 220; i < 280; i++) { //espaco de posições que representam 
 				for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
 					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - j)) {
@@ -349,6 +356,7 @@ int main() {
 				}
 
 			}
+			//soldado direita
 			for (int i = 20; i < 80; i++) { //espaco de posições que representam 
 				for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
 					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - j)) {
@@ -357,8 +365,8 @@ int main() {
 				}
 
 			}
-			//BAIXO
-			//DIREITA
+			//COLISÕES PRA DIREITA
+			//soldado esquerda
 			for (int i = 400; i < 450; i++) { //espaco de posições para a parada do jogador
 				for (int j = 35; j > -35; j--) { //espaco de posições que representam 
 					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j))) {
@@ -366,6 +374,7 @@ int main() {
 					}
 				}
 			}
+			//soldado meio
 			for (int i = 200; i < 250; i++) { //espaco de posições para a parada do jogador
 				for (int j = 35; j > -35; j--) { //espaco de posições que representam 
 					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j))) {
@@ -374,6 +383,7 @@ int main() {
 				}
 
 			}
+			//soldado direita
 			for (int i = 0; i < 50; i++) { //espaco de posições para a parada do jogador
 				for (int j = 35; j > -35; j--) { //espaco de posições que representam 
 					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j))) {
@@ -382,8 +392,8 @@ int main() {
 				}
 
 			}
-			//DIREITA
-			//ESQUERDA
+			//COLISÕES PRA ESQUERDA
+			//soldado esquerda
 			for (int i = 500; i > 450; i--) { //espaco de posições para a parada do jogador
 				for (int j = 35; j > -35; j--) { //espaco de posições que representam 
 					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j))) {
@@ -391,6 +401,7 @@ int main() {
 					}
 				}
 			}
+			//soldado meio
 			for (int i = 300; i > 250; i--) { //espaco de posições para a parada do jogador
 				for (int j = 35; j > -35; j--) { //espaco de posições que representam 
 					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j))) {
@@ -399,6 +410,7 @@ int main() {
 				}
 
 			}
+			//soldado direita
 			for (int i = 100; i > 50; i--) { //espaco de posições para a parada do jogador
 				for (int j = 35; j > -35; j--) { //espaco de posições que representam 
 					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j))) {
@@ -407,8 +419,8 @@ int main() {
 				}
 
 			}
-			//ESQUERDA
-			//RIO - AGUA
+			
+			//COLISÕES COM A ÁGUA
 
 			for (int i = 445; i < 600; i++) {
 				for (int j = 300; j < 320; j++) {
@@ -441,16 +453,16 @@ int main() {
 				}
 			}
 
-			//RIO - AGUA
-			/*
+			
+			// mapa 2
 			for (int i = 360; i < 430; i++) {
 				if (pos_xJogador == i && pos_yJogador == -2) {
-					imagem = al_load_bitmap("sprites/mapa2.jpg");
-					pos_xJogador = 300;
-					pos_yJogador = 500;
+					imagem = al_load_bitmap("sprites/mapa2.png");
+					pos_xJogador = 360;
+					pos_yJogador = 550;
 				}
 			}
-
+			/*
 			for (int i = 230; i < 390; i++) {
 				if ((pos_xJogador == 771 && pos_yJogador == i)) {
 					imagem = al_load_bitmap("sprites/mapa2.jpg");
