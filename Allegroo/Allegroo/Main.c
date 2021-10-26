@@ -134,7 +134,7 @@ int main() {
 		//INIMIGOS
 		inimigos(enemy, pos_xEnemys, pos_yEnemys, 0, vidasInimigos);
 		
-		printf("Posição no eixo X: %d\nPosição no eixo Y %d: ", pos_xJogador, pos_yJogador);
+		printf("Posição no eixo X: %d ---- %d ----- %d \nPosição no eixo Y %d ---- %d: \n\n %d ----- %d", pos_xEnemys[0], pos_xEnemys[1], pos_xEnemys[2], pos_yEnemys[0] - 20, pos_yEnemys[0], pos_xJogador, pos_yJogador);
 		ALLEGRO_EVENT ev; //variavel para usarmos para verificar a situação dos eventos
 		al_wait_for_event(fila_eventos, &ev); //verifica se algum evento foi detectado, se sim avança pra próxima linha, senão não continua o loop - útil para evitar uso de memória indevido
 		if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
@@ -151,15 +151,108 @@ int main() {
 				switch (ev.keyboard.keycode) {
 				case ALLEGRO_KEY_UP:
 					teclas[CIMA] = true;
+					for (int i = 420; i < 480; i++) { //espaco de posições que representam 
+						for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
+							if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] + j)) {
+								teclas[CIMA] = false;
+							}
+						}
+					}
+					for (int i = 220; i < 280; i++) { //espaco de posições que representam 
+						for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
+							if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] + j)) {
+								teclas[CIMA] = false;
+							}
+						}
+
+					}
+					for (int i = 20; i < 80; i++) { //espaco de posições que representam 
+						for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
+							if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] + j)) {
+								teclas[CIMA] = false;
+							}
+						}
+
+					}
+					
 					break;
 				case ALLEGRO_KEY_DOWN:
 					teclas[BAIXO] = true;
+					for (int i = 420; i < 480; i++) { //espaco de posições que representam 
+						for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
+							if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - j)) {
+								teclas[BAIXO] = false;
+							}
+						}
+					}
+					for (int i = 220; i < 280; i++) { //espaco de posições que representam 
+						for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
+							if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - j)) {
+								teclas[BAIXO] = false;
+							}
+						}
+						
+					}
+					for (int i = 20; i < 80; i++) { //espaco de posições que representam 
+						for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
+							if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - j)) {
+								teclas[BAIXO] = false;
+							}
+						}
+
+					}
 					break;
 				case ALLEGRO_KEY_RIGHT:
 					teclas[DIREITA] = true;
+					for (int i = 400; i < 450; i++) { //espaco de posições para a parada do jogador
+						for (int j = 35; j > -35; j--) { //espaco de posições que representam 
+							if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j))) {
+								teclas[DIREITA] = false;
+							}
+						}
+					}
+					for (int i = 200; i < 250; i++) { //espaco de posições para a parada do jogador
+						for (int j = 35; j > -35; j--) { //espaco de posições que representam 
+							if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j))) {
+								teclas[DIREITA] = false;
+							}
+						}
+
+					}
+					for (int i = 0; i < 50; i++) { //espaco de posições para a parada do jogador
+						for (int j = 35; j > -35; j--) { //espaco de posições que representam 
+							if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j))) {
+								teclas[DIREITA] = false;
+							}
+						}
+
+					}
 					break;
 				case ALLEGRO_KEY_LEFT:
 					teclas[ESQUERDA] = true;
+					for (int i = 500; i > 450; i--) { //espaco de posições para a parada do jogador
+						for (int j = 35; j > -35; j--) { //espaco de posições que representam 
+							if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j))) {
+								teclas[ESQUERDA] = false;
+							}
+						}
+					}
+					for (int i = 300; i > 250; i--) { //espaco de posições para a parada do jogador
+						for (int j = 35; j > -35; j--) { //espaco de posições que representam 
+							if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j))) {
+								teclas[ESQUERDA] = false;
+							}
+						}
+
+					}
+					for (int i = 100; i > 50; i--) { //espaco de posições para a parada do jogador
+						for (int j = 35; j > -35; j--) { //espaco de posições que representam 
+							if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j))) {
+								teclas[ESQUERDA] = false;
+							}
+						}
+
+					}
 					break;
 				case ALLEGRO_KEY_SPACE:
 					teclas[SPACE] = true;
@@ -289,6 +382,9 @@ int main() {
 					pos_yJogador = 500;
 				}
 			}*/
+
+			
+
 			al_flip_display();
 			al_clear_to_color(al_map_rgb(0, 0, 0)); //Pra limpar a tela quando movermos os objetos, não deixando rastros
 			al_draw_bitmap(imagem, 0, 0, 0);
