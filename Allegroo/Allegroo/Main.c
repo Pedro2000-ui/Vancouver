@@ -6,15 +6,16 @@
 #include <allegro5/allegro_acodec.h>
 
 enum TECLAS { CIMA, BAIXO, DIREITA, ESQUERDA, SPACE };
-
+enum POSICOES {cima, baixo, direita, esquerda};
 void  jogador(ALLEGRO_BITMAP* player, int pos_x, int pos_y, int constante) {
 	al_draw_bitmap(player, pos_x, pos_y, constante);
 }
 
-void inimigos(ALLEGRO_BITMAP* enemy, int pos_xEnemys[], int pos_yEnemys[], int constante, int vidaInimigos[]) {
-	for (int i = 0; i < 3; i++) {
-		al_draw_bitmap(enemy, pos_xEnemys[i], pos_yEnemys[0], constante);
+void inimigos(ALLEGRO_BITMAP* enemy[], int pos_xEnemys[], int pos_yEnemys[], int constante, int vidaInimigos[]) {
+	for (int i = 0; i < 2; i++) {
+		al_draw_bitmap(enemy[0], pos_xEnemys[i], pos_yEnemys[0], constante);
 	}
+	al_draw_bitmap(enemy[1], pos_xEnemys[2], pos_yEnemys[1], constante);
 	//ideia de colocar condições onde caso o inimigo morra a imagem daquele inimigo que morreu é destruida e desaparece do mapa
 }
 /*
@@ -66,9 +67,8 @@ void menu() {
 }*/
 //MAIN
 int main() {
-
 	const int largura_tela = 800, altura_tela = 600; //Define altura e largura do protótipo da tela;
-	bool x = true; //Variável que será usada para movimentação dos inimigos com o intuito de evitar conflitos
+	bool x = true, y = true; //Variáveis que serão usadas para movimentação dos inimigos com o intuito de evitar conflitos
 	bool fim = false; //variável apenas pra idenficar o fim do jogo futuramente;
 	bool teclas[] = { false, false, false, false, false };
 	//Posição que iniciará o jogador;
@@ -80,15 +80,18 @@ int main() {
 	//Região que os inimigos atacarão ao visualizarem o jogador
 	int regiaoDeAtaque = 400;
 	//Posições que os inimigos iniciarão;
-	int pos_xEnemys[] = { 50, 250, 450 }, pos_yEnemys[] = { 90 }; //terá mais posições em Y para inimigos vindo das laterais
+	int pos_xEnemys[] = { 100, 300, 741 }, pos_yEnemys[] = { 90, 148 }; //terá mais posições em Y para inimigos vindo das laterais
 	//Variaveis para uso dos tiros que sairão dos Inimigos
 	int pos_yTiro[3];
 	int pos_xTiro[3];
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 2; i++) {
 		pos_xTiro[i] = pos_xEnemys[i]; //recebe as posições iniciais de XEnemys e YEnemys, pois os tiros saem dos inimigos né!!!
 		pos_yTiro[i] = pos_yEnemys[0];
 	}
-	bool primeiroTiro = true, tiroAcertou = false;
+	pos_yTiro[2] = pos_yEnemys[1];
+	pos_xTiro[2] = pos_xEnemys[2];
+	bool posicoes [] = { true, false, false, false };
+	bool primeiroTiro[] = { true, true }, tiroAcertou[] = { false, false };
 	//Variável para velocidade de rodagem do jogo
 	int FPS = 60;
 	//Variável para vidas do jogador;
@@ -117,8 +120,8 @@ int main() {
 	//VARIAVEL DA IMAGEM
 	ALLEGRO_BITMAP* imagem = NULL;
 	ALLEGRO_BITMAP* player = NULL;
-	ALLEGRO_BITMAP* enemy = NULL;
-
+	ALLEGRO_BITMAP* enemy[2] = { NULL, NULL };
+	
 	//INICIALIZAÇÃO DE ADDONS
 	al_init_primitives_addon();
 	al_install_keyboard();
@@ -152,8 +155,8 @@ int main() {
 	//CARREGAR IMAGENS
 	imagem = al_load_bitmap("sprites/mapa1.png");
 	player = al_load_bitmap("sprites/playerup.png");
-	enemy = al_load_bitmap("sprites/enemydown.png");
-
+	enemy[0] = al_load_bitmap("sprites/enemydown.png");
+	enemy[1] = al_load_bitmap("sprites/enemyleft.png");
 	al_play_sample_instance(inst_trilha_sonora);
 	while (fim == false && vidasJogador > 0) {
 		//JOGADOR
@@ -189,11 +192,9 @@ int main() {
 					break;
 				case ALLEGRO_KEY_SPACE:
 					teclas[SPACE] = true;
-					al_play_sample_instance(inst_tiro);
 					break;
 				}
-
-			}
+}
 
 			else {
 				if (ev.type == ALLEGRO_EVENT_KEY_UP) {//ALLEGRO_EVENT_KEY_UP -> O UP executa apenas quando soltarmos a tecla
@@ -217,9 +218,9 @@ int main() {
 
 				else {
 					if (ev.type == ALLEGRO_EVENT_TIMER) { //Qualquer movimento dentro desse if roda nas especificações do timer (segundos/fps)
-						if (pos_yEnemys[0] <= 250 && x == true) { //Bloco de controle da movimentação dos inimigos
-							al_destroy_bitmap(enemy);
-							enemy = al_load_bitmap("sprites/enemydown.png");
+						if (pos_yEnemys[0] <= 250 && x) { //Bloco de controle da movimentação dos inimigos
+							al_destroy_bitmap(enemy[0]);
+							enemy[0] = al_load_bitmap("sprites/enemydown.png");
 							if (pos_yJogador <= regiaoDeAtaque) {
 								if (pos_yEnemys[0] <= 215) {
 									pos_yEnemys[0] -= 1;  //entra em conflito com pos_yEnemys += 2 e os inimigos andam de uma em uma casa
@@ -227,21 +228,24 @@ int main() {
 								else {
 									pos_yEnemys[0] -= 2; //entra em conflito com pos_yEnemys += 2 e os inimigos travam na posição
 								}
-								for (int i = 0; i < 3; i++) { //Bloco de controle dos tiros dos inimigos
-									if (primeiroTiro == true) {
+								for (int i = 0; i < 2; i++) { //Bloco de controle dos tiros dos inimigos
+									if (primeiroTiro[0] == true) {
 										pos_yTiro[i] = pos_yEnemys[0];
-										primeiroTiro = false;
+										primeiroTiro[0] = false;
 									}
 									al_draw_filled_rectangle(pos_xTiro[i] + 8, pos_yTiro[i] + 50, (pos_xTiro[i] + 8) + 5, (pos_yTiro[i] + 50) + 5, al_map_rgb(0, 0, 0));
+									if (pos_yTiro[i] + 50 <= pos_yEnemys[0] + 50) { //condição pra apenas sair o som do tiro quando o tiro estiver saindo da arma
+										al_play_sample_instance(inst_tiro);
+									}
 									pos_yTiro[i] += 15; //velocidade dos tiros
-									if ((pos_yTiro[i] >= pos_yJogador && pos_yJogador > pos_yEnemys[0]) && (pos_xTiro[i] + 8 >= pos_xJogador && pos_xTiro[i] + 8 <= pos_xJogador + 35)) {
-										tiroAcertou = true; 
-										vidasJogador--;
+									if ((pos_yTiro[i] >= pos_yJogador && pos_yJogador > pos_yEnemys[0]) && (pos_xTiro[i] + 8 >= pos_xJogador && pos_xTiro[i] <= pos_xJogador + 35)) {
+										tiroAcertou[0] = true; 
+										//vidasJogador--;
 									}
 									else {
-										tiroAcertou = false;
+										tiroAcertou[0] = false;
 									}
-									if (pos_yTiro[i] > 600 || tiroAcertou == true) {
+									if (pos_yTiro[i] > 600 || tiroAcertou[0] == true) {
 										pos_yTiro[i] = pos_yEnemys[0];
 									}
 								}
@@ -255,49 +259,158 @@ int main() {
 							else {
 								pos_yEnemys[0] -= 2;
 								x = false;
-								al_destroy_bitmap(enemy);
-								enemy = al_load_bitmap("sprites/enemyup.png");
+								al_destroy_bitmap(enemy[0]);
+								enemy[0] = al_load_bitmap("sprites/enemyup.png");
 							}
 						}
-						if (teclas[SPACE] && pos_yJogador <= regiaoDeAtaque) { //Consertar Bugs dos Tiros do Jogador
-							al_draw_filled_rectangle(pos_xTiroJogador + 30, pos_yTiroJogador - 13, (pos_xTiroJogador + 30) + 5, (pos_yTiroJogador - 13) + 5, al_map_rgb(0, 0, 0));
-							pos_yTiroJogador -= 20;
-							for (int i = 0; i < 3; i++) {
-								if (pos_yTiroJogador <= pos_yEnemys[i] + 30 && (pos_xTiroJogador + 15 >= pos_xEnemys[i] && pos_xTiroJogador + 15 <= pos_xEnemys[i] + 30)) { //Focar na lógica
-									tiroAcertouInimigo = true;
-									vidasInimigos[i]--;
+						if (pos_xEnemys[2] >= 432 && y) //bloco de controle do inimigo da lateral
+						{
+							al_destroy_bitmap(enemy[1]);
+							enemy[1] = al_load_bitmap("sprites/enemyleft.png");
+							pos_xEnemys[2] -= 2;
+							if (primeiroTiro[1] == true) {
+								pos_xTiro[2] = pos_xEnemys[2];
+								primeiroTiro[1] = false;
+							}
+							if (pos_yJogador <= regiaoDeAtaque) {
+								if (pos_xEnemys[2] >= 500) {
+									pos_xEnemys[2] += 1;  //entra em conflito com pos_xEnemys -= 2 e os inimigos andam de uma em uma casa
 								}
 								else {
-									tiroAcertouInimigo = false;
+									pos_xEnemys[2] += 2; //entra em conflito com pos_xEnemys -= 2 e os inimigos travam na posição
 								}
-								if (pos_yTiroJogador < 0 || tiroAcertouInimigo == true) {
-									pos_yTiroJogador = pos_yJogador;
-									pos_xTiroJogador = pos_xJogador;
-									teclas[SPACE] = false;
+								al_draw_filled_rectangle(pos_xTiro[2] - 2, pos_yTiro[2] + 5, (pos_xTiro[2] - 2) + 5, (pos_yTiro[2] + 5) + 5, al_map_rgb(0, 0, 0));
+								if (pos_xTiro[2] - 2 >= pos_xEnemys[2] - 2) { //condição pra apenas sair o som do tiro quando o tiro estiver saindo da arma
+									al_play_sample_instance(inst_tiro);
 								}
+								pos_xTiro[2] -= 25;
+								if ((pos_xTiro[2] <= pos_xJogador && pos_xJogador < pos_xEnemys[2]) && (pos_yTiro[2] + 5 >= pos_yJogador && pos_yTiro[2] <= pos_yJogador + 35)) {
+									tiroAcertou[1] = true;
+									//vidasJogador--;
+								}
+								else {
+									tiroAcertou[1] = false;
+								}
+								if (pos_xTiro[2] < 0 || tiroAcertou[1] == true) {
+									pos_xTiro[2] = pos_xEnemys[2];
+								}
+								
 							}
 						}
-						if (teclas[CIMA]  && !teclas[BAIXO] && !teclas[DIREITA] && !teclas[ESQUERDA] && pos_yJogador >= 0) {
+						else {
+							if (pos_xEnemys[2] >= 747) {
+								y = true;
+							}
+							else {
+								pos_xEnemys[2] += 2;
+								y = false;
+								al_destroy_bitmap(enemy[1]);
+								enemy[1] = al_load_bitmap("sprites/enemyright.png");
+							}
+						}
+						
+						if (teclas[SPACE] && pos_yJogador <= regiaoDeAtaque) { 
+							if (posicoes[cima]) { //se a img do jogador estiver posicionada para cima
+								al_draw_filled_rectangle(pos_xTiroJogador + 30, pos_yTiroJogador - 13, (pos_xTiroJogador + 30) + 5, (pos_yTiroJogador - 13) + 5, al_map_rgb(0, 0, 0));
+								if (pos_yTiroJogador - 13 == pos_yJogador - 13) { //condição pra apenas sair o som do tiro quando o tiro estiver saindo da arma
+									al_play_sample_instance(inst_tiro);
+								}
+								pos_yTiroJogador -= 20;
+								for (int i = 0; i < 2; i++) {
+									if (pos_yTiroJogador <= pos_yEnemys[0] + 30 && (pos_xTiroJogador + 15 >= pos_xEnemys[i] && pos_xTiroJogador + 15 <= pos_xEnemys[i] + 30)) { //Focar na lógica
+										tiroAcertouInimigo = true;
+										vidasInimigos[i]--;
+									}
+									else {
+										tiroAcertouInimigo = false;
+									}
+								}
+							}
+							else {
+								if (posicoes[baixo]) { //se o personagem estiver para baixo
+									al_draw_filled_rectangle(pos_xTiroJogador + 8, pos_yTiroJogador + 50, (pos_xTiroJogador + 8) + 5, (pos_yTiroJogador + 50) + 5, al_map_rgb(0, 0, 0)); 
+									if (pos_yTiroJogador + 50 == pos_yJogador + 50) { //condição pra apenas sair o som do tiro quando o tiro estiver saindo da arma
+										al_play_sample_instance(inst_tiro);
+									}
+									for (int i = 0; i < 3; i++) {
+										if ((pos_yTiroJogador >= pos_yEnemys[0] && pos_yEnemys[0] > pos_yJogador) && (pos_xTiroJogador + 8 >= pos_xEnemys[i] && pos_xTiroJogador + 8 <= pos_xEnemys[i] + 35)) { //corrigir
+											tiroAcertouInimigo = true;
+										}
+										else {
+											tiroAcertouInimigo = false;
+										}
+									}
+									pos_yTiroJogador += 20;
+								}
+								else {
+									if (posicoes[direita]) { //se o personagem estiver para a direita
+										al_draw_filled_rectangle(pos_xTiroJogador + 50, pos_yTiroJogador + 25, (pos_xTiroJogador + 50) + 5, (pos_yTiroJogador + 25) + 5, al_map_rgb(0, 0, 0));
+										if (pos_xTiroJogador + 50 == pos_xJogador + 50) { //condição pra apenas sair o som do tiro quando o tiro estiver saindo da arma
+											al_play_sample_instance(inst_tiro);
+										}
+										pos_xTiroJogador += 25;
+									}
+									else {
+										if (posicoes[esquerda]) {
+											al_draw_filled_rectangle(pos_xTiroJogador - 2, pos_yTiroJogador + 5, (pos_xTiroJogador - 2) + 5, (pos_yTiroJogador + 5) + 5, al_map_rgb(0, 0, 0));
+											if (pos_xTiroJogador - 2 == pos_xJogador - 2) { //condição pra apenas sair o som do tiro quando o tiro estiver saindo da arma
+												al_play_sample_instance(inst_tiro);
+											}
+											pos_xTiroJogador -= 25;
+										}
+									}
+								}
+							}
+							if (pos_yTiroJogador < 0 || pos_yTiroJogador > 600  || pos_xTiroJogador > 800 || pos_xTiroJogador < 0 || tiroAcertouInimigo == true) {
+								pos_yTiroJogador = pos_yJogador;
+								pos_xTiroJogador = pos_xJogador;
+								teclas[SPACE] = false;
+							}
+						}
+						else {
+							teclas[SPACE] = false; //apenas para bugs caso apertar o espaço antes de entrar na zona de ataque
+						}
+						if (teclas[CIMA] && !teclas[SPACE] && !teclas[BAIXO] && !teclas[DIREITA] && !teclas[ESQUERDA] && pos_yJogador >= 0) {
 							pos_yJogador -= teclas[CIMA] * 3;
+							pos_yTiroJogador = pos_yJogador;
+							for (int i = 1; i < 4; i++) {
+								posicoes[i] = false;
+							}
+							posicoes[cima] = true;
 							al_destroy_bitmap(player);
 							player = al_load_bitmap("sprites/playerup.png");
 						}
 						else {
-							
-							if (teclas[BAIXO] && !teclas[DIREITA] && !teclas[ESQUERDA] && pos_yJogador < 568) {
+							if (teclas[BAIXO] && !teclas[SPACE] && !teclas[DIREITA] && !teclas[ESQUERDA] && pos_yJogador < 547) {
 								pos_yJogador += teclas[BAIXO] * 3;
+								pos_yTiroJogador = pos_yJogador;
+								for (int i = 0; i < 4 && i != 1; i++) {
+									posicoes[i] = false; //pra n ter conflito, seta as demais posições como falsa
+								}
+								posicoes[baixo] = true; //pra saber pra que lado o personagem da virado
 								al_destroy_bitmap(player);
 								player = al_load_bitmap("sprites/playerdown.png");
 							}
 							else {
-								if (teclas[DIREITA] && !teclas[ESQUERDA] && pos_xJogador < 769) {
+								if (teclas[DIREITA] && !teclas[SPACE] && !teclas[ESQUERDA] && pos_xJogador < 750) {
 									pos_xJogador += teclas[DIREITA] * 3;
+									pos_xTiroJogador = pos_xJogador;
+									for (int i = 0; i < 4 && i != 2; i++) {
+										posicoes[i] = false;
+									}
+									posicoes[direita] = true;
 									al_destroy_bitmap(player);
 									player = al_load_bitmap("sprites/playerright.png");
+
 								}
 								else {
-									if (teclas[ESQUERDA] && pos_xJogador >= 4) {
+									if (teclas[ESQUERDA] && !teclas[SPACE] && pos_xJogador >= 4) {
 										pos_xJogador -= teclas[ESQUERDA] * 3;
+										pos_xTiroJogador = pos_xJogador;
+										for (int i = 0; i < 3; i++) {
+											posicoes[i] = false;
+										}
+										posicoes[esquerda] = true;
 										al_destroy_bitmap(player);
 										player = al_load_bitmap("sprites/playerleft.png");
 									}
@@ -484,7 +597,8 @@ int main() {
 	al_destroy_timer(timer);
 	al_destroy_bitmap(imagem);
 	al_destroy_bitmap(player);
-	al_destroy_bitmap(enemy);
+	al_destroy_bitmap(enemy[0]);
+	al_destroy_bitmap(enemy[1]);
 	return 0;
 }
 
