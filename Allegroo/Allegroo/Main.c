@@ -7,23 +7,155 @@
 
 enum TECLAS { CIMA, BAIXO, DIREITA, ESQUERDA, SPACE };
 enum POSICOES {cima, baixo, direita, esquerda};
-void  jogador(ALLEGRO_BITMAP* player, int pos_x, int pos_y, int constante) {
+void  jogador(ALLEGRO_BITMAP* player, int pos_x, int pos_y, int constante, int vidasJogador, ALLEGRO_BITMAP* heart0, ALLEGRO_BITMAP* heart1, ALLEGRO_BITMAP* heart2) {
 	al_draw_bitmap(player, pos_x, pos_y, constante);
+
+	if (vidasJogador == 8) {
+		al_draw_bitmap(heart1, pos_x - 10, pos_y + 52, constante);
+		al_draw_bitmap(heart1, pos_x + 5, pos_y + 52, constante);
+		al_draw_bitmap(heart1, pos_x + 20, pos_y + 52, constante);
+		al_draw_bitmap(heart1, pos_x + 35, pos_y + 52, constante);
+	}
+	else if (vidasJogador == 7) {
+		al_draw_bitmap(heart1, pos_x - 10, pos_y + 52, constante);
+		al_draw_bitmap(heart1, pos_x + 5, pos_y + 52, constante);
+		al_draw_bitmap(heart1, pos_x + 20, pos_y + 52, constante);
+		al_draw_bitmap(heart2, pos_x + 35, pos_y + 52, constante);
+	}
+	else if (vidasJogador == 6) {
+		al_draw_bitmap(heart1, pos_x - 10, pos_y + 52, constante);
+		al_draw_bitmap(heart1, pos_x + 5, pos_y + 52, constante);
+		al_draw_bitmap(heart1, pos_x + 20, pos_y + 52, constante);
+		al_draw_bitmap(heart0, pos_x + 35, pos_y + 52, constante);
+	}
+	else if (vidasJogador == 5) {
+		al_draw_bitmap(heart1, pos_x - 10, pos_y + 52, constante);
+		al_draw_bitmap(heart1, pos_x + 5, pos_y + 52, constante);
+		al_draw_bitmap(heart2, pos_x + 20, pos_y + 52, constante);
+		al_draw_bitmap(heart0, pos_x + 35, pos_y + 52, constante);
+	}
+	else if (vidasJogador == 4) {
+		al_draw_bitmap(heart1, pos_x - 10, pos_y + 52, constante);
+		al_draw_bitmap(heart1, pos_x + 5, pos_y + 52, constante);
+		al_draw_bitmap(heart0, pos_x + 20, pos_y + 52, constante);
+		al_draw_bitmap(heart0, pos_x + 35, pos_y + 52, constante);
+	}
+	else if (vidasJogador == 3) {
+		al_draw_bitmap(heart1, pos_x - 10, pos_y + 52, constante);
+		al_draw_bitmap(heart2, pos_x + 5, pos_y + 52, constante);
+		al_draw_bitmap(heart0, pos_x + 20, pos_y + 52, constante);
+		al_draw_bitmap(heart0, pos_x + 35, pos_y + 52, constante);
+	}
+	else if (vidasJogador == 2) {
+		al_draw_bitmap(heart1, pos_x - 10, pos_y + 52, constante);
+		al_draw_bitmap(heart0, pos_x + 5, pos_y + 52, constante);
+		al_draw_bitmap(heart0, pos_x + 20, pos_y + 52, constante);
+		al_draw_bitmap(heart0, pos_x + 35, pos_y + 52, constante);
+	}
+	else if (vidasJogador == 1) {
+		al_draw_bitmap(heart2, pos_x - 10, pos_y + 52, constante);
+		al_draw_bitmap(heart0, pos_x + 5, pos_y + 52, constante);
+		al_draw_bitmap(heart0, pos_x + 20, pos_y + 52, constante);
+		al_draw_bitmap(heart0, pos_x + 35, pos_y + 52, constante);
+	}
 }
 
-void inimigos(ALLEGRO_BITMAP* enemy[], int pos_xEnemys[], int pos_yEnemys[], int constante, int vidasInimigos[]) {
-	for (int i = 0; i < 2; i++) {
-		if (vidasInimigos[i] > 0) {
-			al_draw_bitmap(enemy[i], pos_xEnemys[i], pos_yEnemys[0], constante);
-			
+void inimigos(ALLEGRO_BITMAP* enemy[], int pos_xEnemys[], int pos_yEnemys[], int constante, int vidasInimigos[], ALLEGRO_BITMAP* heart0, ALLEGRO_BITMAP* heart1, ALLEGRO_BITMAP* heart2) {
+		//INIMIGO 1
+		if (vidasInimigos[0] == 5) {
+			al_draw_bitmap(enemy[0], pos_xEnemys[0], pos_yEnemys[0], constante);
+			al_draw_bitmap(heart2, pos_xEnemys[0] + 10, pos_yEnemys[0] - 30, constante);
+			al_draw_bitmap(heart1, pos_xEnemys[0] - 5, pos_yEnemys[0] - 30, constante);
+			al_draw_bitmap(heart1, pos_xEnemys[0] - 20, pos_yEnemys[0] - 30, constante);
 		}
-		if (vidasInimigos[2] > 0) {
+		else if (vidasInimigos[0] == 4) {
+			al_draw_bitmap(enemy[0], pos_xEnemys[0], pos_yEnemys[0], constante);
+			al_draw_bitmap(heart0, pos_xEnemys[0] + 10, pos_yEnemys[0] - 30, constante);
+			al_draw_bitmap(heart1, pos_xEnemys[0] - 5, pos_yEnemys[0] - 30, constante);
+			al_draw_bitmap(heart1, pos_xEnemys[0] - 20, pos_yEnemys[0] - 30, constante);
+		}
+		else if (vidasInimigos[0] == 3) {
+			al_draw_bitmap(enemy[0], pos_xEnemys[0], pos_yEnemys[0], constante);
+			al_draw_bitmap(heart0, pos_xEnemys[0] + 10, pos_yEnemys[0] - 30, constante);
+			al_draw_bitmap(heart2, pos_xEnemys[0] - 5, pos_yEnemys[0] - 30, constante);
+			al_draw_bitmap(heart1, pos_xEnemys[0] - 20, pos_yEnemys[0] - 30, constante);
+		}
+		else if (vidasInimigos[0] == 2) {
+			al_draw_bitmap(enemy[0], pos_xEnemys[0], pos_yEnemys[0], constante);
+			al_draw_bitmap(heart0, pos_xEnemys[0] + 10, pos_yEnemys[0] - 30, constante);
+			al_draw_bitmap(heart0, pos_xEnemys[0] - 5, pos_yEnemys[0] - 30, constante);
+			al_draw_bitmap(heart1, pos_xEnemys[0] - 20, pos_yEnemys[0] - 30, constante);
+		}
+		else if (vidasInimigos[0] == 1) {
+			al_draw_bitmap(enemy[0], pos_xEnemys[0], pos_yEnemys[0], constante);
+			al_draw_bitmap(heart0, pos_xEnemys[0] + 10, pos_yEnemys[0] - 30, constante);
+			al_draw_bitmap(heart0, pos_xEnemys[0] - 5, pos_yEnemys[0] - 30, constante);
+			al_draw_bitmap(heart2, pos_xEnemys[0] - 20, pos_yEnemys[0] - 30, constante);
+		}
+		//INIMIGO 2  
+		if (vidasInimigos[1] == 5) {
+			al_draw_bitmap(enemy[1], pos_xEnemys[1], pos_yEnemys[0], constante);
+			al_draw_bitmap(heart2, pos_xEnemys[1] + 10, pos_yEnemys[0] - 30, constante);
+			al_draw_bitmap(heart1, pos_xEnemys[1] - 5, pos_yEnemys[0] - 30, constante);
+			al_draw_bitmap(heart1, pos_xEnemys[1] - 20, pos_yEnemys[0] - 30, constante);
+		}
+		else if (vidasInimigos[1] == 4) {
+			al_draw_bitmap(enemy[1], pos_xEnemys[1], pos_yEnemys[0], constante);
+			al_draw_bitmap(heart0, pos_xEnemys[1] + 10, pos_yEnemys[0] - 30, constante);
+			al_draw_bitmap(heart1, pos_xEnemys[1] - 5, pos_yEnemys[0] - 30, constante);
+			al_draw_bitmap(heart1, pos_xEnemys[1] - 20, pos_yEnemys[0] - 30, constante);
+		}
+		else if (vidasInimigos[1] == 3) {
+			al_draw_bitmap(enemy[1], pos_xEnemys[1], pos_yEnemys[0], constante);
+			al_draw_bitmap(heart0, pos_xEnemys[1] + 10, pos_yEnemys[0] - 30, constante);
+			al_draw_bitmap(heart2, pos_xEnemys[1] - 5, pos_yEnemys[0] - 30, constante);
+			al_draw_bitmap(heart1, pos_xEnemys[1] - 20, pos_yEnemys[0] - 30, constante);
+		}
+		else if (vidasInimigos[1] == 2) {
+			al_draw_bitmap(enemy[1], pos_xEnemys[1], pos_yEnemys[0], constante);
+			al_draw_bitmap(heart0, pos_xEnemys[1] + 10, pos_yEnemys[0] - 30, constante);
+			al_draw_bitmap(heart0, pos_xEnemys[1] - 5, pos_yEnemys[0] - 30, constante);
+			al_draw_bitmap(heart1, pos_xEnemys[1] - 20, pos_yEnemys[0] - 30, constante);
+		}
+		else if (vidasInimigos[1] == 1) {
+			al_draw_bitmap(enemy[1], pos_xEnemys[1], pos_yEnemys[0], constante);
+			al_draw_bitmap(heart0, pos_xEnemys[1] + 10, pos_yEnemys[0] - 30, constante);
+			al_draw_bitmap(heart0, pos_xEnemys[1] - 5, pos_yEnemys[0] - 30, constante);
+			al_draw_bitmap(heart2, pos_xEnemys[1] - 20, pos_yEnemys[0] - 30, constante);
+		}
+		//INIMIGO 3
+		if (vidasInimigos[2] == 5) {
 			al_draw_bitmap(enemy[2], pos_xEnemys[2], pos_yEnemys[1], constante);
+			al_draw_bitmap(heart2, pos_xEnemys[2] + 10, pos_yEnemys[1] - 30, constante);
+			al_draw_bitmap(heart1, pos_xEnemys[2] - 5, pos_yEnemys[1] - 30, constante);
+			al_draw_bitmap(heart1, pos_xEnemys[2] - 20, pos_yEnemys[1] - 30, constante);
 		}
-		
-	}
-	//ideia de colocar condições onde caso o inimigo morra a imagem daquele inimigo que morreu é destruida e desaparece do mapa
+		else if (vidasInimigos[2] == 4) {
+			al_draw_bitmap(enemy[2], pos_xEnemys[2], pos_yEnemys[1], constante);
+			al_draw_bitmap(heart0, pos_xEnemys[2] + 10, pos_yEnemys[1] - 30, constante);
+			al_draw_bitmap(heart1, pos_xEnemys[2] - 5, pos_yEnemys[1] - 30, constante);
+			al_draw_bitmap(heart1, pos_xEnemys[2] - 20, pos_yEnemys[1] - 30, constante);
+		}
+		else if (vidasInimigos[2] == 3) {
+			al_draw_bitmap(enemy[2], pos_xEnemys[2], pos_yEnemys[1], constante);
+			al_draw_bitmap(heart0, pos_xEnemys[2] + 10, pos_yEnemys[1] - 30, constante);
+			al_draw_bitmap(heart2, pos_xEnemys[2] - 5, pos_yEnemys[1] - 30, constante);
+			al_draw_bitmap(heart1, pos_xEnemys[2] - 20, pos_yEnemys[1] - 30, constante);
+		}
+		else if (vidasInimigos[2] == 2) {
+			al_draw_bitmap(enemy[2], pos_xEnemys[2], pos_yEnemys[1], constante);
+			al_draw_bitmap(heart0, pos_xEnemys[2] + 10, pos_yEnemys[1] - 30, constante);
+			al_draw_bitmap(heart0, pos_xEnemys[2] - 5, pos_yEnemys[1] - 30, constante);
+			al_draw_bitmap(heart1, pos_xEnemys[2] - 20, pos_yEnemys[1] - 30, constante);
+		}
+		else if (vidasInimigos[2] == 1) {
+			al_draw_bitmap(enemy[2], pos_xEnemys[2], pos_yEnemys[1], constante);
+			al_draw_bitmap(heart0, pos_xEnemys[2] + 10, pos_yEnemys[1] - 30, constante);
+			al_draw_bitmap(heart0, pos_xEnemys[2] - 5, pos_yEnemys[1] - 30, constante);
+			al_draw_bitmap(heart2, pos_xEnemys[2] - 20, pos_yEnemys[1] - 30, constante);
+		}
 }
+	//ideia de colocar condições onde caso o inimigo morra a imagem daquele inimigo que morreu é destruida e desaparece do map
 /*
 void menu() {
 	bool teclas[] = { false, false, false, false };
@@ -127,7 +259,9 @@ int main() {
 	ALLEGRO_BITMAP* imagem = NULL;
 	ALLEGRO_BITMAP* player = NULL;
 	ALLEGRO_BITMAP* enemy[3] = { NULL, NULL, NULL };
-	
+	ALLEGRO_BITMAP* heart0 = NULL;
+	ALLEGRO_BITMAP* heart1 = NULL;
+	ALLEGRO_BITMAP* heart2 = NULL;
 	//INICIALIZAÇÃO DE ADDONS
 	al_init_primitives_addon();
 	al_install_keyboard();
@@ -164,12 +298,18 @@ int main() {
 	enemy[0] = al_load_bitmap("sprites/enemydown.png");
 	enemy[1] = al_load_bitmap("sprites/enemydown.png");
 	enemy[2] = al_load_bitmap("sprites/enemyleft.png");
+	heart0 = al_load_bitmap("sprites/heart0.png");
+	heart1 = al_load_bitmap("sprites/heart1.png");
+	heart2 = al_load_bitmap("sprites/heart2.png");
+
+	//CARREGAR TRILHA SONORA
 	al_play_sample_instance(inst_trilha_sonora);
+
 	while (fim == false && vidasJogador > 0) {
 		//JOGADOR
-		jogador(player, pos_xJogador, pos_yJogador, 0);
+		jogador(player, pos_xJogador, pos_yJogador, 0, vidasJogador, heart0, heart1, heart2);
 		//INIMIGOS
-		inimigos(enemy, pos_xEnemys, pos_yEnemys, 0, vidasInimigos);
+		inimigos(enemy, pos_xEnemys, pos_yEnemys, 0, vidasInimigos, heart0, heart1, heart2);
 		
 		printf("Posição no eixo X: %d ---- %d ----- %d \nPosição no eixo Y %d ---- %d: \n\n %d ----- %d", pos_xEnemys[0], pos_xEnemys[1], pos_xEnemys[2], pos_yEnemys[0] - 20, pos_yEnemys[0], pos_xJogador, pos_yJogador);
 		ALLEGRO_EVENT ev; //variavel para usarmos para verificar a situação dos eventos
@@ -645,7 +785,7 @@ int main() {
 			}
 			// mapa 2
 			for (int i = 360; i < 430; i++) {
-				if (pos_xJogador == i && pos_yJogador == -2 && vidasInimigos[0] == 0 && vidasInimigos[1] == 0 && vidasInimigos[2] == 0) {
+				if (pos_xJogador == i && pos_yJogador == -2 && vidasInimigos[0] <= 0 && vidasInimigos[1] <= 0 && vidasInimigos[2] <= 0) {
 					imagem = al_load_bitmap("sprites/mapa2.png");
 					pos_xJogador = 360;
 					pos_yJogador = 550;
@@ -670,6 +810,3 @@ int main() {
 	}
 	return 0;
 }
-
-
-
