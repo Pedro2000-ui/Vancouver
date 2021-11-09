@@ -4,8 +4,10 @@
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
 
-enum TECLAS { CIMA, BAIXO, DIREITA, ESQUERDA, SPACE };
+enum TECLAS { CIMA, BAIXO, DIREITA, ESQUERDA, SPACE, ENTER};
 enum POSICOES {cima, baixo, direita, esquerda};
 void  jogador(ALLEGRO_BITMAP* player, int pos_x, int pos_y, int constante, int vidasJogador, ALLEGRO_BITMAP* heart0, ALLEGRO_BITMAP* heart1, ALLEGRO_BITMAP* heart2) {
 	al_draw_bitmap(player, pos_x, pos_y, constante);
@@ -156,53 +158,29 @@ void inimigos(ALLEGRO_BITMAP* enemy[], int pos_xEnemys[], int pos_yEnemys[], int
 		}
 }
 	//ideia de colocar condições onde caso o inimigo morra a imagem daquele inimigo que morreu é destruida e desaparece do map
-/*
-void menu() {
-	bool teclas[] = { false, false, false, false };
 
-	bool fim = false;
-
-	ALLEGRO_EVENT_QUEUE* fila_eventos = NULL;
-
-	al_install_keyboard();
-	al_init_image_addon();
-
-	fila_eventos = al_create_evente_queue();
-
-	al_register_event_source(fila_eventos, al_get_keyboard_event_source());
-
-	while (!fim) {
-
-		ALLEGRO_DISPLAY* janela = NULL;
-
-		ALLEGRO_BITMAP* imagem = NULL;
-
-		al_init();
-		al_init_image_addon();
-
-		janela = al_create_display(800, 600);
-
-		imagem = al_load_bitmap("background.png");
-
-		al_draw_bitmap(imagem, 0, 0, 0);
-
-		al_flip_display();
+ALLEGRO_BITMAP* fundoMenu;
 
 
-		ALLEGRO_EVENT ev;
 
-		al_wait_for_event(fila_eventos, &ev);
+/*void menu() {
+	int tempo = 0, flash = 0;
+	bool fimMenu = false;
 
-		if (ev.type == ALLEGRO_EVENT_KEY_UP) {
-			if (ev.keyboard.keycode == ALLEGRO_KEY_ENTER) {
-				fim = true;
-			}
-		}
+	while (!fimMenu) {
+		
+		fundoMenu = al_load_bitmap("sprites/menuF.png");
 
+		al_draw_text(font09, al_map_rgb(255, 255, 255), 50, 50, NULL, "PRESS ENTER TO CONTINUE");
+		
+		al_draw_bitmap(fundoMenu, 0, 0, 0);
+		
+		if (ALLEGRO_KEY_ENTER) fimMenu = true;
 	}
+}
+*/
 
-	al_destroy_event_queue(fila_eventos);
-}*/
+
 //MAIN
 int main() {
 	const int largura_tela = 800, altura_tela = 600; //Define altura e largura do protótipo da tela;
@@ -254,6 +232,9 @@ int main() {
 
 	//INICIALIZAÇÂO DE TEMPORIZADOR
 	ALLEGRO_TIMER* timer = 0;
+	
+	//Fonte do menu
+	ALLEGRO_FONT* font09 = al_load_font("04b.TTF", 50, NULL);
 
 	//VARIAVEL DA IMAGEM
 	ALLEGRO_BITMAP* imagem = NULL;
@@ -291,7 +272,11 @@ int main() {
 	al_set_sample_instance_gain(inst_trilha_sonora, 0.8);
 	al_set_sample_instance_gain(inst_tiro, 0.8);
 
+	//Chamando a função do MENU
+	//menu();
 
+	
+	
 	//CARREGAR IMAGENS
 	imagem = al_load_bitmap("sprites/mapa1.png");
 	player = al_load_bitmap("sprites/playerup.png");
@@ -805,6 +790,7 @@ int main() {
 	al_destroy_timer(timer);
 	al_destroy_bitmap(imagem);
 	al_destroy_bitmap(player);
+	al_destroy_font(font09);
 	for (int i = 0; i < 3; i++) {
 		al_destroy_bitmap(enemy[i]);
 	}

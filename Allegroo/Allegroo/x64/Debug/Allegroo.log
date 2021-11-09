@@ -1,3 +1,5 @@
 ﻿  Main.c
-C:\Users\Frankenstein\Desktop\Vancouver\Allegroo\Allegroo\Main.c(280,74): warning C4133: 'function': incompatible types - from 'ALLEGRO_TIMER *' to 'ALLEGRO_DISPLAY *'
-  Allegroo.vcxproj -> C:\Users\Frankenstein\Desktop\Vancouver\Allegroo\x64\Debug\Allegroo.exe
+C:\Users\carva\Documents\GitHub\Vancouver\Allegroo\Allegroo\Main.c(237,57): warning C4047: 'função': 'int' difere em níveis de indireção de 'void *'
+C:\Users\carva\Documents\GitHub\Vancouver\Allegroo\Allegroo\Main.c(237,53): warning C4024: 'al_load_font': tipos diferentes para parâmetro formal e real 3
+C:\Users\carva\Documents\GitHub\Vancouver\Allegroo\Allegroo\Main.c(261,74): warning C4133: 'função': tipos incompatíveis - de 'ALLEGRO_TIMER *' para 'ALLEGRO_DISPLAY *'
+  Allegroo.vcxproj -> C:\Users\carva\Documents\GitHub\Vancouver\Allegroo\x64\Debug\Allegroo.exe
