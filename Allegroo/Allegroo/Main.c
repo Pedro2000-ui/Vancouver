@@ -9,153 +9,97 @@
 
 enum TECLAS { CIMA, BAIXO, DIREITA, ESQUERDA, SPACE, ENTER };
 enum POSICOES { cima, baixo, direita, esquerda };
-void  jogador(ALLEGRO_BITMAP* player, int pos_x, int pos_y, int constante, int vidasJogador, ALLEGRO_BITMAP* heart0, ALLEGRO_BITMAP* heart1, ALLEGRO_BITMAP* heart2) {
+void  jogador(ALLEGRO_BITMAP* player, int pos_x, int pos_y, int constante, int vidasJogador, ALLEGRO_BITMAP* heart1, ALLEGRO_BITMAP* heart2, ALLEGRO_BITMAP* heart3, ALLEGRO_BITMAP* heart4, ALLEGRO_BITMAP* heart5, ALLEGRO_BITMAP* heart6, ALLEGRO_BITMAP* heart7, ALLEGRO_BITMAP* heart8) {
 	al_draw_bitmap(player, pos_x, pos_y, constante);
 
 	if (vidasJogador == 8) {
-		al_draw_bitmap(heart1, pos_x - 10, pos_y + 52, constante);
-		al_draw_bitmap(heart1, pos_x + 5, pos_y + 52, constante);
-		al_draw_bitmap(heart1, pos_x + 20, pos_y + 52, constante);
-		al_draw_bitmap(heart1, pos_x + 35, pos_y + 52, constante);
+		al_draw_bitmap(heart8, pos_x - 10, pos_y + 52, constante);
 	}
 	else if (vidasJogador == 7) {
-		al_draw_bitmap(heart1, pos_x - 10, pos_y + 52, constante);
-		al_draw_bitmap(heart1, pos_x + 5, pos_y + 52, constante);
-		al_draw_bitmap(heart1, pos_x + 20, pos_y + 52, constante);
-		al_draw_bitmap(heart2, pos_x + 35, pos_y + 52, constante);
+		al_draw_bitmap(heart7, pos_x - 10, pos_y + 52, constante);
 	}
 	else if (vidasJogador == 6) {
-		al_draw_bitmap(heart1, pos_x - 10, pos_y + 52, constante);
-		al_draw_bitmap(heart1, pos_x + 5, pos_y + 52, constante);
-		al_draw_bitmap(heart1, pos_x + 20, pos_y + 52, constante);
-		al_draw_bitmap(heart0, pos_x + 35, pos_y + 52, constante);
+		al_draw_bitmap(heart6, pos_x - 10, pos_y + 52, constante);
 	}
 	else if (vidasJogador == 5) {
-		al_draw_bitmap(heart1, pos_x - 10, pos_y + 52, constante);
-		al_draw_bitmap(heart1, pos_x + 5, pos_y + 52, constante);
-		al_draw_bitmap(heart2, pos_x + 20, pos_y + 52, constante);
-		al_draw_bitmap(heart0, pos_x + 35, pos_y + 52, constante);
+		al_draw_bitmap(heart5, pos_x - 10, pos_y + 52, constante);
 	}
 	else if (vidasJogador == 4) {
-		al_draw_bitmap(heart1, pos_x - 10, pos_y + 52, constante);
-		al_draw_bitmap(heart1, pos_x + 5, pos_y + 52, constante);
-		al_draw_bitmap(heart0, pos_x + 20, pos_y + 52, constante);
-		al_draw_bitmap(heart0, pos_x + 35, pos_y + 52, constante);
+		al_draw_bitmap(heart4, pos_x - 10, pos_y + 52, constante);
 	}
 	else if (vidasJogador == 3) {
-		al_draw_bitmap(heart1, pos_x - 10, pos_y + 52, constante);
-		al_draw_bitmap(heart2, pos_x + 5, pos_y + 52, constante);
-		al_draw_bitmap(heart0, pos_x + 20, pos_y + 52, constante);
-		al_draw_bitmap(heart0, pos_x + 35, pos_y + 52, constante);
+		al_draw_bitmap(heart3, pos_x - 10, pos_y + 52, constante);
 	}
 	else if (vidasJogador == 2) {
-		al_draw_bitmap(heart1, pos_x - 10, pos_y + 52, constante);
-		al_draw_bitmap(heart0, pos_x + 5, pos_y + 52, constante);
-		al_draw_bitmap(heart0, pos_x + 20, pos_y + 52, constante);
-		al_draw_bitmap(heart0, pos_x + 35, pos_y + 52, constante);
+		al_draw_bitmap(heart2, pos_x - 10, pos_y + 52, constante);
 	}
 	else if (vidasJogador == 1) {
-		al_draw_bitmap(heart2, pos_x - 10, pos_y + 52, constante);
-		al_draw_bitmap(heart0, pos_x + 5, pos_y + 52, constante);
-		al_draw_bitmap(heart0, pos_x + 20, pos_y + 52, constante);
-		al_draw_bitmap(heart0, pos_x + 35, pos_y + 52, constante);
+		al_draw_bitmap(heart1, pos_x - 10, pos_y + 52, constante);
 	}
 }
 
-void inimigos(ALLEGRO_BITMAP* enemy[], int pos_xEnemys[], int pos_yEnemys[], int constante, int vidasInimigos[], ALLEGRO_BITMAP* heart0, ALLEGRO_BITMAP* heart1, ALLEGRO_BITMAP* heart2) {
-	//INIMIGO 1
-
+void inimigos(ALLEGRO_BITMAP* enemy[], int pos_xEnemys[], int pos_yEnemys[], int constante, int vidasInimigos[], ALLEGRO_BITMAP* eHeart1, ALLEGRO_BITMAP* eHeart2, ALLEGRO_BITMAP* eHeart3, ALLEGRO_BITMAP* eHeart4, ALLEGRO_BITMAP* eHeart5){
 	if (vidasInimigos[0] == 5) {
 		al_draw_bitmap(enemy[0], pos_xEnemys[0], pos_yEnemys[0], constante);
-		al_draw_bitmap(heart2, pos_xEnemys[0] + 10, pos_yEnemys[0] - 30, constante);
-		al_draw_bitmap(heart1, pos_xEnemys[0] - 5, pos_yEnemys[0] - 30, constante);
-		al_draw_bitmap(heart1, pos_xEnemys[0] - 20, pos_yEnemys[0] - 30, constante);
+		al_draw_bitmap(eHeart5, pos_xEnemys[0] + 10, pos_yEnemys[0] - 30, constante);
 	}
 	else if (vidasInimigos[0] == 4) {
 		al_draw_bitmap(enemy[0], pos_xEnemys[0], pos_yEnemys[0], constante);
-		al_draw_bitmap(heart0, pos_xEnemys[0] + 10, pos_yEnemys[0] - 30, constante);
-		al_draw_bitmap(heart1, pos_xEnemys[0] - 5, pos_yEnemys[0] - 30, constante);
-		al_draw_bitmap(heart1, pos_xEnemys[0] - 20, pos_yEnemys[0] - 30, constante);
+		al_draw_bitmap(eHeart4, pos_xEnemys[0] + 10, pos_yEnemys[0] - 30, constante);
 	}
 	else if (vidasInimigos[0] == 3) {
 		al_draw_bitmap(enemy[0], pos_xEnemys[0], pos_yEnemys[0], constante);
-		al_draw_bitmap(heart0, pos_xEnemys[0] + 10, pos_yEnemys[0] - 30, constante);
-		al_draw_bitmap(heart2, pos_xEnemys[0] - 5, pos_yEnemys[0] - 30, constante);
-		al_draw_bitmap(heart1, pos_xEnemys[0] - 20, pos_yEnemys[0] - 30, constante);
+		al_draw_bitmap(eHeart3, pos_xEnemys[0] + 10, pos_yEnemys[0] - 30, constante);
 	}
 	else if (vidasInimigos[0] == 2) {
 		al_draw_bitmap(enemy[0], pos_xEnemys[0], pos_yEnemys[0], constante);
-		al_draw_bitmap(heart0, pos_xEnemys[0] + 10, pos_yEnemys[0] - 30, constante);
-		al_draw_bitmap(heart0, pos_xEnemys[0] - 5, pos_yEnemys[0] - 30, constante);
-		al_draw_bitmap(heart1, pos_xEnemys[0] - 20, pos_yEnemys[0] - 30, constante);
+		al_draw_bitmap(eHeart2, pos_xEnemys[0] + 10, pos_yEnemys[0] - 30, constante);
 	}
 	else if (vidasInimigos[0] == 1) {
 		al_draw_bitmap(enemy[0], pos_xEnemys[0], pos_yEnemys[0], constante);
-		al_draw_bitmap(heart0, pos_xEnemys[0] + 10, pos_yEnemys[0] - 30, constante);
-		al_draw_bitmap(heart0, pos_xEnemys[0] - 5, pos_yEnemys[0] - 30, constante);
-		al_draw_bitmap(heart2, pos_xEnemys[0] - 20, pos_yEnemys[0] - 30, constante);
+		al_draw_bitmap(eHeart1, pos_xEnemys[0] + 10, pos_yEnemys[0] - 30, constante);
 	}
 	//INIMIGO 2  
 	if (vidasInimigos[1] == 5) {
 		al_draw_bitmap(enemy[1], pos_xEnemys[1], pos_yEnemys[0], constante);
-		al_draw_bitmap(heart2, pos_xEnemys[1] + 10, pos_yEnemys[0] - 30, constante);
-		al_draw_bitmap(heart1, pos_xEnemys[1] - 5, pos_yEnemys[0] - 30, constante);
-		al_draw_bitmap(heart1, pos_xEnemys[1] - 20, pos_yEnemys[0] - 30, constante);
+		al_draw_bitmap(eHeart5, pos_xEnemys[1] + 10, pos_yEnemys[0] - 30, constante);
 	}
 	else if (vidasInimigos[1] == 4) {
 		al_draw_bitmap(enemy[1], pos_xEnemys[1], pos_yEnemys[0], constante);
-		al_draw_bitmap(heart0, pos_xEnemys[1] + 10, pos_yEnemys[0] - 30, constante);
-		al_draw_bitmap(heart1, pos_xEnemys[1] - 5, pos_yEnemys[0] - 30, constante);
-		al_draw_bitmap(heart1, pos_xEnemys[1] - 20, pos_yEnemys[0] - 30, constante);
+		al_draw_bitmap(eHeart4, pos_xEnemys[1] + 10, pos_yEnemys[0] - 30, constante);
 	}
 	else if (vidasInimigos[1] == 3) {
 		al_draw_bitmap(enemy[1], pos_xEnemys[1], pos_yEnemys[0], constante);
-		al_draw_bitmap(heart0, pos_xEnemys[1] + 10, pos_yEnemys[0] - 30, constante);
-		al_draw_bitmap(heart2, pos_xEnemys[1] - 5, pos_yEnemys[0] - 30, constante);
-		al_draw_bitmap(heart1, pos_xEnemys[1] - 20, pos_yEnemys[0] - 30, constante);
+		al_draw_bitmap(eHeart3, pos_xEnemys[1] + 10, pos_yEnemys[0] - 30, constante);
 	}
 	else if (vidasInimigos[1] == 2) {
 		al_draw_bitmap(enemy[1], pos_xEnemys[1], pos_yEnemys[0], constante);
-		al_draw_bitmap(heart0, pos_xEnemys[1] + 10, pos_yEnemys[0] - 30, constante);
-		al_draw_bitmap(heart0, pos_xEnemys[1] - 5, pos_yEnemys[0] - 30, constante);
-		al_draw_bitmap(heart1, pos_xEnemys[1] - 20, pos_yEnemys[0] - 30, constante);
+		al_draw_bitmap(eHeart2, pos_xEnemys[1] + 10, pos_yEnemys[0] - 30, constante);
 	}
 	else if (vidasInimigos[1] == 1) {
 		al_draw_bitmap(enemy[1], pos_xEnemys[1], pos_yEnemys[0], constante);
-		al_draw_bitmap(heart0, pos_xEnemys[1] + 10, pos_yEnemys[0] - 30, constante);
-		al_draw_bitmap(heart0, pos_xEnemys[1] - 5, pos_yEnemys[0] - 30, constante);
-		al_draw_bitmap(heart2, pos_xEnemys[1] - 20, pos_yEnemys[0] - 30, constante);
+		al_draw_bitmap(eHeart1, pos_xEnemys[1] + 10, pos_yEnemys[0] - 30, constante);
 	}
 	//INIMIGO 3
 	if (vidasInimigos[2] == 5) {
 		al_draw_bitmap(enemy[2], pos_xEnemys[2], pos_yEnemys[1], constante);
-		al_draw_bitmap(heart2, pos_xEnemys[2] + 10, pos_yEnemys[1] - 30, constante);
-		al_draw_bitmap(heart1, pos_xEnemys[2] - 5, pos_yEnemys[1] - 30, constante);
-		al_draw_bitmap(heart1, pos_xEnemys[2] - 20, pos_yEnemys[1] - 30, constante);
+		al_draw_bitmap(eHeart5, pos_xEnemys[2] + 10, pos_yEnemys[1] - 30, constante);
 	}
 	else if (vidasInimigos[2] == 4) {
 		al_draw_bitmap(enemy[2], pos_xEnemys[2], pos_yEnemys[1], constante);
-		al_draw_bitmap(heart0, pos_xEnemys[2] + 10, pos_yEnemys[1] - 30, constante);
-		al_draw_bitmap(heart1, pos_xEnemys[2] - 5, pos_yEnemys[1] - 30, constante);
-		al_draw_bitmap(heart1, pos_xEnemys[2] - 20, pos_yEnemys[1] - 30, constante);
+		al_draw_bitmap(eHeart4, pos_xEnemys[2] + 10, pos_yEnemys[1] - 30, constante);
 	}
 	else if (vidasInimigos[2] == 3) {
 		al_draw_bitmap(enemy[2], pos_xEnemys[2], pos_yEnemys[1], constante);
-		al_draw_bitmap(heart0, pos_xEnemys[2] + 10, pos_yEnemys[1] - 30, constante);
-		al_draw_bitmap(heart2, pos_xEnemys[2] - 5, pos_yEnemys[1] - 30, constante);
-		al_draw_bitmap(heart1, pos_xEnemys[2] - 20, pos_yEnemys[1] - 30, constante);
+		al_draw_bitmap(eHeart3, pos_xEnemys[2] + 10, pos_yEnemys[1] - 30, constante);
 	}
 	else if (vidasInimigos[2] == 2) {
 		al_draw_bitmap(enemy[2], pos_xEnemys[2], pos_yEnemys[1], constante);
-		al_draw_bitmap(heart0, pos_xEnemys[2] + 10, pos_yEnemys[1] - 30, constante);
-		al_draw_bitmap(heart0, pos_xEnemys[2] - 5, pos_yEnemys[1] - 30, constante);
-		al_draw_bitmap(heart1, pos_xEnemys[2] - 20, pos_yEnemys[1] - 30, constante);
+		al_draw_bitmap(eHeart2, pos_xEnemys[2] + 10, pos_yEnemys[1] - 30, constante);
 	}
 	else if (vidasInimigos[2] == 1) {
 		al_draw_bitmap(enemy[2], pos_xEnemys[2], pos_yEnemys[1], constante);
-		al_draw_bitmap(heart0, pos_xEnemys[2] + 10, pos_yEnemys[1] - 30, constante);
-		al_draw_bitmap(heart0, pos_xEnemys[2] - 5, pos_yEnemys[1] - 30, constante);
-		al_draw_bitmap(heart2, pos_xEnemys[2] - 20, pos_yEnemys[1] - 30, constante);
+		al_draw_bitmap(eHeart1, pos_xEnemys[2] + 10, pos_yEnemys[1] - 30, constante);
 	}
 }
 
@@ -182,7 +126,6 @@ ALLEGRO_BITMAP* fundoMenu;
 	}
 }
 */
-
 
 //MAIN
 int main() {
@@ -243,9 +186,21 @@ int main() {
 	ALLEGRO_BITMAP* imagem = NULL;
 	ALLEGRO_BITMAP* player = NULL;
 	ALLEGRO_BITMAP* enemy[3] = { NULL, NULL, NULL };
-	ALLEGRO_BITMAP* heart0 = NULL;
-	ALLEGRO_BITMAP* heart1 = NULL;
+	//coração player
+	ALLEGRO_BITMAP* heart8 = NULL;
+	ALLEGRO_BITMAP* heart7 = NULL;
+	ALLEGRO_BITMAP* heart6 = NULL;
+	ALLEGRO_BITMAP* heart5 = NULL;
+	ALLEGRO_BITMAP* heart4 = NULL;
+	ALLEGRO_BITMAP* heart3 = NULL;
 	ALLEGRO_BITMAP* heart2 = NULL;
+	ALLEGRO_BITMAP* heart1 = NULL;
+	//coração enemy
+	ALLEGRO_BITMAP* eHeart5 = NULL;
+	ALLEGRO_BITMAP* eHeart4 = NULL;
+	ALLEGRO_BITMAP* eHeart3 = NULL;
+	ALLEGRO_BITMAP* eHeart2 = NULL;
+	ALLEGRO_BITMAP* eHeart1 = NULL;
 	//INICIALIZAÇÃO DE ADDONS
 	al_init_primitives_addon();
 	al_install_keyboard();
@@ -286,18 +241,30 @@ int main() {
 	enemy[0] = al_load_bitmap("sprites/enemydown.png");
 	enemy[1] = al_load_bitmap("sprites/enemydown.png");
 	enemy[2] = al_load_bitmap("sprites/enemyleft.png");
-	heart0 = al_load_bitmap("sprites/heart0.png");
-	heart1 = al_load_bitmap("sprites/heart1.png");
-	heart2 = al_load_bitmap("sprites/heart2.png");
+	//coração player
+	heart1 = al_load_bitmap("sprites/heartplayer/heart1.png");
+	heart2 = al_load_bitmap("sprites/heartplayer/heart2.png");
+	heart3 = al_load_bitmap("sprites/heartplayer/heart3.png");
+	heart4 = al_load_bitmap("sprites/heartplayer/heart4.png");
+	heart5 = al_load_bitmap("sprites/heartplayer/heart5.png");
+	heart6 = al_load_bitmap("sprites/heartplayer/heart6.png");
+	heart7 = al_load_bitmap("sprites/heartplayer/heart7.png");
+	heart8 = al_load_bitmap("sprites/heartplayer/heart8.png");
+	//coração inimigo
+	eHeart1 = al_load_bitmap("sprites/heartenemy/eHeart1.png");
+	eHeart2 = al_load_bitmap("sprites/heartenemy/eHeart2.png");
+	eHeart3 = al_load_bitmap("sprites/heartenemy/eHeart3.png");
+	eHeart4 = al_load_bitmap("sprites/heartenemy/eHeart4.png");
+	eHeart5 = al_load_bitmap("sprites/heartenemy/eHeart5.png");
 
 	//CARREGAR TRILHA SONORA
 	al_play_sample_instance(inst_trilha_sonora);
 
 	while (fim == false && vidasJogador > 0) {
 		//JOGADOR
-		jogador(player, pos_xJogador, pos_yJogador, 0, vidasJogador, heart0, heart1, heart2);
+		jogador(player, pos_xJogador, pos_yJogador, 0, vidasJogador, heart1, heart2, heart3, heart4, heart5, heart6, heart7, heart8);
 		//INIMIGOS
-		inimigos(enemy, pos_xEnemys, pos_yEnemys, 0, vidasInimigos, heart0, heart1, heart2);
+		inimigos(enemy, pos_xEnemys, pos_yEnemys, 0, vidasInimigos, heart1, heart2, heart3, heart4, heart5, heart6, heart7, heart8);
 
 		printf("Posição no eixo X: %d ---- %d ----- %d \nPosição no eixo Y %d ---- %d: \n\n %d ----- %d", pos_xEnemys[0], pos_xEnemys[1], pos_xEnemys[2], pos_yEnemys[0] - 20, pos_yEnemys[0], pos_xJogador, pos_yJogador);
 		ALLEGRO_EVENT ev; //variavel para usarmos para verificar a situação dos eventos
