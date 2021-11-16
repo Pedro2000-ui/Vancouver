@@ -1,6 +1,1 @@
-﻿  Main.c
-C:\Users\Frankenstein\Desktop\Vancouver\Allegroo\Allegroo\Main.c(183,57): warning C4047: 'function': 'int' differs in levels of indirection from 'void *'
-C:\Users\Frankenstein\Desktop\Vancouver\Allegroo\Allegroo\Main.c(183,53): warning C4024: 'al_load_font': different types for formal and actual parameter 3
-C:\Users\Frankenstein\Desktop\Vancouver\Allegroo\Allegroo\Main.c(219,74): warning C4133: 'function': incompatible types - from 'ALLEGRO_TIMER *' to 'ALLEGRO_DISPLAY *'
-C:\Users\Frankenstein\Desktop\Vancouver\Allegroo\Allegroo\Main.c(267,103): warning C4020: 'inimigos': too many actual parameters
-  Allegroo.vcxproj -> C:\Users\Frankenstein\Desktop\Vancouver\Allegroo\x64\Debug\Allegroo.exe
+﻿LINK : fatal error LNK1168: não foi possível abrir C:\Users\pholi\Vancouver\Vancouver\Allegroo\x64\Debug\Allegroo.exe para escrita
