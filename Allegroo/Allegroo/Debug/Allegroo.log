@@ -1,5 +1,5 @@
 ﻿  Main.c
-C:\Users\pholi\Vancouver\Vancouver\Allegroo\Allegroo\Main.c(178,57): warning C4047: 'função': 'int' difere em níveis de indireção de 'void *'
-C:\Users\pholi\Vancouver\Vancouver\Allegroo\Allegroo\Main.c(178,53): warning C4024: 'al_load_font': tipos diferentes para parâmetro formal e real 3
-C:\Users\pholi\Vancouver\Vancouver\Allegroo\Allegroo\Main.c(205,74): warning C4133: 'função': tipos incompatíveis - de 'ALLEGRO_TIMER *' para 'ALLEGRO_DISPLAY *'
-  Allegroo.vcxproj -> C:\Users\pholi\Vancouver\Vancouver\Allegroo\Debug\Allegroo.exe
+C:\allegro2\Vancouver\Allegroo\Allegroo\Main.c(178,57): warning C4047: 'função': 'int' difere em níveis de indireção de 'void *'
+C:\allegro2\Vancouver\Allegroo\Allegroo\Main.c(178,53): warning C4024: 'al_load_font': tipos diferentes para parâmetro formal e real 3
+C:\allegro2\Vancouver\Allegroo\Allegroo\Main.c(205,74): warning C4133: 'função': tipos incompatíveis - de 'ALLEGRO_TIMER *' para 'ALLEGRO_DISPLAY *'
+  Allegroo.vcxproj -> C:\allegro2\Vancouver\Allegroo\Debug\Allegroo.exe

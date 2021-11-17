@@ -597,16 +597,16 @@ int main() {
 			printf("posicao x %d ---- %d ---- %d", pos_xEnemys[0], pos_xEnemys[1], pos_xEnemys[2]);
 			//COLISÕES PRA CIMA
 			//soldado esquerda
-			for (int i = 70; i < 130; i++) { //espaco de posições que representam 
-				for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
+			for (int i = 70; i < 130; i++) { //espaco de posições que representam a largura do inimigo (x)
+				for (int j = 35; j > 0; j--) { //intervalo da colisão
 					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] + j) && fases[0]) {
 						teclas[CIMA] = false;
 					}
 				}
 			}
 			//soldado meio
-			for (int i = 270; i < 330; i++) { //espaco de posições que representam 
-				for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
+			for (int i = 270; i < 330; i++) { //espaco de posições que representam a largura do inimigo (x)
+				for (int j = 35; j > 0; j--) { //intevalo de espaço
 					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] + j) && fases[0]) {
 						teclas[CIMA] = false;
 					}
@@ -703,8 +703,10 @@ int main() {
 				}
 
 			}
+			
+			//COLISÕES COM OBJETOS
 
-			//COLISÕES COM A ÁGUA
+			//ÁGUA	
 
 			for (int i = 445; i < 600; i++) {
 				for (int j = 300; j < 320; j++) {
@@ -737,6 +739,7 @@ int main() {
 				}
 			}
 			// mapa 2
+			
 			for (int i = 360; i < 430; i++) {
 				if (pos_xJogador == i && pos_yJogador == -2 && vidasInimigos[0] <= 0 && vidasInimigos[1] <= 0 && vidasInimigos[2] <= 0 && fases[0]) {
 					imagem = al_load_bitmap("sprites/mapa2.png");
