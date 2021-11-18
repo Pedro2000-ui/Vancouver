@@ -18,7 +18,7 @@ void  jogador(ALLEGRO_BITMAP* player, int pos_x, int pos_y, int constante, int v
 	}
 }
 
-void inimigos(ALLEGRO_BITMAP* enemy[], ALLEGRO_BITMAP* enemyFaseTwo[], int pos_xEnemys[], int pos_yEnemys[], int pos_xEnemysFaseTwo[], int pos_yEnemysFaseTwo[], int constante, int vidasInimigos[], int vidasInimigosFaseTwo[], ALLEGRO_BITMAP* eHeart[], bool fases[]){
+void inimigos(ALLEGRO_BITMAP* enemy[], ALLEGRO_BITMAP* enemyFaseTwo[], int pos_xEnemys[], int pos_yEnemys[], int pos_xEnemysFaseTwo[], int pos_yEnemysFaseTwo[], int constante, int vidasInimigos[], int vidasInimigosFaseTwo[], ALLEGRO_BITMAP* eHeart[], bool fases[]) {
 	//INIMIGOS FASE 1
 	if (fases[0]) {
 		for (int i = 0; i < 3; i++) {
@@ -37,7 +37,7 @@ void inimigos(ALLEGRO_BITMAP* enemy[], ALLEGRO_BITMAP* enemyFaseTwo[], int pos_x
 				if (vidasInimigosFaseTwo[i] == j) {
 					al_draw_bitmap(enemyFaseTwo[i], pos_xEnemysFaseTwo[i], pos_yEnemysFaseTwo[i], constante);
 					//al_draw_bitmap(eHeart[j], pos_xEnemysFaseTwo[i] + 10, pos_yEnemysFaseTwo[i] - 30, constante);
-					
+
 				}
 			}
 		}
@@ -78,7 +78,7 @@ ALLEGRO_BITMAP* fundoMenu;
 */
 
 //FASE 2
-void faseTwo (ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool inimigoVolta[], bool inimigoVoltaDireita[]) {
+void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool inimigoVolta[], bool inimigoVoltaDireita[]) {
 	//BLOCO DE CONTROLE DO TANQUE A DIREITA
 	if (pos_yEnemy[0] <= 301 && inimigoVolta[0]) {
 		pos_yEnemy[0] += 1; //Tanque Descendo
@@ -89,7 +89,7 @@ void faseTwo (ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool 
 		inimigoVolta[0] = true;
 	}
 	else {
-		pos_yEnemy[0]-= 1;
+		pos_yEnemy[0] -= 1;
 		al_destroy_bitmap(enemy[0]); //Tanque Subindo
 		enemy[0] = al_load_bitmap("sprites/tankEnemyup.png");
 		inimigoVolta[0] = false;
@@ -121,7 +121,7 @@ void faseTwo (ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool 
 	else {
 		inimigoVolta[1] = true;
 		inimigoVoltaDireita[0] = true;
-				
+
 	}
 
 	//BLOCO DE CONTROLE DO SOLDADO NA ESTRADA
@@ -174,7 +174,7 @@ int main() {
 	int regiaoDeAtaque = 400;
 	//Posições que os inimigos iniciarão;
 	int pos_xEnemys[] = { 100, 300, 741 }, pos_yEnemys[] = { 90, 90, 148 };
-	int pos_xEnemysFaseTwo[] = { 261, 105, 741, 696  }, pos_yEnemysFaseTwo[] = { 67, 145, 121, 316  };
+	int pos_xEnemysFaseTwo[] = { 261, 105, 741, 696 }, pos_yEnemysFaseTwo[] = { 67, 145, 121, 316 };
 	//Variaveis para uso dos tiros que sairão dos Inimigos
 	int pos_yTiro[3];
 	int pos_xTiro[3];
@@ -224,7 +224,7 @@ int main() {
 	ALLEGRO_BITMAP* heart[9] = { 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL };
 	//coração enemy
 	ALLEGRO_BITMAP* eHeart[9] = { 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL };
-	
+
 	//INICIALIZAÇÃO DE ADDONS
 	al_init_primitives_addon();
 	al_install_keyboard();
@@ -635,16 +635,16 @@ int main() {
 			printf("posicao x %d ---- %d ---- %d", pos_xEnemys[0], pos_xEnemys[1], pos_xEnemys[2]);
 			//COLISÕES PRA CIMA
 			//soldado esquerda
-			for (int i = 70; i < 130; i++) { //espaco de posições que representam 
-				for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
+			for (int i = 70; i < 130; i++) { //espaco de posições que representam a largura do inimigo (x)
+				for (int j = 35; j > 0; j--) { //intervalo da colisão
 					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] + j) && fases[0]) {
 						teclas[CIMA] = false;
 					}
 				}
 			}
 			//soldado meio
-			for (int i = 270; i < 330; i++) { //espaco de posições que representam 
-				for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
+			for (int i = 270; i < 330; i++) { //espaco de posições que representam a largura do inimigo (x)
+				for (int j = 35; j > 0; j--) { //intevalo de espaço
 					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] + j) && fases[0]) {
 						teclas[CIMA] = false;
 					}
@@ -742,7 +742,9 @@ int main() {
 
 			}
 
-			//COLISÕES COM A ÁGUA
+			//COLISÕES COM OBJETOS
+
+			//ÁGUA	
 
 			for (int i = 445; i < 600; i++) {
 				for (int j = 300; j < 320; j++) {
@@ -775,6 +777,7 @@ int main() {
 				}
 			}
 			// mapa 2
+
 			for (int i = 360; i < 430; i++) {
 				if (pos_xJogador == i && pos_yJogador == -2 && vidasInimigos[0] <= 0 && vidasInimigos[1] <= 0 && vidasInimigos[2] <= 0 && fases[0]) {
 					imagem = al_load_bitmap("sprites/mapa2.png");
