@@ -36,7 +36,7 @@ void inimigos(ALLEGRO_BITMAP* enemy[], ALLEGRO_BITMAP* enemyFaseTwo[], int pos_x
 			for (int j = 8; j > 0; j--) {
 				if (vidasInimigosFaseTwo[i] == j) {
 					al_draw_bitmap(enemyFaseTwo[i], pos_xEnemysFaseTwo[i], pos_yEnemysFaseTwo[i], constante);
-					al_draw_bitmap(eHeart[j], pos_xEnemysFaseTwo[i] + 10, pos_yEnemysFaseTwo[i] - 30, constante);
+					//al_draw_bitmap(eHeart[j], pos_xEnemysFaseTwo[i] + 10, pos_yEnemysFaseTwo[i] - 30, constante);
 					
 				}
 			}
@@ -78,54 +78,92 @@ ALLEGRO_BITMAP* fundoMenu;
 */
 
 //FASE 2
-void faseTwo (ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool inimigoVolta[], bool inimigoVoltaDireita) {
+void faseTwo (ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool inimigoVolta[], bool inimigoVoltaDireita[]) {
 	//BLOCO DE CONTROLE DO TANQUE A DIREITA
 	if (pos_yEnemy[0] <= 301 && inimigoVolta[0]) {
-		pos_yEnemy[0] += 2;
+		pos_yEnemy[0] += 1; //Tanque Descendo
 		al_destroy_bitmap(enemy[0]);
-		enemy[0] = al_load_bitmap("sprites/enemydown.png");
+		enemy[0] = al_load_bitmap("sprites/tankEnemydown.png");
+	}
+	else if (pos_yEnemy[0] <= 67) {
+		inimigoVolta[0] = true;
 	}
 	else {
-		if (pos_yEnemy[0] <= 67) {
-			inimigoVolta[0] = true;
-		}
-		else {
-			pos_yEnemy[0]-= 2;
-			al_destroy_bitmap(enemy[0]);
-			enemy[0] = al_load_bitmap("sprites/enemyup.png");
-			inimigoVolta[0] = false;
-		}
+		pos_yEnemy[0]-= 1;
+		al_destroy_bitmap(enemy[0]); //Tanque Subindo
+		enemy[0] = al_load_bitmap("sprites/tankEnemyup.png");
+		inimigoVolta[0] = false;
 	}
+
 	//BLOCO DE CONTROLE DO TANQUE A ESQUERDA
 	if (pos_yEnemy[1] <= 382 && inimigoVolta[1]) {
-		pos_yEnemy[1] += 2;
+		pos_yEnemy[1] += 1; //Tanque descendo
 		al_destroy_bitmap(enemy[1]);
-		enemy[1] = al_load_bitmap("sprites/enemydown.png");
+		enemy[1] = al_load_bitmap("sprites/tankEnemydown.png");
+	}
+	else if (pos_xEnemy[1] <= 300 && inimigoVoltaDireita[0]) {
+		pos_xEnemy[1] += 1; //Tanque indo para Direita
+		inimigoVolta[1] = false;
+		al_destroy_bitmap(enemy[1]);
+		enemy[1] = al_load_bitmap("sprites/tankEnemyright.png");
+	}
+	else if (pos_xEnemy[1] > 120) {
+		pos_xEnemy[1] -= 1; //Tanque indo para Esquerda
+		inimigoVoltaDireita[0] = false;
+		al_destroy_bitmap(enemy[1]);
+		enemy[1] = al_load_bitmap("sprites/tankEnemyleft.png");
+	}
+	else if (pos_yEnemy[1] > 100) {
+		pos_yEnemy[1] -= 1; //Tanque subindo
+		al_destroy_bitmap(enemy[1]);
+		enemy[1] = al_load_bitmap("sprites/tankEnemyup.png");
 	}
 	else {
-		if (pos_xEnemy[1] <= 321 && inimigoVoltaDireita) {
-			pos_xEnemy[1] += 2;
-		}
-		else {
-			if (pos_xEnemy[1] <= 15) {
-				inimigoVoltaDireita = true;
-			}
-			else {
-				pos_xEnemy[1] -= 2;
-				inimigoVoltaDireita = false;
-			}
-			
-		}
+		inimigoVolta[1] = true;
+		inimigoVoltaDireita[0] = true;
+				
+	}
+
+	//BLOCO DE CONTROLE DO SOLDADO NA ESTRADA
+	if (pos_xEnemy[2] >= 471 && inimigoVoltaDireita[1]) {
+		pos_xEnemy[2] -= 2; //Soldado indo para esquerda
+		al_destroy_bitmap(enemy[2]);
+		enemy[2] = al_load_bitmap("sprites/enemyleft.png");
+	}
+	else if (pos_xEnemy[2] <= 741) {
+		pos_xEnemy[2] += 2; //Soldado indo para Direita
+		inimigoVoltaDireita[1] = false;
+		al_destroy_bitmap(enemy[2]);
+		enemy[2] = al_load_bitmap("sprites/enemyright.png");
+	}
+	else {
+		inimigoVoltaDireita[1] = true;
+	}
+
+	//BLOCO DE CONTROLE DO SOLDADO ABAIXO
+	if (pos_yEnemy[3] >= 160 && inimigoVolta[2]) {
+		pos_yEnemy[3] -= 2; //Soldado Subindo
+		al_destroy_bitmap(enemy[3]);
+		enemy[3] = al_load_bitmap("sprites/enemyup.png");
+	}
+	else if (pos_yEnemy[3] <= 316) {
+		pos_yEnemy[3] += 2; //Soldado Descendo
+		inimigoVolta[2] = false;
+		al_destroy_bitmap(enemy[3]);
+		enemy[3] = al_load_bitmap("sprites/enemydown.png");
+	}
+	else {
+		inimigoVolta[2] = true;
 	}
 }
 
 //MAIN
 int main() {
 	const int largura_tela = 800, altura_tela = 600; //Define altura e largura do protótipo da tela;
-	bool x = true, y = true, inimigoVolta[] = { true, true }, inimigoVoltaDireita = true; //Variáveis que serão usadas para movimentação dos inimigos com o intuito de evitar conflitos
+	bool x = true, y = true, inimigoVolta[] = { true, true, true }; bool inimigoVoltaDireita[] = { true, true }; //Variáveis que serão usadas para movimentação dos inimigos com o intuito de evitar conflitos
 	bool fim = false; //variável apenas pra idenficar o fim do jogo futuramente;
 	bool teclas[] = { false, false, false, false, false };
-	bool fases[] = { true, false };
+	bool fases[] = { true, false, false };
 	//Posição que iniciará o jogador;
 	int pos_xJogador = 150, pos_yJogador = 550;
 	//Variaveis para uso dos tiros que sairão do Jogador
@@ -740,10 +778,10 @@ int main() {
 			for (int i = 360; i < 430; i++) {
 				if (pos_xJogador == i && pos_yJogador == -2 && vidasInimigos[0] <= 0 && vidasInimigos[1] <= 0 && vidasInimigos[2] <= 0 && fases[0]) {
 					imagem = al_load_bitmap("sprites/mapa2.png");
-					enemyFaseTwo[0] = al_load_bitmap("sprites/enemydown.png");
-					enemyFaseTwo[1] = al_load_bitmap("sprites/enemydown.png");
-					enemyFaseTwo[2] = al_load_bitmap("sprites/enemydown.png");
-					enemyFaseTwo[3] = al_load_bitmap("sprites/enemydown.png");
+					enemyFaseTwo[0] = al_load_bitmap("sprites/tankEnemydown.png");
+					enemyFaseTwo[1] = al_load_bitmap("sprites/tankEnemydown.png");
+					enemyFaseTwo[2] = al_load_bitmap("sprites/enemyleft.png");
+					enemyFaseTwo[3] = al_load_bitmap("sprites/enemyup.png");
 					pos_xJogador = 360;
 					pos_yJogador = 550;
 					vidasJogador = 8;
