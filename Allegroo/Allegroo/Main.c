@@ -223,7 +223,7 @@ int main() {
 	//coração player 
 	ALLEGRO_BITMAP* heart[9] = { 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL };
 	//coração enemy
-	ALLEGRO_BITMAP* eHeart[9] = { 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL };
+	ALLEGRO_BITMAP* eHeart[11] = { 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
 
 	//INICIALIZAÇÃO DE ADDONS
 	al_init_primitives_addon();
@@ -283,6 +283,8 @@ int main() {
 	eHeart[6] = al_load_bitmap("sprites/heartenemy/eHeart6.png");
 	eHeart[7] = al_load_bitmap("sprites/heartenemy/eHeart7.png");
 	eHeart[8] = al_load_bitmap("sprites/heartenemy/eHeart8.png");
+	eHeart[9] = al_load_bitmap("sprites/heartenemy/eHeart9.png");
+	eHeart[10] = al_load_bitmap("sprites/heatenemy/eHeart10.png");
 
 	//CARREGAR TRILHA SONORA
 	al_play_sample_instance(inst_trilha_sonora);
