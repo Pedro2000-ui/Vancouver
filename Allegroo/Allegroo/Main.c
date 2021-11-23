@@ -77,7 +77,7 @@ ALLEGRO_BITMAP* fundoMenu;
 */
 
 //FASE 2
-void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool inimigoVolta[], bool inimigoVoltaDireita[], int pos_yJogador, int pos_xJogador, int vidasInimigos[], int pos_yTiro[], int pos_xTiro[], bool tiroAcertou[], int vidasJogador[], ALLEGRO_SAMPLE_INSTANCE* inst_tiro) {
+void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool inimigoVolta[], bool inimigoVoltaDireita[], int pos_yJogador, int pos_xJogador, int vidasInimigos[], int pos_yTiro[], int pos_xTiro[], bool tiroAcertou[], int vidasJogador[], ALLEGRO_SAMPLE_INSTANCE* inst_tiro, ALLEGRO_SAMPLE_INSTANCE* inst_tank_tiro) {
 	//BLOCO DE CONTROLE DO TANQUE A DIREITA
 	if(vidasInimigos[0] > 0) {
 		if (pos_yEnemy[0] <= 301 && inimigoVolta[0]) {
@@ -90,12 +90,13 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 				//Bloco de controle dos tiros
 				al_draw_filled_rectangle(pos_xTiro[0] + 35, pos_yTiro[0] + 70, (pos_xTiro[0] + 35) + 10, (pos_yTiro[0] + 70) + 10, al_map_rgb(0, 0, 0));
 				if (pos_yTiro[0] + 50 <= pos_yEnemy[0] + 50) { //condição pra apenas sair o som do tiro quando o tiro estiver saindo da arma
-					al_play_sample_instance(inst_tiro);
+					al_play_sample_instance(inst_tank_tiro);
 				}
 				pos_yTiro[0] += 15; //velocidade dos tiros
 				if (pos_yTiro[0] > pos_yJogador && (pos_xTiro[0] + 35) <= pos_xJogador + 37 && (pos_xTiro[0] + 35) + 10 >= pos_xJogador) {
 					tiroAcertou[0] = true;
 					//vidasJogador[0] -= 4;
+
 				}
 				else {
 					tiroAcertou[0] = false;
@@ -122,7 +123,7 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 			
 				al_draw_filled_rectangle(pos_xTiro[0] + 35, pos_yTiro[0] - 13, (pos_xTiro[0] + 35) + 10, (pos_yTiro[0] - 13) + 10, al_map_rgb(0, 0, 0));
 				if (pos_yTiro[0] + 50 >= pos_yEnemy[0] + 50) { //condição pra apenas sair o som do tiro quando o tiro estiver saindo da arma
-					al_play_sample_instance(inst_tiro);
+					al_play_sample_instance(inst_tank_tiro);
 				}
 				pos_yTiro[0] -= 15;
 				if (pos_yTiro[0] < pos_yJogador &&  (pos_xTiro[0] + 35) <= pos_xJogador + 37 && (pos_xTiro[0] + 35) + 10 >= pos_xJogador) {
@@ -151,7 +152,7 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 			
 				al_draw_filled_rectangle(pos_xTiro[1] + 35, pos_yTiro[1] + 70, (pos_xTiro[1] + 35) + 10, (pos_yTiro[1] + 70) + 10, al_map_rgb(0, 0, 0));
 				if (pos_yTiro[1] + 50 <= pos_yEnemy[1] + 50) { //condição pra apenas sair o som do tiro quando o tiro estiver saindo da arma
-					al_play_sample_instance(inst_tiro);
+					al_play_sample_instance(inst_tank_tiro);
 				}
 				pos_yTiro[1] += 15; //velocidade dos tiros
 				if (pos_yTiro[1] > pos_yJogador && (pos_xTiro[1] + 35) <= pos_xJogador + 37 && (pos_xTiro[1] + 35) + 10 >= pos_xJogador) {
@@ -185,7 +186,7 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 				}
 				al_draw_filled_rectangle(pos_xTiro[1] + 70, pos_yTiro[1] + 35, (pos_xTiro[1] + 70) + 10, (pos_yTiro[1] + 35) + 10, al_map_rgb(0, 0, 0));
 				if (pos_xTiro[1] + 50 <= pos_xEnemy[1] + 50) { //condição pra apenas sair o som do tiro quando o tiro estiver saindo da arma
-					al_play_sample_instance(inst_tiro);
+					al_play_sample_instance(inst_tank_tiro);
 				}
 				if (((pos_xTiro[1] + 70) + 10 > pos_xJogador && pos_xEnemy[1] < pos_xJogador) && ((pos_yTiro[1] + 35) + 10 >= pos_yJogador && pos_yTiro[1] + 35 <= pos_yJogador + 35)) {
 					tiroAcertou[5] = true;
@@ -217,7 +218,7 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 				pos_xEnemy[1] += 1;
 				al_draw_filled_rectangle(pos_xTiro[1] - 2, pos_yTiro[1] + 35, (pos_xTiro[1] - 2) + 10, (pos_yTiro[1] + 35) + 10, al_map_rgb(0, 0, 0));
 				if (pos_xTiro[1] - 2 >= pos_xEnemy[1] - 2) { //condição pra apenas sair o som do tiro quando o tiro estiver saindo da arma
-					al_play_sample_instance(inst_tiro);
+					al_play_sample_instance(inst_tank_tiro);
 				}
 				pos_xTiro[1] -= 15;
 				if ((pos_xTiro[1] <= pos_xJogador + 15 && pos_xJogador < pos_xEnemy[1]) && ((pos_yTiro[1] + 35) + 10 >= pos_yJogador && pos_yTiro[1] + 35 <= pos_yJogador + 35)) {
@@ -248,7 +249,7 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 			
 				al_draw_filled_rectangle(pos_xTiro[1] + 35, pos_yTiro[1] - 13, (pos_xTiro[1] + 35) + 10, (pos_yTiro[1] - 13) + 10, al_map_rgb(0, 0, 0));
 				if (pos_yTiro[1] + 50 >= pos_yEnemy[1] + 50) { //condição pra apenas sair o som do tiro quando o tiro estiver saindo da arma
-					al_play_sample_instance(inst_tiro);
+					al_play_sample_instance(inst_tank_tiro);
 				}
 				pos_yTiro[1] -= 15;
 				if (pos_yTiro[1] < pos_yJogador && (pos_xTiro[1] + 35) <= pos_xJogador + 37 && (pos_xTiro[1] + 35) + 10 >= pos_xJogador) {
@@ -453,9 +454,10 @@ int main() {
 	//Variavel de Som
 	ALLEGRO_SAMPLE* trilha_sonora = NULL;
 	ALLEGRO_SAMPLE* tiro = NULL;
+	ALLEGRO_SAMPLE* tank_tiro = NULL;
 	ALLEGRO_SAMPLE_INSTANCE* inst_trilha_sonora = NULL;
 	ALLEGRO_SAMPLE_INSTANCE* inst_tiro = NULL;
-	
+	ALLEGRO_SAMPLE_INSTANCE* inst_tank_tiro = NULL;
 	//TELA DO JOGO
 	al_init();
 	ALLEGRO_DISPLAY* display = 0; //criando tela do jogo com ponteiro fazendo referência em ALLEGRO_DISPLAY;
@@ -500,11 +502,15 @@ int main() {
 	inst_trilha_sonora = al_create_sample_instance(trilha_sonora);
 	tiro = al_load_sample("sounds/tiro.ogg");
 	inst_tiro = al_create_sample_instance(tiro);
+	tank_tiro = al_load_sample("sounds/tank.ogg");
+	inst_tank_tiro = al_create_sample_instance(tank_tiro);
 	al_attach_sample_instance_to_mixer(inst_trilha_sonora, al_get_default_mixer());
 	al_attach_sample_instance_to_mixer(inst_tiro, al_get_default_mixer());
+	al_attach_sample_instance_to_mixer(inst_tank_tiro, al_get_default_mixer());
 	al_set_sample_instance_playmode(inst_trilha_sonora, ALLEGRO_PLAYMODE_LOOP);
-	al_set_sample_instance_gain(inst_trilha_sonora, 0.8);
-	al_set_sample_instance_gain(inst_tiro, 0.8);
+	al_set_sample_instance_gain(inst_trilha_sonora, 0.1);
+	al_set_sample_instance_gain(inst_tiro, 0.1);
+	al_set_sample_instance_gain(inst_tank_tiro, 0.1);
 
 	//Chamando a função do MENU
 	//menu();
@@ -812,7 +818,7 @@ int main() {
 						}
 						else if (fases[1]) {
 							//criar uma função para mostrar a cutscene por alguns segundos e dps sair
-							faseTwo(enemyFaseTwo, pos_xEnemysFaseTwo, pos_yEnemysFaseTwo, inimigoVolta, inimigoVoltaDireita, pos_yJogador, pos_xJogador, vidasInimigosFaseTwo, pos_yTiroFaseTwo, pos_xTiroFaseTwo, tiroAcertouFaseTwo, vidasJogador, inst_tiro);
+							faseTwo(enemyFaseTwo, pos_xEnemysFaseTwo, pos_yEnemysFaseTwo, inimigoVolta, inimigoVoltaDireita, pos_yJogador, pos_xJogador, vidasInimigosFaseTwo, pos_yTiroFaseTwo, pos_xTiroFaseTwo, tiroAcertouFaseTwo, vidasJogador, inst_tiro, inst_tank_tiro);
 							//MAPA 3
 							for (int i = 88; i < 189; i++) {
 								if (pos_xJogador == 750 && pos_yJogador == i && vidasInimigosFaseTwo[0] <= 0 && vidasInimigosFaseTwo[1] <= 0 && vidasInimigosFaseTwo[2] <= 0 && vidasInimigosFaseTwo[3] <= 0) {
