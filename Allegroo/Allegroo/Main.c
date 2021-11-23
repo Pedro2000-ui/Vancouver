@@ -549,7 +549,7 @@ int main() {
 		//INIMIGOS
 		inimigos(enemy, enemyFaseTwo, pos_xEnemys, pos_yEnemys, pos_xEnemysFaseTwo, pos_yEnemysFaseTwo, 0, vidasInimigos, vidasInimigosFaseTwo, eHeart, fases);
 
-		printf("Posição no eixo X: %d ---- %d ----- %d \nPosição no eixo Y %d ---- %d: \n\n %d ----- %d", pos_xEnemys[0], pos_xEnemys[1], pos_xEnemys[2], pos_yEnemys[0] - 20, pos_yEnemys[0], pos_xJogador, pos_yJogador);
+		printf(/*"Posição no eixo X: %d ---- %d ----- %d \nPosição no eixo Y %d ---- %d: \n\n %d ----- %d"*/"x = %d e y = %d", /*pos_xEnemys[0], pos_xEnemys[1], pos_xEnemys[2], pos_yEnemys[0] - 20, pos_yEnemys[0],*/ pos_xJogador, pos_yJogador);
 		
 		ALLEGRO_EVENT ev; //variavel para usarmos para verificar a situação dos eventos
 		al_wait_for_event(fila_eventos, &ev); //verifica se algum evento foi detectado, se sim avança pra próxima linha, senão não continua o loop - útil para evitar uso de memória indevido
@@ -828,6 +828,7 @@ int main() {
 									pos_yJogador = 229;
 									vidasJogador[0] = 4;
 									fases[1] = false;
+									fases[2] = true;
 								}
 							}
 						}
@@ -1044,7 +1045,6 @@ int main() {
 						teclas[CIMA] = false;
 					}
 				}
-
 			}
 			//COLISÕES PRA BAIXO
 			//soldado esquerda
@@ -1062,7 +1062,6 @@ int main() {
 						teclas[BAIXO] = false;
 					}
 				}
-
 			}
 			//soldado direita
 			for (int i = 100; i < 130; i++) { //espaco de posições que representam 
@@ -1071,7 +1070,6 @@ int main() {
 						teclas[BAIXO] = false;
 					}
 				}
-
 			}
 			//COLISÕES PRA DIREITA
 			//soldado esquerda
@@ -1089,7 +1087,6 @@ int main() {
 						teclas[DIREITA] = false;
 					}
 				}
-
 			}
 			//soldado direita
 			for (int i = 100; i < 160; i++) { //espaco de posições para a parada do jogador
@@ -1098,7 +1095,6 @@ int main() {
 						teclas[DIREITA] = false;
 					}
 				}
-
 			}
 			//COLISÕES PRA ESQUERDA
 			//soldado esquerda
@@ -1116,22 +1112,20 @@ int main() {
 						teclas[ESQUERDA] = false;
 					}
 				}
-
 			}
 			//soldado direita
-			for (int i = 100; i > 160; i--) { //espaco de posições para a parada do jogador
+			for (int i = 160; i > 100; i--) { //espaco de posições para a parada do jogador
 				for (int j = 35; j > -35; j--) { //espaco de posições que representam 
 					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[2] - (j)) && fases[0]) {
 						teclas[ESQUERDA] = false;
 					}
 				}
-
 			}
 
 			//COLISÕES COM OBJETOS
-
+			
 			//ÁGUA	
-
+			//Direita
 			for (int i = 445; i < 600; i++) {
 				for (int j = 300; j < 320; j++) {
 					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
@@ -1139,19 +1133,18 @@ int main() {
 					}
 				}
 			}
-
-			for (int i = 445; i <= 460; i++) {
-				for (int j = 300; j <= 483; j++) {
-					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
-						teclas[BAIXO] = false;
-					}
-				}
-			}
-
 			for (int i = 375; i < 446; i++) {
 				for (int j = 483; j < 500; j++) {
 					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
 						teclas[DIREITA] = false;
+					}
+				}
+			}
+			//Baixo
+			for (int i = 445; i <= 460; i++) {
+				for (int j = 300; j <= 483; j++) {
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[BAIXO] = false;
 					}
 				}
 			}
@@ -1162,6 +1155,760 @@ int main() {
 					}
 				}
 			}
+
+			//ARVORE1
+			//cima
+			for (int i = 30; i <= 35; i++) {//i é y
+				for (int j = 0; j <= 68; j++) {//i = x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[BAIXO] = false;
+					}
+				}
+			}
+			//baixo
+			for (int i = 125; i < 130; i++) {//i é y
+				for (int j = 0; j < 68; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[CIMA] = false;
+					}
+				}
+			}
+			//direita
+			for (int i = 40; i < 120; i++) {//i é y
+				for (int j = 0; j < 70; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[ESQUERDA] = false;
+					}
+				}
+			}
+			//esquerda (não tem)
+			
+			//ARVORE 2
+			//cima (não tem)			
+			//baixo
+			for (int i = 80; i < 85; i++) {//i é y
+				for (int j = 190; j < 258; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[CIMA] = false;
+					}
+				}
+			}
+			//direita
+			for (int i = -2; i < 80; i++) {//i é y
+				for (int j = 185; j < 190; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[DIREITA] = false;
+					}
+				}
+			}
+			//esquerda
+			for (int i = -2; i < 80; i++) {//i é y
+				for (int j = 273; j < 278; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[ESQUERDA] = false;
+					}
+				}
+			}
+
+			//ARVORE 3
+			//cima
+			for (int i = 10; i <= 15; i++) {//i é y
+				for (int j = 660; j <= 745; j++) {//i = x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[BAIXO] = false;
+					}
+				}
+			}
+			//baixo
+			for (int i = 105; i < 107; i++) {//i é y
+				for (int j = 663; j < 747; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[CIMA] = false;
+					}
+				}
+			}
+			//direita
+			for (int i = 30; i < 90; i++) {//i é y
+				for (int j = 653; j < 660; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[DIREITA] = false;
+					}
+				}
+			}
+			//esquerda
+			for (int i = 25; i < 85; i++) {//i é y
+				for (int j = 743; j < 748; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[ESQUERDA] = false;
+					}
+				}
+			}
+
+			//ARVORE 4
+			//cima
+			for (int i = 145; i <= 150; i++) {//i é y
+				for (int j = 160; j <= 252; j++) {//i = x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[BAIXO] = false;
+					}
+				}
+			}
+			//baixo
+			for (int i = 250; i < 255; i++) {//i é y
+				for (int j = 160; j < 252; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[CIMA] = false;
+					}
+				}
+			}
+			//direita
+			for (int i = 145; i < 245; i++) {//i é y
+				for (int j = 150; j < 155; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[DIREITA] = false;
+					}
+				}
+			}
+			//esquerda
+			for (int i = 175; i < 248; i++) {//i é y
+				for (int j = 250; j < 255; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[ESQUERDA] = false;
+					}
+				}
+			}
+
+			//ARVORE 5
+			//cima
+			for (int i = 424; i <= 429; i++) {//i é y
+				for (int j = 0; j <= 87; j++) {//i = x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[BAIXO] = false;
+					}
+				}
+			}
+			//baixo
+			for (int i = 523; i < 528; i++) {//i é y
+				for (int j = 0; j < 87; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[CIMA] = false;
+					}
+				}
+			}
+			//direita (não tem)
+			//esquerda
+			for (int i = 454; i < 523; i++) {//i é y
+				for (int j = 83; j < 87; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[ESQUERDA] = false;
+					}
+				}
+			}
+
+			//barricada1
+			//baixo
+			for (int i = 150; i <= 155; i++) { //i é = y
+				for (int j = 400; j <= 555; j++) {// j é = x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[BAIXO] = false;
+					}
+				}
+			}
+			//cima
+			for (int i = 260; i <= 265; i++) { //i é = y
+				for (int j = 400; j <= 555; j++) {// j é = x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[CIMA] = false;
+					}
+				}
+			}
+			//Direita
+			for (int i = 150; i <= 260; i++) { //i é = y
+				for (int j = 390; j <= 405; j++) {// j é = x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[DIREITA] = false;
+					}
+				}
+			}
+			//esquerda
+			for (int i = 150; i <= 260; i++) { //i é = y
+				for (int j = 550; j <= 560; j++) {// j é = x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[ESQUERDA] = false;
+					}
+				}
+			}
+			
+			//barril
+			//baixo 
+			for (int i = 380; i <= 385; i++) {
+				for (int j = 470; j <= 570; j++) {
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[CIMA] = false;
+					}
+				}
+			}
+			//cima
+			for (int i = 290; i <= 295; i++) {
+				for (int j = 470; j <= 570; j++) {
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[BAIXO] = false;
+					}
+				}
+			}//295 446
+			//direita
+			for (int i = 290; i < 380; i++) {
+				for (int j = 470; j < 475; j++) {
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[DIREITA] = false;
+					}
+				}
+			}
+			//esquerda
+			for (int i = 295; i < 390; i++) {
+				for (int j = 570; j < 575; j++) {
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[ESQUERDA] = false;
+					}
+				}
+			}
+			
+			//barreira
+			//baixo
+			for (int i = 300; i <= 305; i++) {
+				for (int j = 730; j <= 800; j++) {
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[CIMA] = false;
+					}
+				}
+			}
+			//cima
+			for (int i = 220; i <= 225; i++) {
+				for (int j = 730; j <= 800; j++) {
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[BAIXO] = false;
+					}
+				}
+			}
+			//direita
+			for (int i = 220; i < 300; i++) {
+				for (int j = 730; j < 735; j++) {
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[0]) {
+						teclas[DIREITA] = false;
+					}
+				}
+			}
+			//esquerda (não tem)
+			
+			// =========================================================================== //
+			// ==     COLISÕES                    DO                       M A P A 2    == //
+			// =========================================================================== //
+			 
+			
+			//objetos
+			
+			///ARVORE 1
+			//baixo
+			for (int i = 436; i <= 440; i++) {//i é y
+				for (int j = 85; j <= 183; j++) {//i = x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[BAIXO] = false;
+					}
+				}
+			}
+			//cima
+			for (int i = 538; i < 543; i++) {//i é y
+				for (int j = 105; j < 180; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[CIMA] = false;
+					}
+				}
+			}
+			//direita
+			for (int i = 435; i < 540; i++) {//i é y
+				for (int j = 87; j < 92; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[DIREITA] = false;
+					}
+				}
+			}
+			//esquerda
+			for (int i = 435; i < 540; i++) {//i é y
+				for (int j = 175; j < 180; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[ESQUERDA] = false;
+					}
+				}
+			}
+
+			///ARVORE 2
+			//baixo
+			for (int i = 256; i <= 261; i++) {//i é y
+				for (int j = 153; j <= 252; j++) {//i = x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[BAIXO] = false;
+					}
+				}
+			}
+			//cima
+			for (int i = 355; i < 360; i++) {//i é y
+				for (int j = 153; j < 252; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[CIMA] = false;
+					}
+				}
+			}
+			//direita
+			for (int i = 256; i < 355; i++) {//i é y
+				for (int j = 153; j < 158; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[DIREITA] = false;
+					}
+				}
+			}
+			//esquerda
+			for (int i = 256; i < 355; i++) {//i é y
+				for (int j = 252; j < 257; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[ESQUERDA] = false;
+					}
+				}
+			}
+
+			///ARVORE 3
+			//baixo
+			for (int i = 240; i <= 340; i++) {//i é y
+				for (int j = 0; j <= 90; j++) {//i = x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[BAIXO] = false;
+					}
+				}
+			}
+			//cima
+			for (int i = 343; i < 348; i++) {//i é y
+				for (int j = 0; j < 90; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[CIMA] = false;
+					}
+				}
+			}
+			//esquerda
+			for (int i = 241; i < 343; i++) {//i é y
+				for (int j = 90; j < 95; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[ESQUERDA] = false;
+					}
+				}
+			}
+
+			///ARVORE 4
+			//cima
+			for (int i = 80; i < 87; i++) {//i é y
+				for (int j = 90; j < 192; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[CIMA] = false;
+					}
+				}
+			}
+			//direita
+			for (int i = -2; i < 82; i++) {//i é y
+				for (int j = 90; j < 95; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[DIREITA] = false;
+					}
+				}
+			}
+			//esquerda
+			for (int i = -2; i < 82; i++) {//i é y
+				for (int j = 189; j < 194; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[ESQUERDA] = false;
+					}
+				}
+			}
+
+			//ARVORE 5
+			//baixo
+			for (int i = 442; i <= 447; i++) {//i é y
+				for (int j = 462; j <= 564; j++) {//i = x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[BAIXO] = false;
+					}
+				}
+			}
+			//cima
+			for (int i = 545; i < 550; i++) {//i é y
+				for (int j = 462; j < 561; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[CIMA] = false;
+					}
+				}
+			}
+			//direita
+			for (int i = 439; i < 541; i++) {//i é y
+				for (int j = 462; j < 467; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[DIREITA] = false;
+					}
+				}
+			}
+			//esquerda
+			for (int i = 442; i < 541; i++) {//i é y
+				for (int j = 560; j < 565; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[ESQUERDA] = false;
+					}
+				}
+			}
+
+			//ARVORE 6
+			//baixo
+			for (int i = 211; i <= 216; i++) {//i é y
+				for (int j = 522; j <= 622; j++) {//i = x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[BAIXO] = false;
+					}
+				}
+			}
+			//cima
+			for (int i = 310; i < 315; i++) {//i é y
+				for (int j = 519; j < 624; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[CIMA] = false;
+					}
+				}
+			}
+			//direita
+			for (int i = 208; i < 310; i++) {//i é y
+				for (int j = 522; j < 527; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[DIREITA] = false;
+					}
+				}
+			}
+			//esquerda
+			for (int i = 208; i < 310; i++) {//i é y
+				for (int j = 620; j < 625; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[ESQUERDA] = false;
+					}
+				}
+			}
+
+			//ARVORE 7
+			//cima
+			for (int i = 60; i < 85; i++) {//i é y
+				for (int j = 642; j < 742; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[CIMA] = false;
+					}
+				}
+			}
+			//direita
+			for (int i = -2; i < 85; i++) {//i é y
+				for (int j = 639; j < 644; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[DIREITA] = false;
+					}
+				}
+			}
+			//esquerda
+			for (int i = -2; i < 85; i++) {//i é y
+				for (int j = 741; j < 746; j++) {//i é x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[ESQUERDA] = false;
+					}
+				}
+			}
+			
+			//barreira1
+			//baixo
+			for (int i = 205; i <= 210; i++) {//y
+				for (int j = 0; j <= 60; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[CIMA] = false;
+					}
+				}
+			}
+			//cima
+			for (int i = 30; i <= 35; i++) {//y
+				for (int j = 0; j <= 60; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[BAIXO] = false;
+					}
+				}
+			}
+			//direita (não tem)
+			//esquerda
+			for (int i = 30; i <= 210; i++) {//y
+				for (int j = 55; j <= 60; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[ESQUERDA] = false;
+					}
+				}
+			}
+			
+			//barreira2
+			//baixo
+			for (int i = 40; i <= 55; i++) {//y
+				for (int j = 290; j <= 465; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[CIMA] = false;
+					}
+				}
+			}
+			//cima (não tem)
+			//direita
+			for (int i = -5; i <= 55; i++) {//y
+				for (int j = 290; j <= 295; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[DIREITA] = false;
+					}
+				}
+			}
+			//esquerda 
+			for (int i = -5; i <= 55; i++) {//y
+				for (int j = 460; j <= 465; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[ESQUERDA] = false;
+					}
+				}
+			}
+			
+			//acampamento
+			//cima
+			for (int i = 320; i <= 325; i++) {//y
+				for (int j = 630; j <= 805; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[BAIXO] = false;
+					}
+				}
+			}
+			//baixo (não tem)
+			//direita
+			for (int i = 340; i <= 605; i++) {//y
+				for (int j = 595; j <= 600; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[DIREITA] = false;
+					}
+				}
+			}
+			//esquerda (não tem)
+
+			//tank destruido
+			//cima
+			for (int i = 460; i <= 465; i++) {//y
+				for (int j = 230; j <= 315; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[BAIXO] = false;
+					}
+				}
+			}
+			//baixo
+			for (int i = 460; i <= 515; i++) {//y
+				for (int j = 230; j <= 315; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[CIMA] = false;
+					}
+				}
+			}
+			//direita
+			for (int i = 460; i <= 590; i++) {//y
+				for (int j = 315; j <= 320; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[ESQUERDA] = false;
+					}
+				}
+			}
+			//esquerda
+			for (int i = 500; i <= 590; i++) {//y
+				for (int j = 225; j <= 230; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[1]) {
+						teclas[DIREITA] = false;
+					}
+				}
+			}
+
+			// =========================================================================== //
+			// ==     COLISÕES                    DO                       M A P A 3    == //
+			// =========================================================================== //
+
+			//objetos
+			
+			//barreira1
+			//cima (não tem)		
+			//baixo
+			for (int i = 195; i <= 200; i++) {//y
+				for (int j = 100; j <= 235; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[2]) {
+						teclas[CIMA] = false;
+					}
+				}
+			}
+			//direita
+			for (int i = -5; i <= 190; i++) {//y
+				for (int j = 235; j <= 240; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[2]) {
+						teclas[ESQUERDA] = false;
+					}
+				}
+			}
+			//esquerda
+			for (int i = -5; i <= 190; i++) {//y
+				for (int j = 95; j <= 110; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[2]) {
+						teclas[DIREITA] = false;
+					}
+				}
+			}
+			
+			//barreira2
+			//cima
+			for (int i = 280; i <= 285; i++) {//y
+				for (int j = 95; j <= 235; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[2]) {
+						teclas[BAIXO] = false;
+					}
+				}
+			}
+			//baixo (não tem)
+			//direita
+			for (int i = 280; i <= 605; i++) {//y
+				for (int j = 235; j <= 240; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[2]) {
+						teclas[ESQUERDA] = false;
+					}
+				}
+			}
+			//esquerda
+			for (int i = 280; i <= 605; i++) {//y
+				for (int j = 95; j <= 110; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[2]) {
+						teclas[DIREITA] = false;
+					}
+				}
+			}
+			
+			//barricada
+			//cima (não tem)
+			//baixo
+			for (int i = 15; i <= 20; i++) {//y
+				for (int j = 230; j <= 320; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[2]) {
+						teclas[CIMA] = false;
+					}
+				}
+			}
+			//direita (não tem)
+			//esquerda (não tem)
+			
+			//barreira3
+			//cima
+			//baixo
+			for (int i = 520; i <= 525; i++) {//y
+				for (int j = 282; j <= 420; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[2]) {
+						teclas[CIMA] = false;
+					}
+				}
+			}
+			//direita
+			for (int i = -5; i <= 525; i++) {//y
+				for (int j = 410; j <= 420; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[2]) {
+						teclas[ESQUERDA] = false;
+					}
+				}
+			}
+			//esquerda
+			for (int i = -5; i <= 525; i++) {//y
+				for (int j = 282; j <= 305; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[2]) {
+						teclas[DIREITA] = false;
+					}
+				}
+			}
+			
+			//bunker
+			//cima
+			for (int i = 340; i <= 345; i++) {//y
+				for (int j = 420; j <= 620; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[2]) {
+						teclas[BAIXO] = false;
+					}
+				}
+			}
+			//baixo
+			for (int i = 520; i <= 525; i++) {//y
+				for (int j = 420; j <= 620; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[2]) {
+						teclas[CIMA] = false;
+					}
+				}
+			}
+			//direita
+			for (int i = 340; i <= 525; i++) {//y
+				for (int j = 615; j <= 625; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[2]) {
+						teclas[ESQUERDA] = false;
+					}
+				}
+			}
+			//esquerda(não tem)
+			
+			//barricada baixo
+			for (int i = 241; i <= 547; i++) {//y
+				for (int j = 3; j <= 90; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[2]) {
+						teclas[BAIXO] = false;
+					}
+				}
+			}
+
+			//barricada cima
+			for (int i = -2; i <= 205; i++) {//y
+				for (int j = 3; j <= 90; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[2]) {
+						teclas[CIMA] = false;
+					}
+				}
+			}
+
+			//lago
+			//cima
+			for (int i = 235; i <= 240; i++) {//y
+				for (int j = 474; j <= 732; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[2]) {
+						teclas[CIMA] = false;
+					}
+				}
+			}
+			//baixo
+			for (int i = 73; i <= 78; i++) {//y
+				for (int j = 474; j <= 732; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[2]) {
+						teclas[BAIXO] = false;
+					}
+				}
+			}
+			//esquerda
+			for (int i = 73; i <= 232; i++) {//y
+				for (int j = 732; j <= 737; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[2]) {
+						teclas[ESQUERDA] = false;
+					}
+				}
+			}
+
+			//direita
+			for (int i = 73; i <= 238; i++) {//y
+				for (int j = 474; j <= 479; j++) {//x
+					if ((pos_xJogador == j) && (pos_yJogador == i) && fases[2]) {
+						teclas[DIREITA] = false;
+					}
+				}
+			}
+			
 			al_flip_display();
 			al_draw_bitmap(imagem, 0, 0, 0);
 		}
