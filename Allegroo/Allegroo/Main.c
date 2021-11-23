@@ -55,26 +55,9 @@ void inimigos(ALLEGRO_BITMAP* enemy[], ALLEGRO_BITMAP* enemyFaseTwo[], int pos_x
 
 //ideia de colocar condições onde caso o inimigo morra a imagem daquele inimigo que morreu é destruida e desaparece do map
 
-ALLEGRO_BITMAP* fundoMenu;
+//Váriavel de para a condição do MENU funcionar
+bool menu = false;
 
-
-
-/*void menu() {
-	int tempo = 0, flash = 0;
-	bool fimMenu = false;
-
-	while (!fimMenu) {
-
-		fundoMenu = al_load_bitmap("sprites/menuF.png");
-
-		al_draw_text(font09, al_map_rgb(255, 255, 255), 50, 50, NULL, "PRESS ENTER TO CONTINUE");
-
-		al_draw_bitmap(fundoMenu, 0, 0, 0);
-
-		if (ALLEGRO_KEY_ENTER) fimMenu = true;
-	}
-}
-*/
 
 //FASE 2
 void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool inimigoVolta[], bool inimigoVoltaDireita[], int pos_yJogador, int pos_xJogador, int vidasInimigos[], int pos_yTiro[], int pos_xTiro[], bool tiroAcertou[], int vidasJogador[], ALLEGRO_SAMPLE_INSTANCE* inst_tiro, ALLEGRO_SAMPLE_INSTANCE* inst_tank_tiro) {
@@ -470,6 +453,7 @@ int main() {
 	ALLEGRO_FONT* font09 = al_load_font("04b.TTF", 50, NULL);
 
 	//VARIAVEL DA IMAGEM
+	ALLEGRO_BITMAP* fundoMenu;
 	ALLEGRO_BITMAP* imagem = NULL;
 	ALLEGRO_BITMAP* player = NULL;
 	ALLEGRO_BITMAP* enemy[3] = { NULL, NULL, NULL, };
@@ -515,6 +499,7 @@ int main() {
 	//Chamando a função do MENU
 	//menu();
 	//CARREGAR IMAGENS
+	fundoMenu = al_load_bitmap("sprites/fundo.png");
 	imagem = al_load_bitmap("sprites/mapa1.png");
 	player = al_load_bitmap("sprites/playerup.png");
 	enemy[0] = al_load_bitmap("sprites/enemydown.png");
@@ -542,6 +527,23 @@ int main() {
 	eHeart[10] = al_load_bitmap("sprites/heartenemy/eHeart10.png");
 	//CARREGAR TRILHA SONORA
 	al_play_sample_instance(inst_trilha_sonora);
+
+	//Menu
+	al_draw_bitmap(fundoMenu, 0, 0, 0);
+	al_flip_display();
+
+	while (!menu) {
+		ALLEGRO_EVENT mn;
+
+		al_wait_for_event(fila_eventos, &mn);
+
+		if (mn.type == ALLEGRO_EVENT_KEY_DOWN) {
+			if (mn.keyboard.keycode == ALLEGRO_KEY_ENTER)
+				menu = true;
+		}
+
+	}
+	//Fim Menu
 
 	while (fim == false && vidasJogador[0] > 0) {
 		//JOGADOR
