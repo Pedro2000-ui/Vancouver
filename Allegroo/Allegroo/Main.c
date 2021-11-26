@@ -811,18 +811,26 @@ int main() {
 								if (pos_xJogador == i && pos_yJogador == -2 && vidasInimigos[0] <= 0 && vidasInimigos[1] <= 0 && vidasInimigos[2] <= 0) {
 									al_destroy_bitmap(imagem);
 									al_draw_bitmap(priCutscene, 0, 0, 0);
-									if (ev.type == ALLEGRO_EVENT_KEY_UP) {
-										if (ev.keyboard.keycode == ALLEGRO_KEY_ENTER) {
-											al_destroy_bitmap(priCutscene);
-											imagem = al_load_bitmap("sprites/mapa2.png");
-											enemyFaseTwo[0] = al_load_bitmap("sprites/tankEnemydown.png");
-											enemyFaseTwo[1] = al_load_bitmap("sprites/tankEnemydown.png");
-											enemyFaseTwo[2] = al_load_bitmap("sprites/enemyleft.png");
-											enemyFaseTwo[3] = al_load_bitmap("sprites/enemyup.png");
-											pos_xJogador = 360; pos_yJogador = 550; vidasJogador[0] = 8;
-											fases[0] = false; fases[1] = true;
+									al_flip_display();
+									bool pricut = false;
+									while (!pricut) {
+										ALLEGRO_EVENT mn;
+										al_wait_for_event(fila_eventos, &mn);
+										if (mn.type == ALLEGRO_EVENT_KEY_DOWN) {
+											if (mn.keyboard.keycode == ALLEGRO_KEY_ENTER)
+												pricut = true;
 										}
 									}
+									al_destroy_bitmap(priCutscene);
+									imagem = al_load_bitmap("sprites/mapa2.png");
+									enemyFaseTwo[0] = al_load_bitmap("sprites/tankEnemydown.png");
+									enemyFaseTwo[1] = al_load_bitmap("sprites/tankEnemydown.png");
+									enemyFaseTwo[2] = al_load_bitmap("sprites/enemyleft.png");
+									enemyFaseTwo[3] = al_load_bitmap("sprites/enemyup.png");
+									pos_xJogador = 360; pos_yJogador = 550; vidasJogador[0] = 8;
+									fases[0] = false; fases[1] = true;
+										
+									
 									
 									
 								}
