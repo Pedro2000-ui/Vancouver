@@ -453,7 +453,8 @@ int main() {
 	ALLEGRO_FONT* font09 = al_load_font("04b.TTF", 50, NULL);
 
 	//VARIAVEL DA IMAGEM
-	ALLEGRO_BITMAP* fundoMenu;
+	ALLEGRO_BITMAP* priCutscene = NULL;
+	ALLEGRO_BITMAP* fundoMenu = NULL;
 	ALLEGRO_BITMAP* imagem = NULL;
 	ALLEGRO_BITMAP* player = NULL;
 	ALLEGRO_BITMAP* enemy[3] = { NULL, NULL, NULL, };
@@ -499,6 +500,7 @@ int main() {
 	//Chamando a função do MENU
 	//menu();
 	//CARREGAR IMAGENS
+	priCutscene = al_load_bitmap("sprites/firstCutsceneVancouver.jpg");
 	fundoMenu = al_load_bitmap("sprites/fundo.png");
 	imagem = al_load_bitmap("sprites/mapa1.png");
 	player = al_load_bitmap("sprites/playerup.png");
@@ -808,13 +810,21 @@ int main() {
 							for (int i = 360; i < 430; i++) {
 								if (pos_xJogador == i && pos_yJogador == -2 && vidasInimigos[0] <= 0 && vidasInimigos[1] <= 0 && vidasInimigos[2] <= 0) {
 									al_destroy_bitmap(imagem);
-									imagem = al_load_bitmap("sprites/mapa2.png");
-									enemyFaseTwo[0] = al_load_bitmap("sprites/tankEnemydown.png");
-									enemyFaseTwo[1] = al_load_bitmap("sprites/tankEnemydown.png");
-									enemyFaseTwo[2] = al_load_bitmap("sprites/enemyleft.png");
-									enemyFaseTwo[3] = al_load_bitmap("sprites/enemyup.png");
-									pos_xJogador = 360; pos_yJogador = 550; vidasJogador[0] = 8;
-									fases[0] = false; fases[1] = true;
+									al_draw_bitmap(priCutscene, 0, 0, 0);
+									if (ev.type == ALLEGRO_EVENT_KEY_UP) {
+										if (ev.keyboard.keycode == ALLEGRO_KEY_ENTER) {
+											al_destroy_bitmap(priCutscene);
+											imagem = al_load_bitmap("sprites/mapa2.png");
+											enemyFaseTwo[0] = al_load_bitmap("sprites/tankEnemydown.png");
+											enemyFaseTwo[1] = al_load_bitmap("sprites/tankEnemydown.png");
+											enemyFaseTwo[2] = al_load_bitmap("sprites/enemyleft.png");
+											enemyFaseTwo[3] = al_load_bitmap("sprites/enemyup.png");
+											pos_xJogador = 360; pos_yJogador = 550; vidasJogador[0] = 8;
+											fases[0] = false; fases[1] = true;
+										}
+									}
+									
+									
 								}
 							}
 						}
