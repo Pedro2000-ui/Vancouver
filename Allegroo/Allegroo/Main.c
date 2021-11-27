@@ -62,7 +62,7 @@ bool menu = false;
 //FASE 2
 void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool inimigoVolta[], bool inimigoVoltaDireita[], int pos_yJogador, int pos_xJogador, int vidasInimigos[], int pos_yTiro[], int pos_xTiro[], bool tiroAcertou[], int vidasJogador[], ALLEGRO_SAMPLE_INSTANCE* inst_tiro, ALLEGRO_SAMPLE_INSTANCE* inst_tank_tiro) {
 	//BLOCO DE CONTROLE DO TANQUE A DIREITA
-	if(vidasInimigos[0] > 0) {
+	if (vidasInimigos[0] > 0) {
 		if (pos_yEnemy[0] <= 301 && inimigoVolta[0]) {
 			pos_yEnemy[0] += 1; //Tanque Descendo
 			al_destroy_bitmap(enemy[0]);
@@ -98,18 +98,18 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 			al_destroy_bitmap(enemy[0]); //Tanque Subindo
 			enemy[0] = al_load_bitmap("sprites/tankEnemyup.png");
 			inimigoVolta[0] = false;
-		
-		
+
+
 			//BLOCO DE CONTROLE DOS TIROS
 			if (pos_yJogador < pos_yEnemy[0] && pos_xJogador <= pos_xEnemy[0] + 70 && pos_xJogador + 35 >= pos_xEnemy[0]) {
 				pos_yEnemy[0] += 1;
-			
+
 				al_draw_filled_rectangle(pos_xTiro[0] + 35, pos_yTiro[0] - 13, (pos_xTiro[0] + 35) + 10, (pos_yTiro[0] - 13) + 10, al_map_rgb(0, 0, 0));
 				if (pos_yTiro[0] + 50 >= pos_yEnemy[0] + 50) { //condição pra apenas sair o som do tiro quando o tiro estiver saindo da arma
 					al_play_sample_instance(inst_tank_tiro);
 				}
 				pos_yTiro[0] -= 15;
-				if (pos_yTiro[0] < pos_yJogador &&  (pos_xTiro[0] + 35) <= pos_xJogador + 37 && (pos_xTiro[0] + 35) + 10 >= pos_xJogador) {
+				if (pos_yTiro[0] < pos_yJogador && (pos_xTiro[0] + 35) <= pos_xJogador + 37 && (pos_xTiro[0] + 35) + 10 >= pos_xJogador) {
 					tiroAcertou[1] = true;
 					//vidasJogador[0] -= 4;
 				}
@@ -124,7 +124,7 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 		}
 	}
 	//BLOCO DE CONTROLE DO TANQUE DA ESQUERDA
-	if(vidasInimigos[1] > 0) {
+	if (vidasInimigos[1] > 0) {
 		if (pos_yEnemy[1] <= 382 && inimigoVolta[1]) {
 			pos_yEnemy[1] += 1; //Tanque descendo
 			al_destroy_bitmap(enemy[1]);
@@ -132,7 +132,7 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 			if (pos_yJogador > pos_yEnemy[1] && pos_xJogador <= pos_xEnemy[1] + 70 && pos_xJogador + 35 >= pos_xEnemy[1]) {
 				pos_yEnemy[1] -= 1;
 				//Bloco de controle dos tiros
-			
+
 				al_draw_filled_rectangle(pos_xTiro[1] + 35, pos_yTiro[1] + 70, (pos_xTiro[1] + 35) + 10, (pos_yTiro[1] + 70) + 10, al_map_rgb(0, 0, 0));
 				if (pos_yTiro[1] + 50 <= pos_yEnemy[1] + 50) { //condição pra apenas sair o som do tiro quando o tiro estiver saindo da arma
 					al_play_sample_instance(inst_tank_tiro);
@@ -163,7 +163,7 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 
 			//BLOCO DE CONTROLE DOS TIROS
 			if (pos_xJogador > pos_xEnemy[1] && pos_yJogador <= pos_yEnemy[1] + 70 && pos_yJogador + 35 >= pos_yEnemy[1]) {
-			
+
 				if (pos_xJogador > pos_xEnemy[1] + 80) {
 					pos_xEnemy[1] -= 1;
 				}
@@ -192,7 +192,7 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 		}
 		else if (pos_xEnemy[1] > 120) {
 			pos_xEnemy[1] -= 1; //Tanque indo para Esquerda
-			inimigoVoltaDireita[0] = false; 
+			inimigoVoltaDireita[0] = false;
 			al_destroy_bitmap(enemy[1]);
 			enemy[1] = al_load_bitmap("sprites/tankEnemyleft.png");
 
@@ -229,7 +229,7 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 			//BLOCO DE CONTROLE DOS TIROS
 			if (pos_yJogador < pos_yEnemy[1] && pos_xJogador <= pos_xEnemy[1] + 70 && pos_xJogador + 35 >= pos_xEnemy[1]) {
 				pos_yEnemy[1] += 1;
-			
+
 				al_draw_filled_rectangle(pos_xTiro[1] + 35, pos_yTiro[1] - 13, (pos_xTiro[1] + 35) + 10, (pos_yTiro[1] - 13) + 10, al_map_rgb(0, 0, 0));
 				if (pos_yTiro[1] + 50 >= pos_yEnemy[1] + 50) { //condição pra apenas sair o som do tiro quando o tiro estiver saindo da arma
 					al_play_sample_instance(inst_tank_tiro);
@@ -258,7 +258,7 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 		}
 	}
 	//BLOCO DE CONTROLE DO SOLDADO NA ESTRADA
-	if(vidasInimigos[2] > 0) {
+	if (vidasInimigos[2] > 0) {
 		if (pos_xEnemy[2] >= 471 && inimigoVoltaDireita[1]) {
 			pos_xEnemy[2] -= 2; //Soldado indo para esquerda
 			al_destroy_bitmap(enemy[2]);
@@ -272,7 +272,7 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 					al_play_sample_instance(inst_tiro);
 				}
 				pos_xTiro[2] -= 25;
-				if (pos_xTiro[2] <= pos_xJogador  && pos_yTiro[2] + 5 >= pos_yJogador && pos_yTiro[2] <= pos_yJogador + 35) {
+				if (pos_xTiro[2] <= pos_xJogador && pos_yTiro[2] + 5 >= pos_yJogador && pos_yTiro[2] <= pos_yJogador + 35) {
 					tiroAcertou[6] = true;
 					//vidasJogador[0]--;
 				}
@@ -325,7 +325,7 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 		}
 	}
 	//BLOCO DE CONTROLE DO SOLDADO ABAIXO
-	if(vidasInimigos[3] > 0) {
+	if (vidasInimigos[3] > 0) {
 		if (pos_yEnemy[3] >= 160 && inimigoVolta[2]) {
 			pos_yEnemy[3] -= 2; //Soldado Subindo
 			al_destroy_bitmap(enemy[3]);
@@ -340,7 +340,7 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 					al_play_sample_instance(inst_tiro);
 				}
 				pos_yTiro[3] -= 15;
-				if (pos_yTiro[3] <= pos_yJogador + 30 && pos_xTiro[3] + 30 >= pos_xJogador && pos_xTiro[3] + 20 <= pos_xJogador + 30) { 
+				if (pos_yTiro[3] <= pos_yJogador + 30 && pos_xTiro[3] + 30 >= pos_xJogador && pos_xTiro[3] + 20 <= pos_xJogador + 30) {
 					tiroAcertou[8] = true;
 					//vidasJogador[0]--;
 				}
@@ -366,7 +366,7 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 			//BLOCO DE CONTROLE DOS TIROS
 			if (pos_yJogador > pos_yEnemy[3] && pos_xJogador <= pos_xEnemy[3] + 35 && pos_xJogador + 35 >= pos_xEnemy[3]) {
 				pos_yEnemy[3] -= 2;
-			
+
 				al_draw_filled_rectangle(pos_xTiro[3] + 8, pos_yTiro[3] + 50, (pos_xTiro[3] + 8) + 5, (pos_yTiro[3] + 50) + 5, al_map_rgb(0, 0, 0));
 				if (pos_yTiro[3] + 50 >= pos_yEnemy[3] + 50) { //condição pra apenas sair o som do tiro quando o tiro estiver saindo da arma
 					al_play_sample_instance(inst_tiro);
@@ -453,8 +453,7 @@ int main() {
 	ALLEGRO_FONT* font09 = al_load_font("04b.TTF", 50, NULL);
 
 	//VARIAVEL DA IMAGEM
-	ALLEGRO_BITMAP* priCutscene = NULL;
-	ALLEGRO_BITMAP* fundoMenu = NULL;
+	ALLEGRO_BITMAP* fundoMenu;
 	ALLEGRO_BITMAP* imagem = NULL;
 	ALLEGRO_BITMAP* player = NULL;
 	ALLEGRO_BITMAP* enemy[3] = { NULL, NULL, NULL, };
@@ -462,8 +461,8 @@ int main() {
 	//coração player 
 	ALLEGRO_BITMAP* heart[9] = { 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL };
 	//coração enemy
-	ALLEGRO_BITMAP* eHeart[11] = { 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
-	
+	ALLEGRO_BITMAP* eHeart[11] = { 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL };
+
 	//INICIALIZAÇÃO DE ADDONS
 	al_init_primitives_addon();
 	al_install_keyboard();
@@ -500,7 +499,6 @@ int main() {
 	//Chamando a função do MENU
 	//menu();
 	//CARREGAR IMAGENS
-	priCutscene = al_load_bitmap("sprites/firstCutsceneVancouver.jpg");
 	fundoMenu = al_load_bitmap("sprites/fundo.png");
 	imagem = al_load_bitmap("sprites/mapa1.png");
 	player = al_load_bitmap("sprites/playerup.png");
@@ -554,7 +552,7 @@ int main() {
 		inimigos(enemy, enemyFaseTwo, pos_xEnemys, pos_yEnemys, pos_xEnemysFaseTwo, pos_yEnemysFaseTwo, 0, vidasInimigos, vidasInimigosFaseTwo, eHeart, fases);
 
 		printf(/*"Posição no eixo X: %d ---- %d ----- %d \nPosição no eixo Y %d ---- %d: \n\n %d ----- %d"*/"x = %d e y = %d", /*pos_xEnemys[0], pos_xEnemys[1], pos_xEnemys[2], pos_yEnemys[0] - 20, pos_yEnemys[0],*/ pos_xJogador, pos_yJogador);
-		
+
 		ALLEGRO_EVENT ev; //variavel para usarmos para verificar a situação dos eventos
 		al_wait_for_event(fila_eventos, &ev); //verifica se algum evento foi detectado, se sim avança pra próxima linha, senão não continua o loop - útil para evitar uso de memória indevido
 		if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
@@ -810,18 +808,6 @@ int main() {
 							for (int i = 360; i < 430; i++) {
 								if (pos_xJogador == i && pos_yJogador == -2 && vidasInimigos[0] <= 0 && vidasInimigos[1] <= 0 && vidasInimigos[2] <= 0) {
 									al_destroy_bitmap(imagem);
-									al_draw_bitmap(priCutscene, 0, 0, 0);
-									al_flip_display();
-									bool pricut = false;
-									while (!pricut) {
-										ALLEGRO_EVENT mn;
-										al_wait_for_event(fila_eventos, &mn);
-										if (mn.type == ALLEGRO_EVENT_KEY_DOWN) {
-											if (mn.keyboard.keycode == ALLEGRO_KEY_ENTER)
-												pricut = true;
-										}
-									}
-									al_destroy_bitmap(priCutscene);
 									imagem = al_load_bitmap("sprites/mapa2.png");
 									enemyFaseTwo[0] = al_load_bitmap("sprites/tankEnemydown.png");
 									enemyFaseTwo[1] = al_load_bitmap("sprites/tankEnemydown.png");
@@ -829,10 +815,6 @@ int main() {
 									enemyFaseTwo[3] = al_load_bitmap("sprites/enemyup.png");
 									pos_xJogador = 360; pos_yJogador = 550; vidasJogador[0] = 8;
 									fases[0] = false; fases[1] = true;
-										
-									
-									
-									
 								}
 							}
 						}
@@ -859,7 +841,7 @@ int main() {
 						}
 						else {
 							//criar uma função pra cutscene final e setar a váriavel fim = true
-						} 
+						}
 						//BLOCO DE CONTROLE DE MOVIMENTAÇÂO E TIROS DO JOGADOR
 						if (teclas[SPACE]) {
 							if (posicoes[cima]) { //se a img do jogador estiver posicionada para cima
@@ -869,16 +851,16 @@ int main() {
 								}
 								pos_yTiroJogador -= 20;
 								//Intervalos para Acertar Inimigos na Fase 1
-								if ((pos_yTiroJogador <= pos_yEnemys[0] + 30 && pos_yJogador >= pos_yEnemys[0]) && ((pos_xTiroJogador + 30) >= pos_xEnemys[0] && pos_xTiroJogador + 20 <= pos_xEnemys[0] + 30 ) && vidasInimigos[0] > 0){
+								if ((pos_yTiroJogador <= pos_yEnemys[0] + 30 && pos_yJogador >= pos_yEnemys[0]) && ((pos_xTiroJogador + 30) >= pos_xEnemys[0] && pos_xTiroJogador + 20 <= pos_xEnemys[0] + 30) && vidasInimigos[0] > 0) {
 									tiroAcertouInimigo = true;
 									vidasInimigos[0]--;
 								}
-								else if ((pos_yTiroJogador <= pos_yEnemys[0] + 30 && pos_yJogador >= pos_yEnemys[0]) && ((pos_xTiroJogador + 30) >= pos_xEnemys[1] && pos_xTiroJogador + 20 <= pos_xEnemys[1] + 30) && vidasInimigos[1] > 0){
+								else if ((pos_yTiroJogador <= pos_yEnemys[0] + 30 && pos_yJogador >= pos_yEnemys[0]) && ((pos_xTiroJogador + 30) >= pos_xEnemys[1] && pos_xTiroJogador + 20 <= pos_xEnemys[1] + 30) && vidasInimigos[1] > 0) {
 									tiroAcertouInimigo = true;
 									vidasInimigos[1]--;
 								}
 								//Intervalos para Acertar Inimigos na Fase 2
-								else if ((pos_yTiroJogador <= pos_yEnemysFaseTwo[0] + 70 && pos_yJogador >= pos_yEnemysFaseTwo[0]) && ((pos_xTiroJogador + 30) >= pos_xEnemysFaseTwo[0] && pos_xTiroJogador + 20 <= pos_xEnemysFaseTwo[0] + 70) && vidasInimigosFaseTwo[0] > 0 && fases[1]){
+								else if ((pos_yTiroJogador <= pos_yEnemysFaseTwo[0] + 70 && pos_yJogador >= pos_yEnemysFaseTwo[0]) && ((pos_xTiroJogador + 30) >= pos_xEnemysFaseTwo[0] && pos_xTiroJogador + 20 <= pos_xEnemysFaseTwo[0] + 70) && vidasInimigosFaseTwo[0] > 0 && fases[1]) {
 									tiroAcertouInimigo = true;
 									vidasInimigosFaseTwo[0]--;
 								}
@@ -1143,7 +1125,7 @@ int main() {
 			}
 
 			//COLISÕES COM OBJETOS
-			
+
 			//ÁGUA	
 			//Direita
 			for (int i = 445; i < 600; i++) {
@@ -1202,7 +1184,7 @@ int main() {
 				}
 			}
 			//esquerda (não tem)
-			
+
 			//ARVORE 2
 			//cima (não tem)			
 			//baixo
@@ -1358,7 +1340,7 @@ int main() {
 					}
 				}
 			}
-			
+
 			//barril
 			//baixo 
 			for (int i = 380; i <= 385; i++) {
@@ -1392,7 +1374,7 @@ int main() {
 					}
 				}
 			}
-			
+
 			//barreira
 			//baixo
 			for (int i = 300; i <= 305; i++) {
@@ -1419,14 +1401,14 @@ int main() {
 				}
 			}
 			//esquerda (não tem)
-			
+
 			// =========================================================================== //
 			// ==     COLISÕES                    DO                       M A P A 2    == //
 			// =========================================================================== //
-			 
-			
+
+
 			//objetos
-			
+
 			///ARVORE 1
 			//baixo
 			for (int i = 436; i <= 440; i++) {//i é y
@@ -1640,7 +1622,7 @@ int main() {
 					}
 				}
 			}
-			
+
 			//barreira1
 			//baixo
 			for (int i = 205; i <= 210; i++) {//y
@@ -1667,7 +1649,7 @@ int main() {
 					}
 				}
 			}
-			
+
 			//barreira2
 			//baixo
 			for (int i = 40; i <= 55; i++) {//y
@@ -1694,7 +1676,7 @@ int main() {
 					}
 				}
 			}
-			
+
 			//acampamento
 			//cima
 			for (int i = 320; i <= 325; i++) {//y
@@ -1754,7 +1736,7 @@ int main() {
 			// =========================================================================== //
 
 			//objetos
-			
+
 			//barreira1
 			//cima (não tem)		
 			//baixo
@@ -1781,7 +1763,7 @@ int main() {
 					}
 				}
 			}
-			
+
 			//barreira2
 			//cima
 			for (int i = 280; i <= 285; i++) {//y
@@ -1808,7 +1790,7 @@ int main() {
 					}
 				}
 			}
-			
+
 			//barricada
 			//cima (não tem)
 			//baixo
@@ -1821,7 +1803,7 @@ int main() {
 			}
 			//direita (não tem)
 			//esquerda (não tem)
-			
+
 			//barreira3
 			//cima
 			//baixo
@@ -1848,7 +1830,7 @@ int main() {
 					}
 				}
 			}
-			
+
 			//bunker
 			//cima
 			for (int i = 340; i <= 345; i++) {//y
@@ -1875,7 +1857,7 @@ int main() {
 				}
 			}
 			//esquerda(não tem)
-			
+
 			//barricada baixo
 			for (int i = 241; i <= 547; i++) {//y
 				for (int j = 3; j <= 90; j++) {//x
@@ -1928,7 +1910,7 @@ int main() {
 					}
 				}
 			}
-			
+
 			al_flip_display();
 			al_draw_bitmap(imagem, 0, 0, 0);
 		}
