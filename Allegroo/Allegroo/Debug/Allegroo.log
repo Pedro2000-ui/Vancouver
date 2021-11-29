@@ -1,1 +1,7 @@
-﻿LINK : fatal error LNK1168: não foi possível abrir C:\Users\pholi\Vancouver\Vancouver\Allegroo\Debug\Allegroo.exe para escrita
+﻿  Main.c
+C:\Users\pholi\Vancouver\Vancouver\Allegroo\Allegroo\Main.c(26,74): warning C4133: 'função': tipos incompatíveis - de 'ALLEGRO_TIMER *' para 'ALLEGRO_DISPLAY *'
+C:\Users\pholi\Vancouver\Vancouver\Allegroo\Allegroo\Main.c(54,74): warning C4133: 'função': tipos incompatíveis - de 'ALLEGRO_TIMER *' para 'ALLEGRO_DISPLAY *'
+C:\Users\pholi\Vancouver\Vancouver\Allegroo\Allegroo\Main.c(81,74): warning C4133: 'função': tipos incompatíveis - de 'ALLEGRO_TIMER *' para 'ALLEGRO_DISPLAY *'
+C:\Users\pholi\Vancouver\Vancouver\Allegroo\Allegroo\Main.c(107,74): warning C4133: 'função': tipos incompatíveis - de 'ALLEGRO_TIMER *' para 'ALLEGRO_DISPLAY *'
+C:\Users\pholi\Vancouver\Vancouver\Allegroo\Allegroo\Main.c(947,74): warning C4133: 'função': tipos incompatíveis - de 'ALLEGRO_TIMER *' para 'ALLEGRO_DISPLAY *'
+  Allegroo.vcxproj -> C:\Users\pholi\Vancouver\Vancouver\Allegroo\Debug\Allegroo.exe
