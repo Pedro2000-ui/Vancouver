@@ -2,7 +2,11 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
+<<<<<<< HEAD
       <FullPath>C:\Users\pholi\Vancouver\Vancouver\Allegroo\x64\Debug\Allegroo.exe</FullPath>
+=======
+      <FullPath>C:\Users\Frankenstein\Desktop\Vancouver\Allegroo\x64\Debug\Allegroo.exe</FullPath>
+>>>>>>> a27ac82090ace3688bd9c0ea70be7411d91475cb
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

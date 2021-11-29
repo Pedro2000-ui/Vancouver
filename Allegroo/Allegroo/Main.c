@@ -517,7 +517,7 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 
 void faseThree(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool inimigoVolta[], int pos_xJogador, int pos_yJogador, int pos_xTiro[], int pos_yTiro[], bool tiroAcertou[], int vidasJogador[], int vidasInimigos[], ALLEGRO_SAMPLE_INSTANCE* inst_tiro) {
 	//BLOCO DE CONTROLE DO SOLDADO 1
-	if(vidasInimigos[0] > 0) {
+	if (vidasInimigos[0] > 0) {
 		if (pos_yEnemy[0] <= 502 && inimigoVolta[0]) {
 			pos_yEnemy[0] += 2; //Soldado Descendo
 			al_destroy_bitmap(enemy[0]);
@@ -586,7 +586,7 @@ void faseThree(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool
 		}
 	}
 	//BLOCO DE CONTROLE DO SOLDADO 2
-	if(vidasInimigos[1] > 0) {
+	if (vidasInimigos[1] > 0) {
 		if (pos_xEnemy[1] > 458 && pos_yEnemy[1] == 254) {
 			pos_xEnemy[1] -= 2; //Soldado indo para a esquerda
 			al_destroy_bitmap(enemy[1]);
