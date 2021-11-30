@@ -15,7 +15,7 @@ void CutsCene_Introduction() {
 	ALLEGRO_BITMAP* cutscene = NULL;
 	fila_eventos = al_create_event_queue(); //função para guardar os eventos gerados dentro da variável "fila_eventos";
 	al_register_event_source(fila_eventos, al_get_keyboard_event_source()); //eventos de teclado (keyboard)
-	
+
 	bool cut = false;
 	cutscene = al_load_bitmap("sprites/Cutscenes/introduction.jpg");
 	al_draw_bitmap(cutscene, 0, 0, 0);
@@ -41,7 +41,7 @@ void CutsCene_1() {
 	ALLEGRO_BITMAP* cutscene = NULL;
 	fila_eventos = al_create_event_queue(); //função para guardar os eventos gerados dentro da variável "fila_eventos";
 	al_register_event_source(fila_eventos, al_get_keyboard_event_source()); //eventos de teclado (keyboard)
-	
+
 	bool cut = false;
 	cutscene = al_load_bitmap("sprites/Cutscenes/cut1.jpg");
 	al_draw_bitmap(cutscene, 0, 0, 0);
@@ -67,7 +67,7 @@ void Cutscene_2() {
 	ALLEGRO_BITMAP* cutscene = NULL;
 	fila_eventos = al_create_event_queue(); //função para guardar os eventos gerados dentro da variável "fila_eventos";
 	al_register_event_source(fila_eventos, al_get_keyboard_event_source()); //eventos de teclado (keyboard)
-	
+
 	bool cut = false;
 	cutscene = al_load_bitmap("sprites/Cutscenes/cut2.jpg");
 	al_draw_bitmap(cutscene, 0, 0, 0);
@@ -93,7 +93,7 @@ void Cutscene_3() {
 	ALLEGRO_BITMAP* cutscene = NULL;
 	fila_eventos = al_create_event_queue(); //função para guardar os eventos gerados dentro da variável "fila_eventos";
 	al_register_event_source(fila_eventos, al_get_keyboard_event_source()); //eventos de teclado (keyboard)
-	
+
 	bool cut = false;
 	cutscene = al_load_bitmap("sprites/Cutscenes/cut3.jpg");
 	al_draw_bitmap(cutscene, 0, 0, 0);
@@ -143,7 +143,7 @@ void Cutscene_GameOver() {
 	ALLEGRO_BITMAP* cutscene = NULL;
 	fila_eventos = al_create_event_queue(); //função para guardar os eventos gerados dentro da variável "fila_eventos";
 	al_register_event_source(fila_eventos, al_get_keyboard_event_source()); //eventos de teclado (keyboard)
-	
+
 	bool cut = false;
 	cutscene = al_load_bitmap("sprites/Cutscenes/GameOver.jpg");
 	al_draw_bitmap(cutscene, 0, 0, 0);
@@ -269,7 +269,7 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 				pos_yTiro[0] -= 15;
 				if (pos_yTiro[0] < pos_yJogador && (pos_xTiro[0] + 35) <= pos_xJogador + 37 && (pos_xTiro[0] + 35) + 10 >= pos_xJogador) {
 					tiroAcertou[1] = true;
-					//vidasJogador[0] -= 4;
+					vidasJogador[0] -= 4;
 				}
 				else {
 					tiroAcertou[1] = false;
@@ -298,7 +298,7 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 				pos_yTiro[1] += 15; //velocidade dos tiros
 				if (pos_yTiro[1] > pos_yJogador && (pos_xTiro[1] + 35) <= pos_xJogador + 37 && (pos_xTiro[1] + 35) + 10 >= pos_xJogador) {
 					tiroAcertou[2] = true;
-					//vidasJogador[0] -= 4;
+					vidasJogador[0] -= 4;
 				}
 				else {
 					tiroAcertou[2] = false;
@@ -331,7 +331,7 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 				}
 				if (((pos_xTiro[1] + 70) + 10 > pos_xJogador && pos_xEnemy[1] < pos_xJogador) && ((pos_yTiro[1] + 35) + 10 >= pos_yJogador && pos_yTiro[1] + 35 <= pos_yJogador + 35)) {
 					tiroAcertou[5] = true;
-					//vidasJogador[0] -= 4;
+					vidasJogador[0] -= 4;
 				}
 				else {
 					tiroAcertou[5] = false;
@@ -364,7 +364,7 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 				pos_xTiro[1] -= 15;
 				if ((pos_xTiro[1] <= pos_xJogador + 15 && pos_xJogador < pos_xEnemy[1]) && ((pos_yTiro[1] + 35) + 10 >= pos_yJogador && pos_yTiro[1] + 35 <= pos_yJogador + 35)) {
 					tiroAcertou[4] = true;
-					//vidasJogador[0] -= 4 ;
+					vidasJogador[0] -= 4 ;
 				}
 				else {
 					tiroAcertou[4] = false;
@@ -395,7 +395,7 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 				pos_yTiro[1] -= 15;
 				if (pos_yTiro[1] < pos_yJogador && (pos_xTiro[1] + 35) <= pos_xJogador + 37 && (pos_xTiro[1] + 35) + 10 >= pos_xJogador) {
 					tiroAcertou[3] = true;
-					//vidasJogador[0] -= 4;
+					vidasJogador[0] -= 4;
 				}
 				else {
 					tiroAcertou[3] = false;
@@ -432,7 +432,7 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 				pos_xTiro[2] -= 25;
 				if (pos_xTiro[2] <= pos_xJogador && pos_yTiro[2] + 5 >= pos_yJogador && pos_yTiro[2] <= pos_yJogador + 35) {
 					tiroAcertou[6] = true;
-					//vidasJogador[0]--;
+					vidasJogador[0]--;
 				}
 				else {
 					tiroAcertou[6] = false;
@@ -462,7 +462,7 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 				}
 				if ((pos_xTiro[2] + 40 >= pos_xJogador && pos_xEnemy[2] < pos_xJogador) && (pos_yTiro[2] + 25 >= pos_yJogador && pos_yTiro[2] <= pos_yJogador + 20)) {
 					tiroAcertou[7] = true;
-					//vidasJogador[0]--;
+					vidasJogador[0]--;
 				}
 				else {
 					tiroAcertou[7] = false;
@@ -500,7 +500,7 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 				pos_yTiro[3] -= 15;
 				if (pos_yTiro[3] <= pos_yJogador + 30 && pos_xTiro[3] + 30 >= pos_xJogador && pos_xTiro[3] + 20 <= pos_xJogador + 30) {
 					tiroAcertou[8] = true;
-					//vidasJogador[0]--;
+					vidasJogador[0]--;
 				}
 				else {
 					tiroAcertou[8] = false;
@@ -532,7 +532,7 @@ void faseTwo(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool i
 				pos_yTiro[3] += 15;
 				if (pos_yTiro[3] >= pos_yJogador && pos_xTiro[3] + 8 <= pos_xJogador + 35 && (pos_xTiro[3] + 8) + 5 >= pos_xJogador) {
 					tiroAcertou[9] = true;
-					//vidasJogador[0]--;
+					vidasJogador[0]--;
 				}
 				else {
 					tiroAcertou[9] = false;
@@ -572,7 +572,7 @@ void faseThree(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool
 				pos_yTiro[0] += 15;
 				if (pos_yTiro[0] >= pos_yJogador && pos_xTiro[0] + 8 <= pos_xJogador + 35 && (pos_xTiro[0] + 8) + 5 >= pos_xJogador) {
 					tiroAcertou[0] = true;
-					//vidasJogador[0]--;
+					vidasJogador[0]--;
 				}
 				else {
 					tiroAcertou[0] = false;
@@ -607,7 +607,7 @@ void faseThree(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool
 				pos_yTiro[0] -= 15;
 				if (pos_yTiro[0] <= pos_yJogador + 30 && pos_xTiro[0] + 30 >= pos_xJogador && pos_xTiro[0] + 20 <= pos_xJogador + 30) {
 					tiroAcertou[1] = true;
-					//vidasJogador[0]--;
+					vidasJogador[0]--;
 				}
 				else {
 					tiroAcertou[1] = false;
@@ -642,7 +642,7 @@ void faseThree(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool
 				pos_xTiro[1] -= 25;
 				if (pos_xTiro[1] <= pos_xJogador && pos_yTiro[1] + 5 >= pos_yJogador && pos_yTiro[1] <= pos_yJogador + 35) {
 					tiroAcertou[2] = true;
-					//vidasJogador[0]--;
+					vidasJogador[0]--;
 				}
 				else {
 					tiroAcertou[2] = false;
@@ -675,7 +675,7 @@ void faseThree(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool
 				pos_yTiro[1] -= 15;
 				if (pos_yTiro[1] <= pos_yJogador + 30 && pos_xTiro[1] + 30 >= pos_xJogador && pos_xTiro[1] + 20 <= pos_xJogador + 30) {
 					tiroAcertou[3] = true;
-					//vidasJogador[0]--;
+					vidasJogador[0]--;
 				}
 				else {
 					tiroAcertou[3] = false;
@@ -706,7 +706,7 @@ void faseThree(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool
 				}
 				if ((pos_xTiro[1] + 40 >= pos_xJogador && pos_xEnemy[1] < pos_xJogador) && (pos_yTiro[1] + 25 >= pos_yJogador && pos_yTiro[1] <= pos_yJogador + 20)) {
 					tiroAcertou[4] = true;
-					//vidasJogador[0]--;
+					vidasJogador[0]--;
 				}
 				else {
 					tiroAcertou[4] = false;
@@ -740,7 +740,7 @@ void faseThree(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool
 				pos_yTiro[1] += 15;
 				if (pos_yTiro[1] >= pos_yJogador && pos_xTiro[1] + 8 <= pos_xJogador + 35 && (pos_xTiro[1] + 8) + 5 >= pos_xJogador) {
 					tiroAcertou[5] = true;
-					//vidasJogador[0]--;
+					vidasJogador[0]--;
 				}
 				else {
 					tiroAcertou[5] = false;
@@ -775,7 +775,7 @@ void faseThree(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool
 				pos_xTiro[2] -= 25;
 				if (pos_xTiro[2] <= pos_xJogador && pos_yTiro[2] + 5 >= pos_yJogador && pos_yTiro[2] <= pos_yJogador + 35) {
 					tiroAcertou[6] = true;
-					//vidasJogador[0]--;
+					vidasJogador[0]--;
 				}
 				else {
 					tiroAcertou[6] = false;
@@ -807,7 +807,7 @@ void faseThree(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool
 				pos_yTiro[2] -= 15;
 				if (pos_yTiro[2] <= pos_yJogador + 30 && pos_xTiro[2] + 30 >= pos_xJogador && pos_xTiro[2] + 20 <= pos_xJogador + 30) {
 					tiroAcertou[7] = true;
-					//vidasJogador[0]--;
+					vidasJogador[0]--;
 				}
 				else {
 					tiroAcertou[7] = false;
@@ -838,7 +838,7 @@ void faseThree(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool
 				}
 				if ((pos_xTiro[2] + 40 >= pos_xJogador && pos_xEnemy[2] < pos_xJogador) && (pos_yTiro[2] + 25 >= pos_yJogador && pos_yTiro[2] <= pos_yJogador + 20)) {
 					tiroAcertou[8] = true;
-					//vidasJogador[0]--;
+					vidasJogador[0]--;
 				}
 				else {
 					tiroAcertou[8] = false;
@@ -871,7 +871,7 @@ void faseThree(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool
 				pos_yTiro[2] += 15;
 				if (pos_yTiro[2] >= pos_yJogador && pos_xTiro[2] + 8 <= pos_xJogador + 35 && (pos_xTiro[2] + 8) + 5 >= pos_xJogador) {
 					tiroAcertou[9] = true;
-					//vidasJogador[0]--;
+					vidasJogador[0]--;
 				}
 				else {
 					tiroAcertou[9] = false;
@@ -1050,7 +1050,7 @@ int main() {
 		//INIMIGOS
 		inimigos(enemy, enemyFaseTwo, enemyFaseThree, pos_xEnemys, pos_yEnemys, pos_xEnemysFaseTwo, pos_yEnemysFaseTwo, pos_xEnemysFaseThree, pos_yEnemysFaseThree, 0, vidasInimigos, vidasInimigosFaseTwo, vidasInimigosFaseThree, eHeart, fases);
 
-		printf(/*"Posição no eixo X: %d ---- %d ----- %d \nPosição no eixo Y %d ---- %d: \n\n %d ----- %d"*/"x = %d e y = %d", /*pos_xEnemys[0], pos_xEnemys[1], pos_xEnemys[2], pos_yEnemys[0] - 20, pos_yEnemys[0],*/ pos_xJogador, pos_yJogador);
+		
 
 		ALLEGRO_EVENT ev; //variavel para usarmos para verificar a situação dos eventos
 		al_wait_for_event(fila_eventos, &ev); //verifica se algum evento foi detectado, se sim avança pra próxima linha, senão não continua o loop - útil para evitar uso de memória indevido
@@ -1125,7 +1125,7 @@ int main() {
 									pos_yTiro[0] += 15; //velocidade dos tiros
 									if (pos_yTiro[0] >= pos_yJogador && pos_xTiro[0] + 8 >= pos_xJogador && pos_xTiro[0] <= pos_xJogador + 35) {
 										tiroAcertou[0] = true;
-										//vidasJogador[0]--;
+										vidasJogador[0]--;
 									}
 									else {
 										tiroAcertou[0] = false;
@@ -1156,7 +1156,7 @@ int main() {
 									pos_yTiro[0] -= 15;
 									if (pos_yTiro[0] <= pos_yJogador + 30 && pos_xTiro[0] + 30 >= pos_xJogador && pos_xTiro[0] + 20 <= pos_xJogador + 30) {
 										tiroAcertou[3] = true;
-										//vidasJogador[0]--;
+										vidasJogador[0]--;
 									}
 									else {
 										tiroAcertou[3] = false;
@@ -1190,7 +1190,7 @@ int main() {
 									pos_yTiro[1] += 15; //velocidade dos tiros
 									if (pos_yTiro[1] >= pos_yJogador && pos_xTiro[1] + 8 >= pos_xJogador && pos_xTiro[1] <= pos_xJogador + 35) {
 										tiroAcertou[4] = true;
-										//vidasJogador[0]--;
+										vidasJogador[0]--;
 									}
 									else {
 										tiroAcertou[4] = false;
@@ -1221,7 +1221,7 @@ int main() {
 									pos_yTiro[1] -= 15;
 									if (pos_yTiro[1] <= pos_yJogador + 30 && pos_xTiro[1] + 30 >= pos_xJogador && pos_xTiro[1] + 20 <= pos_xJogador + 30) {
 										tiroAcertou[5] = true;
-										//vidasJogador[0]--;
+										vidasJogador[0]--;
 									}
 									else {
 										tiroAcertou[5] = false;
@@ -1256,7 +1256,7 @@ int main() {
 									pos_xTiro[2] -= 25;
 									if ((pos_xTiro[2] <= pos_xJogador && pos_xJogador < pos_xEnemys[2]) && (pos_yTiro[2] + 5 >= pos_yJogador && pos_yTiro[2] <= pos_yJogador + 35)) {
 										tiroAcertou[1] = true;
-										//vidasJogador[0]--;
+										vidasJogador[0]--;
 									}
 									else {
 										tiroAcertou[1] = false;
@@ -1288,7 +1288,7 @@ int main() {
 										}
 										if ((pos_xTiro[2] + 40 >= pos_xJogador && pos_xEnemys[2] < pos_xJogador) && (pos_yTiro[2] + 25 >= pos_yJogador && pos_yTiro[2] <= pos_yJogador + 20)) {
 											tiroAcertou[2] = true;
-											//vidasJogador[0]--;
+											vidasJogador[0]--;
 										}
 										else {
 											tiroAcertou[2] = false;
@@ -1573,9 +1573,19 @@ int main() {
 			// =========================================================================== //
 			// ==     COLISÕES                    DO                       M A P A 1    ==
 			// =========================================================================== //
-			//printf("posicao x %d ---- %d ---- %d", pos_xEnemys[0], pos_xEnemys[1], pos_xEnemys[2]);
+			
 			//COLISÕES PRA CIMA
 			//soldado esquerda
+			//cima
+			for (int i = 90; i < 110; i++) { //espaco de posições que representam 
+				for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
+					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - j) && fases[0]) {
+						teclas[BAIXO] = false;
+					}
+				}
+			}
+
+			//baixo			
 			for (int i = 70; i < 130; i++) { //espaco de posições que representam a largura do inimigo (x)
 				for (int j = 35; j > 0; j--) { //intervalo da colisão
 					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] + j) && fases[0]) {
@@ -1583,7 +1593,36 @@ int main() {
 					}
 				}
 			}
+
+			//direita			
+			for (int i = 150; i > 100; i--) { //espaco de posições para a parada do jogador
+				for (int j = 35; j > -35; j--) { //espaco de posições que representam 
+					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j)) && fases[0]) {
+						teclas[ESQUERDA] = false;
+					}
+				}
+			}
+
+			//esquerda
+			for (int i = 70; i < 100; i++) { //espaco de posições para a parada do jogador
+				for (int j = 35; j > -35; j--) { //espaco de posições que representam 
+					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j)) && fases[0]) {
+						teclas[DIREITA] = false;
+					}
+				}
+			}
+
 			//soldado meio
+			//cima
+			for (int i = 290; i < 310; i++) { //espaco de posições que representam 
+				for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
+					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - j) && fases[0]) {
+						teclas[BAIXO] = false;
+					}
+				}
+			}
+
+			//baixo
 			for (int i = 270; i < 330; i++) { //espaco de posições que representam a largura do inimigo (x)
 				for (int j = 35; j > 0; j--) { //intevalo de espaço
 					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] + j) && fases[0]) {
@@ -1592,74 +1631,8 @@ int main() {
 				}
 
 			}
-			//soldado direita
-			for (int i = 190; i > 100; i--) { //espaco de posições que representam 
-				for (int j = 35; j > -35; j--) { //espaco de posições para a parada do jogador
-					if ((pos_yJogador == i) && (pos_xJogador == pos_xEnemys[2] + j) && fases[0]) {
-						teclas[CIMA] = false;
-					}
-				}
-			}
-			//COLISÕES PRA BAIXO
-			//soldado esquerda
-			for (int i = 90; i < 110; i++) { //espaco de posições que representam 
-				for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
-					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - j) && fases[0]) {
-						teclas[BAIXO] = false;
-					}
-				}
-			}
-			//soldado meio
-			for (int i = 290; i < 310; i++) { //espaco de posições que representam 
-				for (int j = 35; j > 0; j--) { //espaco de posições para a parada do jogador
-					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - j) && fases[0]) {
-						teclas[BAIXO] = false;
-					}
-				}
-			}
-			//soldado direita
-			for (int i = 100; i < 130; i++) { //espaco de posições que representam 
-				for (int j = 35; j > -35; j--) { //espaco de posições para a parada do jogador
-					if ((pos_yJogador == i) && (pos_xJogador == pos_xEnemys[2] - j) && fases[0]) {
-						teclas[BAIXO] = false;
-					}
-				}
-			}
-			//COLISÕES PRA DIREITA
-			//soldado esquerda
-			for (int i = 70; i < 100; i++) { //espaco de posições para a parada do jogador
-				for (int j = 35; j > -35; j--) { //espaco de posições que representam 
-					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j)) && fases[0]) {
-						teclas[DIREITA] = false;
-					}
-				}
-			}
-			//soldado meio
-			for (int i = 270; i < 300; i++) { //espaco de posições para a parada do jogador
-				for (int j = 35; j > -35; j--) { //espaco de posições que representam 
-					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j)) && fases[0]) {
-						teclas[DIREITA] = false;
-					}
-				}
-			}
-			//soldado direita
-			for (int i = 100; i < 160; i++) { //espaco de posições para a parada do jogador
-				for (int j = 35; j > 0; j--) { //espaco de posições que representam 
-					if ((pos_yJogador == i) && (pos_xJogador == pos_xEnemys[2] - (j)) && fases[0]) {
-						teclas[DIREITA] = false;
-					}
-				}
-			}
-			//COLISÕES PRA ESQUERDA
-			//soldado esquerda
-			for (int i = 150; i > 100; i--) { //espaco de posições para a parada do jogador
-				for (int j = 35; j > -35; j--) { //espaco de posições que representam 
-					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j)) && fases[0]) {
-						teclas[ESQUERDA] = false;
-					}
-				}
-			}
-			//soldado meio
+
+			//direita
 			for (int i = 350; i > 300; i--) { //espaco de posições para a parada do jogador
 				for (int j = 35; j > -35; j--) { //espaco de posições que representam 
 					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j)) && fases[0]) {
@@ -1667,7 +1640,37 @@ int main() {
 					}
 				}
 			}
+
+			//esquerda
+			for (int i = 270; i < 300; i++) { //espaco de posições para a parada do jogador
+				for (int j = 35; j > -35; j--) { //espaco de posições que representam 
+					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[0] - (j)) && fases[0]) {
+						teclas[DIREITA] = false;
+					}
+				}
+			}
+
+
 			//soldado direita
+			//cima
+			for (int i = 100; i < 130; i++) { //espaco de posições que representam 
+				for (int j = 35; j > -35; j--) { //espaco de posições para a parada do jogador
+					if ((pos_yJogador == i) && (pos_xJogador == pos_xEnemys[2] - j) && fases[0]) {
+						teclas[BAIXO] = false;
+					}
+				}
+			}
+
+			//baixo
+			for (int i = 190; i > 100; i--) { //espaco de posições que representam 
+				for (int j = 35; j > -35; j--) { //espaco de posições para a parada do jogador
+					if ((pos_yJogador == i) && (pos_xJogador == pos_xEnemys[2] + j) && fases[0]) {
+						teclas[CIMA] = false;
+					}
+				}
+			}
+
+			//direita
 			for (int i = 160; i > 100; i--) { //espaco de posições para a parada do jogador
 				for (int j = 35; j > -35; j--) { //espaco de posições que representam 
 					if ((pos_xJogador == i) && (pos_yJogador == pos_yEnemys[2] - (j)) && fases[0]) {
@@ -1675,6 +1678,16 @@ int main() {
 					}
 				}
 			}
+
+			//esquerda
+			for (int i = 100; i < 160; i++) { //espaco de posições para a parada do jogador
+				for (int j = 35; j > 0; j--) { //espaco de posições que representam 
+					if ((pos_yJogador == i) && (pos_xJogador == pos_xEnemys[2] - (j)) && fases[0]) {
+						teclas[DIREITA] = false;
+					}
+				}
+			}
+
 
 			//COLISÕES COM OBJETOS
 
@@ -1957,6 +1970,8 @@ int main() {
 			// =========================================================================== //
 			// ==     COLISÕES                    DO                       M A P A 2    == //
 			// =========================================================================== //
+
+			//inimigos
 
 
 			//objetos
@@ -2383,7 +2398,7 @@ int main() {
 				}
 			}
 
-			//bunker
+			//lago1
 			//cima
 			for (int i = 340; i <= 345; i++) {//y
 				for (int j = 420; j <= 620; j++) {//x
@@ -2428,7 +2443,7 @@ int main() {
 				}
 			}
 
-			//lago
+			//lago2
 			//cima
 			for (int i = 235; i <= 240; i++) {//y
 				for (int j = 474; j <= 732; j++) {//x
