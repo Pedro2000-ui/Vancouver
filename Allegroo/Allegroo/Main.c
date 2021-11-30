@@ -10,22 +10,64 @@
 enum TECLAS { CIMA, BAIXO, DIREITA, ESQUERDA, SPACE, ENTER };
 enum POSICOES { cima, baixo, direita, esquerda };
 
-void CutsCene_Introduction(ALLEGRO_TIMER* timer) {
-
-}
-
-void CutsCene_1(ALLEGRO_TIMER* timer) {
-
-}
-
-void Cutscene_2(ALLEGRO_TIMER* timer) {
+void CutsCene_Introduction() {
 	ALLEGRO_EVENT_QUEUE* fila_eventos = 0; //iniciando eventos com ponteiro em fila_eventos (=0, pois não há eventos ainda);
 	ALLEGRO_BITMAP* cutscene = NULL;
 	fila_eventos = al_create_event_queue(); //função para guardar os eventos gerados dentro da variável "fila_eventos";
 	al_register_event_source(fila_eventos, al_get_keyboard_event_source()); //eventos de teclado (keyboard)
-	al_register_event_source(fila_eventos, al_get_display_event_source(timer)); //eventos de timer
+	
+	bool cut = false;
+	cutscene = al_load_bitmap("sprites/Cutscenes/introduction.jpg");
+	al_draw_bitmap(cutscene, 0, 0, 0);
+	al_flip_display();
 
+	while (!cut) {
+		ALLEGRO_EVENT mn;
 
+		al_wait_for_event(fila_eventos, &mn);
+
+		if (mn.type == ALLEGRO_EVENT_KEY_DOWN) {
+			if (mn.keyboard.keycode == ALLEGRO_KEY_ENTER)
+				cut = true;
+		}
+
+	}
+	al_destroy_event_queue(fila_eventos);
+	al_destroy_bitmap(cutscene);
+}
+
+void CutsCene_1() {
+	ALLEGRO_EVENT_QUEUE* fila_eventos = 0; //iniciando eventos com ponteiro em fila_eventos (=0, pois não há eventos ainda);
+	ALLEGRO_BITMAP* cutscene = NULL;
+	fila_eventos = al_create_event_queue(); //função para guardar os eventos gerados dentro da variável "fila_eventos";
+	al_register_event_source(fila_eventos, al_get_keyboard_event_source()); //eventos de teclado (keyboard)
+	
+	bool cut = false;
+	cutscene = al_load_bitmap("sprites/Cutscenes/cut1.jpg");
+	al_draw_bitmap(cutscene, 0, 0, 0);
+	al_flip_display();
+
+	while (!cut) {
+		ALLEGRO_EVENT mn;
+
+		al_wait_for_event(fila_eventos, &mn);
+
+		if (mn.type == ALLEGRO_EVENT_KEY_DOWN) {
+			if (mn.keyboard.keycode == ALLEGRO_KEY_ENTER)
+				cut = true;
+		}
+
+	}
+	al_destroy_event_queue(fila_eventos);
+	al_destroy_bitmap(cutscene);
+}
+
+void Cutscene_2() {
+	ALLEGRO_EVENT_QUEUE* fila_eventos = 0; //iniciando eventos com ponteiro em fila_eventos (=0, pois não há eventos ainda);
+	ALLEGRO_BITMAP* cutscene = NULL;
+	fila_eventos = al_create_event_queue(); //função para guardar os eventos gerados dentro da variável "fila_eventos";
+	al_register_event_source(fila_eventos, al_get_keyboard_event_source()); //eventos de teclado (keyboard)
+	
 	bool cut = false;
 	cutscene = al_load_bitmap("sprites/Cutscenes/cut2.jpg");
 	al_draw_bitmap(cutscene, 0, 0, 0);
@@ -46,14 +88,12 @@ void Cutscene_2(ALLEGRO_TIMER* timer) {
 	al_destroy_bitmap(cutscene);
 }
 
-void Cutscene_3(ALLEGRO_TIMER* timer) {
+void Cutscene_3() {
 	ALLEGRO_EVENT_QUEUE* fila_eventos = 0; //iniciando eventos com ponteiro em fila_eventos (=0, pois não há eventos ainda);
 	ALLEGRO_BITMAP* cutscene = NULL;
 	fila_eventos = al_create_event_queue(); //função para guardar os eventos gerados dentro da variável "fila_eventos";
 	al_register_event_source(fila_eventos, al_get_keyboard_event_source()); //eventos de teclado (keyboard)
-	al_register_event_source(fila_eventos, al_get_display_event_source(timer)); //eventos de timer
-
-
+	
 	bool cut = false;
 	cutscene = al_load_bitmap("sprites/Cutscenes/cut3.jpg");
 	al_draw_bitmap(cutscene, 0, 0, 0);
@@ -73,12 +113,11 @@ void Cutscene_3(ALLEGRO_TIMER* timer) {
 	al_destroy_bitmap(cutscene);
 }
 
-void Cutscene_Vitoria(ALLEGRO_TIMER* timer) {
+void Cutscene_Vitoria() {
 	ALLEGRO_EVENT_QUEUE* fila_eventos = 0; //iniciando eventos com ponteiro em fila_eventos (=0, pois não há eventos ainda);
 	ALLEGRO_BITMAP* cutscene = NULL;
 	fila_eventos = al_create_event_queue(); //função para guardar os eventos gerados dentro da variável "fila_eventos";
 	al_register_event_source(fila_eventos, al_get_keyboard_event_source()); //eventos de teclado (keyboard)
-	al_register_event_source(fila_eventos, al_get_display_event_source(timer)); //eventos de timer
 
 	bool cut = false;
 	cutscene = al_load_bitmap("sprites/Cutscenes/Vitoria.jpg");
@@ -99,13 +138,12 @@ void Cutscene_Vitoria(ALLEGRO_TIMER* timer) {
 	al_destroy_bitmap(cutscene);
 }
 
-void Cutscene_GameOver(ALLEGRO_TIMER* timer) {
+void Cutscene_GameOver() {
 	ALLEGRO_EVENT_QUEUE* fila_eventos = 0; //iniciando eventos com ponteiro em fila_eventos (=0, pois não há eventos ainda);
 	ALLEGRO_BITMAP* cutscene = NULL;
 	fila_eventos = al_create_event_queue(); //função para guardar os eventos gerados dentro da variável "fila_eventos";
 	al_register_event_source(fila_eventos, al_get_keyboard_event_source()); //eventos de teclado (keyboard)
-	al_register_event_source(fila_eventos, al_get_display_event_source(timer)); //eventos de timer
-
+	
 	bool cut = false;
 	cutscene = al_load_bitmap("sprites/Cutscenes/GameOver.jpg");
 	al_draw_bitmap(cutscene, 0, 0, 0);
@@ -591,7 +629,7 @@ void faseThree(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool
 			pos_xEnemy[1] -= 2; //Soldado indo para a esquerda
 			al_destroy_bitmap(enemy[1]);
 			enemy[1] = al_load_bitmap("sprites/enemyleft.png");
-			if (pos_xEnemy[2] + 12 < pos_xEnemy[1] && pos_yEnemy[2] == pos_yEnemy[1]) {
+			if (pos_xEnemy[2] + 12 < pos_xEnemy[1] && pos_yEnemy[2] == pos_yEnemy[1] && vidasInimigos[2] > 0) {
 				pos_xEnemy[1] += 2;
 			}
 			//BLOCO DE CONTROLE DOS TIROS
@@ -623,7 +661,7 @@ void faseThree(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool
 			pos_yEnemy[1] -= 2; //Soldado Subindo
 			al_destroy_bitmap(enemy[1]);
 			enemy[1] = al_load_bitmap("sprites/enemyup.png");
-			if (pos_yEnemy[2] + 12 < pos_yEnemy[1] && pos_xEnemy[2] == pos_xEnemy[1]) {
+			if (pos_yEnemy[2] + 12 < pos_yEnemy[1] && pos_xEnemy[2] == pos_xEnemy[1] && vidasInimigos[2] > 0) {
 				pos_yEnemy[1] += 2;
 			}
 			//BLOCO DE CONTROLE DOS TIROS
@@ -656,7 +694,7 @@ void faseThree(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool
 			pos_xEnemy[1] += 2; //Soldado indo para a direita
 			al_destroy_bitmap(enemy[1]);
 			enemy[1] = al_load_bitmap("sprites/enemyright.png");
-			if (pos_xEnemy[2] - 12 > pos_xEnemy[1] && pos_yEnemy[2] == pos_yEnemy[1]) {
+			if (pos_xEnemy[2] - 12 > pos_xEnemy[1] && pos_yEnemy[2] == pos_yEnemy[1] && vidasInimigos[2] > 0) {
 				pos_xEnemy[1] -= 2;
 			}
 			//BLOCO DE CONTROLE DOS TIROS
@@ -688,7 +726,7 @@ void faseThree(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool
 			pos_yEnemy[1] += 2; //Soldado descendo
 			al_destroy_bitmap(enemy[1]);
 			enemy[1] = al_load_bitmap("sprites/enemydown.png");
-			if (pos_yEnemy[2] - 12 > pos_yEnemy[1] && pos_xEnemy[2] == pos_xEnemy[1]) {
+			if (pos_yEnemy[2] - 12 > pos_yEnemy[1] && pos_xEnemy[2] == pos_xEnemy[1] && vidasInimigos[2] > 0) {
 				pos_yEnemy[1] -= 2;
 			}
 			//BLOCO DE CONTROLE DOS TIROS
@@ -724,7 +762,7 @@ void faseThree(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool
 			pos_xEnemy[2] -= 2; //Soldado indo para a esquerda
 			al_destroy_bitmap(enemy[2]);
 			enemy[2] = al_load_bitmap("sprites/enemyleft.png");
-			if (pos_xEnemy[1] + 12 < pos_xEnemy[2] && pos_yEnemy[2] == pos_yEnemy[1]) {
+			if (pos_xEnemy[1] + 12 < pos_xEnemy[2] && pos_yEnemy[2] == pos_yEnemy[1] && vidasInimigos[1] > 0) {
 				pos_xEnemy[2] += 2;
 			}
 			//BLOCO DE CONTROLE DOS TIROS
@@ -756,7 +794,7 @@ void faseThree(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool
 			pos_yEnemy[2] -= 2; //Soldado Subindo
 			al_destroy_bitmap(enemy[2]);
 			enemy[2] = al_load_bitmap("sprites/enemyup.png");
-			if (pos_yEnemy[1] + 12 < pos_yEnemy[2] && pos_xEnemy[2] == pos_xEnemy[1]) {
+			if (pos_yEnemy[1] + 12 < pos_yEnemy[2] && pos_xEnemy[2] == pos_xEnemy[1] && vidasInimigos[1] > 0) {
 				pos_yEnemy[2] += 2;
 			}
 			//BLOCO DE CONTROLE DOS TIROS
@@ -788,7 +826,7 @@ void faseThree(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool
 			pos_xEnemy[2] += 2; //Soldado indo para a direita
 			al_destroy_bitmap(enemy[2]);
 			enemy[2] = al_load_bitmap("sprites/enemyright.png");
-			if (pos_xEnemy[1] - 12 > pos_xEnemy[2] && pos_yEnemy[2] == pos_yEnemy[1]) {
+			if (pos_xEnemy[1] - 12 > pos_xEnemy[2] && pos_yEnemy[2] == pos_yEnemy[1] && vidasInimigos[1] > 0) {
 				pos_xEnemy[2] -= 2;
 			}
 			//BLOCO DE CONTROLE DOS TIROS
@@ -820,7 +858,7 @@ void faseThree(ALLEGRO_BITMAP* enemy[], int pos_xEnemy[], int pos_yEnemy[], bool
 			pos_yEnemy[2] += 2; //Soldado descendo
 			al_destroy_bitmap(enemy[2]);
 			enemy[2] = al_load_bitmap("sprites/enemydown.png");
-			if (pos_yEnemy[1] - 12 > pos_yEnemy[2] && pos_xEnemy[2] == pos_xEnemy[1]) {
+			if (pos_yEnemy[1] - 12 > pos_yEnemy[2] && pos_xEnemy[2] == pos_xEnemy[1] && vidasInimigos[1] > 0) {
 				pos_yEnemy[2] -= 2;
 			}
 			//BLOCO DE CONTROLE DOS TIROS
@@ -910,13 +948,8 @@ int main() {
 	al_init();
 	ALLEGRO_DISPLAY* display = 0; //criando tela do jogo com ponteiro fazendo referência em ALLEGRO_DISPLAY;
 	display = al_create_display(largura_tela, altura_tela); //função que cria um display (eixo x, eixo y);
-
 	//INICIALIZAÇÂO DE TEMPORIZADOR
 	ALLEGRO_TIMER* timer = 0;
-
-	//Fonte do menu
-	//ALLEGRO_FONT* font09 = al_load_font("04b.TTF", 50, NULL);
-
 	//VARIAVEL DA IMAGEM
 	ALLEGRO_BITMAP* fundoMenu = NULL;
 	ALLEGRO_BITMAP* imagem = NULL;
@@ -1009,7 +1042,8 @@ int main() {
 
 	}
 	//Fim Menu
-
+	CutsCene_Introduction();
+	CutsCene_1();
 	while (fim == false && vidasJogador[0] > 0) {
 		//JOGADOR
 		jogador(player, pos_xJogador, pos_yJogador, 0, vidasJogador, heart);
@@ -1272,7 +1306,7 @@ int main() {
 							//MAPA 2
 							for (int i = 360; i < 430; i++) {
 								if (pos_xJogador == i && pos_yJogador == -2 && vidasInimigos[0] <= 0 && vidasInimigos[1] <= 0 && vidasInimigos[2] <= 0) {
-									Cutscene_2(timer);
+									Cutscene_2();
 									al_destroy_bitmap(imagem);
 									imagem = al_load_bitmap("sprites/mapa2.png");
 									enemyFaseTwo[0] = al_load_bitmap("sprites/tankEnemydown.png");
@@ -1289,7 +1323,7 @@ int main() {
 							//MAPA 3
 							for (int i = 88; i < 189; i++) {
 								if (pos_xJogador == 750 && pos_yJogador == i && vidasInimigosFaseTwo[0] <= 0 && vidasInimigosFaseTwo[1] <= 0 && vidasInimigosFaseTwo[2] <= 0 && vidasInimigosFaseTwo[3] <= 0) {
-									Cutscene_3(timer);
+									Cutscene_3();
 									al_destroy_bitmap(imagem);
 									imagem = al_load_bitmap("sprites/mapa3.png");
 									enemyFaseThree[0] = al_load_bitmap("sprites/enemydown.png");
@@ -1306,8 +1340,8 @@ int main() {
 						else if (fases[2]) {
 							faseThree(enemyFaseThree, pos_xEnemysFaseThree, pos_yEnemysFaseThree, inimigoVoltaFaseThree, pos_xJogador, pos_yJogador, pos_xTiroFaseThree, pos_yTiroFaseThree, tiroAcertouFaseThree, vidasJogador, vidasInimigosFaseThree, inst_tiro);
 							for (int i = 579; i < 628; i++) {
-								if (pos_xJogador == i && pos_yJogador == -2) { //&& vidasInimigosFaseThree[0] <= 0 && vidasInimigosFaseThree[1] <= 0 && vidasInimigosFaseThree[2] <= 0) {
-									Cutscene_Vitoria(timer);
+								if (pos_xJogador == i && pos_yJogador == -2 && vidasInimigosFaseThree[0] <= 0 && vidasInimigosFaseThree[1] <= 0 && vidasInimigosFaseThree[2] <= 0) {
+									Cutscene_Vitoria();
 									fases[2] = false;
 								}
 							}
@@ -1350,6 +1384,14 @@ int main() {
 									tiroAcertouInimigo = true;
 									vidasInimigosFaseThree[0]--;
 								}
+								else if ((pos_yTiroJogador <= pos_yEnemysFaseThree[1] + 70 && pos_yJogador >= pos_yEnemysFaseThree[1]) && ((pos_xTiroJogador + 30) >= pos_xEnemysFaseThree[1] && pos_xTiroJogador + 20 <= pos_xEnemysFaseThree[1] + 70) && (pos_xJogador >= 624 || pos_yJogador <= 385) && vidasInimigosFaseThree[1] > 0 && fases[2]) {
+									tiroAcertouInimigo = true;
+									vidasInimigosFaseThree[1]--;
+								}
+								else if ((pos_yTiroJogador <= pos_yEnemysFaseThree[2] + 70 && pos_yJogador >= pos_yEnemysFaseThree[2]) && ((pos_xTiroJogador + 30) >= pos_xEnemysFaseThree[2] && pos_xTiroJogador + 20 <= pos_xEnemysFaseThree[2] + 70) && (pos_xJogador >= 624 || pos_yJogador <= 385) && vidasInimigosFaseThree[2] > 0 && fases[2]) {
+									tiroAcertouInimigo = true;
+									vidasInimigosFaseThree[2]--;
+								}
 								else {
 									tiroAcertouInimigo = false;
 								}
@@ -1387,6 +1429,14 @@ int main() {
 										tiroAcertouInimigo = true;
 										vidasInimigosFaseThree[0]--;
 									}
+									else if (pos_yTiroJogador >= pos_yEnemysFaseThree[1] - 30 && pos_yEnemysFaseThree[1] > pos_yJogador && pos_xTiroJogador + 8 >= pos_xEnemysFaseThree[1] && pos_xTiroJogador + 8 <= pos_xEnemysFaseThree[1] + 70 && vidasInimigosFaseThree[1] > 0 && fases[2]) {
+										tiroAcertouInimigo = true;
+										vidasInimigosFaseThree[1]--;
+									}
+									else if (pos_yTiroJogador >= pos_yEnemysFaseThree[2] - 30 && pos_yEnemysFaseThree[2] > pos_yJogador && pos_xTiroJogador + 8 >= pos_xEnemysFaseThree[2] && pos_xTiroJogador + 8 <= pos_xEnemysFaseThree[2] + 70 && vidasInimigosFaseThree[2] > 0 && fases[2]) {
+										tiroAcertouInimigo = true;
+										vidasInimigosFaseThree[2]--;
+									}
 									else {
 										tiroAcertouInimigo = false;
 									}
@@ -1412,6 +1462,15 @@ int main() {
 											tiroAcertouInimigo = true;
 											vidasInimigosFaseTwo[2]--;
 										}
+										//Intervalos para Acertar Inimigos na Fase 3
+										else if ((pos_xTiroJogador + 40 >= pos_xEnemysFaseThree[1] && pos_xEnemysFaseThree[1] > pos_xJogador) && (pos_yTiroJogador + 25 >= pos_yEnemysFaseThree[1] && pos_yTiroJogador <= pos_yEnemysFaseThree[1] + 20 && pos_xJogador >= 426 && vidasInimigosFaseThree[1] > 0 && fases[2])) {
+											tiroAcertouInimigo = true;
+											vidasInimigosFaseThree[1]--;
+										}
+										else if ((pos_xTiroJogador + 40 >= pos_xEnemysFaseThree[2] && pos_xEnemysFaseThree[2] > pos_xJogador) && (pos_yTiroJogador + 25 >= pos_yEnemysFaseThree[2] && pos_yTiroJogador <= pos_yEnemysFaseThree[2] + 20 && pos_xJogador >= 426 && vidasInimigosFaseThree[2] > 0 && fases[2])) {
+											tiroAcertouInimigo = true;
+											vidasInimigosFaseThree[2]--;
+										}
 										else {
 											tiroAcertouInimigo = false;
 										}
@@ -1436,6 +1495,15 @@ int main() {
 											else if ((pos_xTiroJogador - 40 <= pos_xEnemysFaseTwo[2] && pos_xEnemysFaseTwo[2] < pos_xJogador) && (pos_yTiroJogador + 5 >= pos_yEnemysFaseTwo[2] && pos_yTiroJogador <= pos_yEnemysFaseTwo[2] + 35 && vidasInimigosFaseTwo[2] > 0 && fases[1])) {
 												tiroAcertouInimigo = true;
 												vidasInimigosFaseTwo[2]--;
+											}
+											//Intervalos para Acertar Inimigos na Fase 3
+											else if ((pos_xTiroJogador - 40 <= pos_xEnemysFaseThree[1] && pos_xEnemysFaseThree[1] < pos_xJogador) && (pos_yTiroJogador + 5 >= pos_yEnemysFaseThree[1] && pos_yTiroJogador <= pos_yEnemysFaseThree[1] + 70 && vidasInimigosFaseThree[1] > 0 && fases[2])) {
+												tiroAcertouInimigo = true;
+												vidasInimigosFaseThree[1]--;
+											}
+											else if ((pos_xTiroJogador - 40 <= pos_xEnemysFaseThree[2] && pos_xEnemysFaseThree[2] < pos_xJogador) && (pos_yTiroJogador + 5 >= pos_yEnemysFaseThree[2] && pos_yTiroJogador <= pos_yEnemysFaseThree[2] + 70 && vidasInimigosFaseThree[2] > 0 && fases[2])) {
+												tiroAcertouInimigo = true;
+												vidasInimigosFaseThree[2]--;
 											}
 											else {
 												tiroAcertouInimigo = false;
@@ -2399,8 +2467,8 @@ int main() {
 			al_draw_bitmap(imagem, 0, 0, 0);
 		}
 	}
-	if (vidasJogador[0] <= 0) {
-		Cutscene_GameOver(timer);
+	if (vidasJogador[0] == 0) {
+		Cutscene_GameOver();
 	}
 	//FINALIZAÇÃO DO PROGRAMA
 	al_destroy_display(display);
